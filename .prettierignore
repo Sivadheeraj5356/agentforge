@@ -1,0 +1,11 @@
+node_modules
+.turbo
+.next
+dist
+coverage
+playwright-report
+test-results
+pnpm-lock.yaml
+.agents
+*.min.js
+services/evaluator

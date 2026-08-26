@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "terminus",
+  "benchmarkVersion": "2.0.0",
+  "artifact": {
+    "contentHash": "<sha256>",
+    "byteSize": 0
+  },
+  "detection": {
+    "matched": true,
+    "adapterId": "terminus",
+    "confidence": 1,
+    "reasons": ["instruction.md", "task.toml", "environment definition", "test entrypoint"]
+  },
+  "tasks": [
+    {
+      "rootPath": "",
+      "externalKey": "task",
+      "name": "task",
+      "version": "1.0.0"
+    }
+  ],
+  "outcome": "fail",
+  "policy": "strict",
+  "summary": {
+    "total": 2,
+    "critical": 0,
+    "error": 1,
+    "warning": 1,
+    "info": 0
+  },
+  "findings": [
+    {
+      "code": "TASK_VERIFIER_INVALID_CONFIGURATION",
+      "category": "verifier",
+      "severity": "error",
+      "title": "Verifier configuration references a file that does not exist",
+      "message": "entrypoint points at tests/not-present.sh, which is not in the package.",
+      "evidencePath": "task.toml",
+      "evidenceLine": 10,
+      "evidenceFieldPath": "verifier.entrypoint",
+      "excerpt": null,
+      "remediation": "Point entrypoint at a file included in the package.",
+      "validatorId": "verifier",
+      "fingerprint": "ff9b07fd6cefa4fdf9e0dc43e8082dc862456f40050d2f69cf7772ab70c75f7b",
+      "ordinal": 0
+    },
+    {
+      "code": "TASK_VERIFIER_INVALID_CONFIGURATION",
+      "category": "verifier",
+      "severity": "warning",
+      "title": "Verifier requests a separate environment that is not defined",
+      "message": "environment_mode is \"separate\" but tests/Dockerfile is not present in the package.",
+      "evidencePath": "task.toml",
+      "evidenceLine": 9,
+      "evidenceFieldPath": "verifier.environment_mode",
+      "excerpt": null,
+      "remediation": "Add tests/Dockerfile for the separate verifier image, or use the shared environment mode.",
+      "validatorId": "verifier",
+      "fingerprint": "3e58d1fb5706a833a4c83b292779e9b67eb0afe47c71c1066dd58fbf3379e18a",
+      "ordinal": 1
+    }
+  ],
+  "validators": [
+    {
+      "id": "task-structure",
+      "name": "Task structure",
+      "version": "2.0.0"
+    },
+    {
+      "id": "metadata",
+      "name": "Task metadata",
+      "version": "2.0.0"
+    },
+    {
+      "id": "instruction",
+      "name": "Instruction content",
+      "version": "2.0.0"
+    },
+    {
+      "id": "environment",
+      "name": "Environment definition",
+      "version": "2.0.0"
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier configuration",
+      "version": "2.0.0"
+    },
+    {
+      "id": "test",
+      "name": "Test entrypoint",
+      "version": "2.0.0"
+    },
+    {
+      "id": "documentation",
+      "name": "Human documentation",
+      "version": "2.0.0"
+    },
+    {
+      "id": "security",
+      "name": "Static security inspection",
+      "version": "2.0.0"
+    },
+    {
+      "id": "reproducibility",
+      "name": "Reproducibility",
+      "version": "1.0.0"
+    }
+  ],
+  "validatorErrors": [],
+  "durationMs": 0,
+  "configuration": {
+    "schemaVersion": 1,
+    "strictMode": false,
+    "policy": "strict",
+    "enabledValidators": [
+      "task-structure",
+      "metadata",
+      "instruction",
+      "environment",
+      "verifier",
+      "test",
+      "documentation",
+      "security",
+      "reproducibility"
+    ],
+    "benchmarkVersion": "harbor-3",
+    "validatorOptions": {
+      "schemaVersion": 1,
+      "minInstructionCharacters": 40,
+      "maxExcerptCharacters": 400,
+      "maxExcerptLines": 12
+    }
+  }
+}

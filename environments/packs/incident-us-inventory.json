@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "key": "incident-us-inventory",
+  "version": "1.0.0",
+  "family": "production-incident",
+  "title": "US warehouse inventory incident",
+  "instruction": "US-east warehouse allocation is failing. Investigate and restore service without losing customer rows. Use Simulated Slack, Simulated GitHub, Simulated Jira, and Simulated Grafana only through the provided tools.",
+  "simulated": ["slack", "github", "jira", "grafana", "terminal"],
+  "applications": ["inventory-api", "postgres"],
+  "tools": [
+    {
+      "name": "search_messages",
+      "description": "Search Simulated Slack",
+      "simulatedBackend": "slack"
+    },
+    {
+      "name": "search_repo",
+      "description": "Search Simulated GitHub",
+      "simulatedBackend": "github"
+    },
+    {
+      "name": "update_issue",
+      "description": "Update a Simulated Jira issue",
+      "simulatedBackend": "jira"
+    },
+    {
+      "name": "query_metrics",
+      "description": "Query Simulated Grafana",
+      "simulatedBackend": "grafana"
+    },
+    {
+      "name": "rollback_release",
+      "description": "Roll back the inventory release",
+      "simulatedBackend": "terminal"
+    },
+    {
+      "name": "post_status",
+      "description": "Post a Simulated Slack status update",
+      "simulatedBackend": "slack"
+    },
+    {
+      "name": "run_terminal",
+      "description": "Inspect in-world health",
+      "simulatedBackend": "terminal"
+    }
+  ],
+  "stages": [
+    {
+      "id": "health",
+      "label": "Service health restored",
+      "weight": 0.35,
+      "metricKey": "service_health"
+    },
+    {
+      "id": "root-cause",
+      "label": "Root cause identified",
+      "weight": 0.2,
+      "metricKey": "root_cause"
+    },
+    {
+      "id": "data",
+      "label": "Customer rows preserved",
+      "weight": 0.2,
+      "metricKey": "data_preserved"
+    },
+    {
+      "id": "rollback",
+      "label": "Safe rollback applied",
+      "weight": 0.15,
+      "metricKey": "safe_rollback"
+    },
+    {
+      "id": "communication",
+      "label": "Incident communicated",
+      "weight": 0.1,
+      "metricKey": "communication"
+    }
+  ],
+  "rewardRecipe": "staged",
+  "catalogTaskKey": "incident-us-inventory",
+  "failureModes": [
+    "missed rollback",
+    "deleted customers",
+    "silent fix",
+    "wrong region"
+  ],
+  "reset": { "kind": "new_world" },
+  "environmentVersion": "incident-us-inv-1.0.0",
+  "hiddenState": {
+    "badRelease": "deploy-us-inv-2026-08-22",
+    "goodRelease": "deploy-us-inv-2026-08-21",
+    "customerCount": 3
+  },
+  "sandboxProvider": "work"
+}

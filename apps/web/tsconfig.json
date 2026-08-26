@@ -1,0 +1,17 @@
+{
+  "extends": "@agentforge/config/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@agentforge/ui": ["../../packages/ui/src/index.ts"],
+      "@agentforge/ui/*": ["../../packages/ui/src/*"],
+      "@agentforge/contracts": ["../../packages/contracts/src/index.ts"],
+      "@agentforge/security": ["../../packages/security/src/index.ts"]
+    },
+    "plugins": [{ "name": "next" }],
+    "allowImportingTsExtensions": false,
+    "verbatimModuleSyntax": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "e2e"]
+}

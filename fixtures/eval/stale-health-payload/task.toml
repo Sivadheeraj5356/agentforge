@@ -1,0 +1,7 @@
+version = "1.0"
+
+[metadata]
+name = "stale-health-payload"
+description = "Restore the health payload contract."
+category = "devops"
+difficulty = "easy"

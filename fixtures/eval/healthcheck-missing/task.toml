@@ -1,0 +1,7 @@
+version = "1.0"
+
+[metadata]
+name = "healthcheck-missing"
+description = "Restore GET /health."
+category = "devops"
+difficulty = "easy"

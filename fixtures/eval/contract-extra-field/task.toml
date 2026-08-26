@@ -1,0 +1,7 @@
+version = "1.0"
+
+[metadata]
+name = "contract-extra-field"
+description = "Remove leaked debug field from GET /orders."
+category = "api"
+difficulty = "easy"

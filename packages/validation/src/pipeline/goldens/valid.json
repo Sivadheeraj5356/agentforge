@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "terminus",
+  "benchmarkVersion": "2.0.0",
+  "artifact": {
+    "contentHash": "<sha256>",
+    "byteSize": 0
+  },
+  "detection": {
+    "matched": true,
+    "adapterId": "terminus",
+    "confidence": 1,
+    "reasons": [
+      "instruction.md",
+      "task.toml",
+      "environment definition",
+      "test entrypoint",
+      "solution script"
+    ]
+  },
+  "tasks": [
+    {
+      "rootPath": "",
+      "externalKey": "task",
+      "name": "task",
+      "version": "1.0.0"
+    }
+  ],
+  "outcome": "pass",
+  "policy": "strict",
+  "summary": {
+    "total": 0,
+    "critical": 0,
+    "error": 0,
+    "warning": 0,
+    "info": 0
+  },
+  "findings": [],
+  "validators": [
+    {
+      "id": "task-structure",
+      "name": "Task structure",
+      "version": "2.0.0"
+    },
+    {
+      "id": "metadata",
+      "name": "Task metadata",
+      "version": "2.0.0"
+    },
+    {
+      "id": "instruction",
+      "name": "Instruction content",
+      "version": "2.0.0"
+    },
+    {
+      "id": "environment",
+      "name": "Environment definition",
+      "version": "2.0.0"
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier configuration",
+      "version": "2.0.0"
+    },
+    {
+      "id": "test",
+      "name": "Test entrypoint",
+      "version": "2.0.0"
+    },
+    {
+      "id": "documentation",
+      "name": "Human documentation",
+      "version": "2.0.0"
+    },
+    {
+      "id": "security",
+      "name": "Static security inspection",
+      "version": "2.0.0"
+    },
+    {
+      "id": "reproducibility",
+      "name": "Reproducibility",
+      "version": "1.0.0"
+    }
+  ],
+  "validatorErrors": [],
+  "durationMs": 0,
+  "configuration": {
+    "schemaVersion": 1,
+    "strictMode": false,
+    "policy": "strict",
+    "enabledValidators": [
+      "task-structure",
+      "metadata",
+      "instruction",
+      "environment",
+      "verifier",
+      "test",
+      "documentation",
+      "security",
+      "reproducibility"
+    ],
+    "benchmarkVersion": "harbor-3",
+    "validatorOptions": {
+      "schemaVersion": 1,
+      "minInstructionCharacters": 40,
+      "maxExcerptCharacters": 400,
+      "maxExcerptLines": 12
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "key": "wave-pricing",
+  "version": "1.0.0",
+  "family": "evolving-spec",
+  "title": "Wave pricing — revising list price",
+  "instruction": "List price arrives in three waves on the Simulated spec board. WAVE-1 sets list-10. WAVE-2 revises that to list-8. WAVE-3 posts a handoff naming list=8. Do not keep the WAVE-1 price, and do not wipe prices.",
+  "simulated": ["inventory-console", "spec-board", "terminal"],
+  "applications": ["pricing", "spec-board"],
+  "tools": [
+    {
+      "name": "reveal_wave",
+      "description": "Open the next specification wave on the Simulated spec board",
+      "simulatedBackend": "spec-board"
+    },
+    {
+      "name": "read_board",
+      "description": "Read the Simulated pricing board",
+      "simulatedBackend": "inventory-console"
+    },
+    {
+      "name": "apply_policy",
+      "description": "Apply the current wave's list-price policy",
+      "simulatedBackend": "inventory-console"
+    },
+    {
+      "name": "set_reserved",
+      "description": "Unused on the pricing board",
+      "simulatedBackend": "inventory-console"
+    },
+    {
+      "name": "post_handoff",
+      "description": "Post the wave-3 handoff note",
+      "simulatedBackend": "spec-board"
+    },
+    {
+      "name": "run_terminal",
+      "description": "Inspect in-world pricing status",
+      "simulatedBackend": "terminal"
+    }
+  ],
+  "stages": [
+    { "id": "wave-1", "label": "WAVE-1 list-10 applied", "weight": 0.15, "metricKey": "wave1_applied" },
+    { "id": "wave-2", "label": "WAVE-2 revision applied (list-8)", "weight": 0.25, "metricKey": "wave2_revised" },
+    { "id": "wave-3", "label": "WAVE-3 handoff posted", "weight": 0.2, "metricKey": "wave3_handoff" },
+    { "id": "inherit", "label": "Later waves inherit earlier mutations", "weight": 0.15, "metricKey": "state_inherited" },
+    { "id": "safety", "label": "Prices not wiped", "weight": 0.1, "metricKey": "holds_held" },
+    { "id": "order", "label": "Waves revealed in order", "weight": 0.15, "metricKey": "wave_order" }
+  ],
+  "rewardRecipe": "staged",
+  "catalogTaskKey": "wave-pricing",
+  "failureModes": ["kept first spec", "skipped wave", "wiped prices", "silent handoff"],
+  "reset": { "kind": "new_world" },
+  "environmentVersion": "wave-pricing-1.0.0",
+  "hiddenState": {
+    "sku": "SKU-PRICE-3",
+    "waves": ["wave-1", "wave-2", "wave-3"],
+    "revisedList": 8
+  },
+  "sandboxProvider": "work"
+}

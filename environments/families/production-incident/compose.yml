@@ -1,0 +1,24 @@
+# Simulated production-incident topology.
+# Started only from services/evaluator when AGENTFORGE_INCIDENT_COMPOSE=1.
+# Default tests use the in-memory world. apps/web must never run this file.
+
+services:
+  payments-api:
+    image: agentforge-eval-python:3.12
+    command: ["python", "-c", "print('simulated payments api')"]
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: unused-in-memory-world
+  simulated-slack:
+    image: agentforge-eval-python:3.12
+    command: ["python", "-c", "print('simulated slack stub')"]
+  simulated-github:
+    image: agentforge-eval-python:3.12
+    command: ["python", "-c", "print('simulated github stub')"]
+  simulated-jira:
+    image: agentforge-eval-python:3.12
+    command: ["python", "-c", "print('simulated jira stub')"]
+  simulated-grafana:
+    image: agentforge-eval-python:3.12
+    command: ["python", "-c", "print('simulated grafana stub')"]

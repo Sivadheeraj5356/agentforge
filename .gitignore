@@ -1,0 +1,60 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# build
+dist
+.next
+out
+build
+.turbo
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+apps/web/.env.local
+
+# supabase local
+supabase/.branches
+supabase/.temp
+
+# test / coverage
+coverage
+playwright-report
+test-results
+blob-report
+.nyc_output
+
+# misc
+.DS_Store
+*.pem
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Python
+__pycache__
+*.py[cod]
+.venv
+venv
+*.egg-info
+
+# untrusted ingest bytes (local ArtifactStore)
+.data
+
+# research clones (inspiration only — never vendor instances)
+.research
+scripts/horizon-score.out.json
+
+# OS
+Thumbs.db

@@ -1,0 +1,32 @@
+{
+  "name": "agentforge",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:e2e": "pnpm --filter @agentforge/web test:e2e",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:status": "supabase status",
+    "db:reset": "supabase db reset",
+    "db:lint": "supabase db lint",
+    "db:test": "supabase test db",
+    "db:types": "node scripts/generate-db-types.mjs"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "supabase": "2.113.0",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  }
+}

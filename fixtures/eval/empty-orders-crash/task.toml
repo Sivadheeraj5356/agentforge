@@ -1,0 +1,7 @@
+version = "1.0"
+
+[metadata]
+name = "empty-orders-crash"
+description = "Empty store should return [] not 500."
+category = "debugging"
+difficulty = "easy"

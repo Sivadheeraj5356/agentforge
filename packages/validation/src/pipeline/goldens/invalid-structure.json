@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "terminus",
+  "benchmarkVersion": "2.0.0",
+  "artifact": {
+    "contentHash": "<sha256>",
+    "byteSize": 0
+  },
+  "detection": {
+    "matched": true,
+    "adapterId": "terminus",
+    "confidence": 0.6,
+    "reasons": ["task.toml", "environment definition", "solution script"]
+  },
+  "tasks": [
+    {
+      "rootPath": "",
+      "externalKey": "task",
+      "name": "task",
+      "version": "1.0.0"
+    }
+  ],
+  "outcome": "fail",
+  "policy": "strict",
+  "summary": {
+    "total": 4,
+    "critical": 0,
+    "error": 4,
+    "warning": 0,
+    "info": 0
+  },
+  "findings": [
+    {
+      "code": "TASK_STRUCTURE_MISSING_INSTRUCTION",
+      "category": "structure",
+      "severity": "error",
+      "title": "Instruction file is not present",
+      "message": "No instruction.md was found, and no task.yaml instruction field was declared at ..",
+      "evidencePath": ".",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Add instruction.md (Harbor/Terminus) or an instruction key in task.yaml.",
+      "validatorId": "task-structure",
+      "fingerprint": "48b004655045062ec3598f8cdaf6d4d9ac5493070c286e0a2a20e5eb8a911452",
+      "ordinal": 0
+    },
+    {
+      "code": "TASK_INSTRUCTION_EMPTY",
+      "category": "instructions",
+      "severity": "error",
+      "title": "Instruction text is empty",
+      "message": "No agent-facing instruction text was found for this task.",
+      "evidencePath": "task.toml",
+      "evidenceLine": null,
+      "evidenceFieldPath": "instruction",
+      "excerpt": null,
+      "remediation": "Write the instruction in instruction.md or the task.yaml instruction field.",
+      "validatorId": "instruction",
+      "fingerprint": "92b103fdb1889cd49b9668168536f96681147ac296ee073ce3c6533ae6f33284",
+      "ordinal": 1
+    },
+    {
+      "code": "TASK_TEST_ENTRYPOINT_MISSING",
+      "category": "tests",
+      "severity": "error",
+      "title": "Test entrypoint is not present",
+      "message": "None of tests/test.sh, run-tests.sh, tests/test_outputs.py, tests/test.py was found in the package.",
+      "evidencePath": "tests",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Add a test entrypoint file. AgentForge records it as evidence and never executes it.",
+      "validatorId": "test",
+      "fingerprint": "49f5deff884cb1cc7087969e052b70095e1e05fec15476b3470126d7ba615fbf",
+      "ordinal": 2
+    },
+    {
+      "code": "TASK_VERIFIER_MISSING",
+      "category": "verifier",
+      "severity": "error",
+      "title": "Verifier tests directory is not present",
+      "message": "No files were found under tests.",
+      "evidencePath": ".",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Add tests/ with test.sh (Harbor) or test_outputs.py (classic Terminal Bench).",
+      "validatorId": "verifier",
+      "fingerprint": "5a2c78d5811717eaafa49fa1ee897ff868bb334d3b9098a973d28f519935091d",
+      "ordinal": 3
+    }
+  ],
+  "validators": [
+    {
+      "id": "task-structure",
+      "name": "Task structure",
+      "version": "2.0.0"
+    },
+    {
+      "id": "metadata",
+      "name": "Task metadata",
+      "version": "2.0.0"
+    },
+    {
+      "id": "instruction",
+      "name": "Instruction content",
+      "version": "2.0.0"
+    },
+    {
+      "id": "environment",
+      "name": "Environment definition",
+      "version": "2.0.0"
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier configuration",
+      "version": "2.0.0"
+    },
+    {
+      "id": "test",
+      "name": "Test entrypoint",
+      "version": "2.0.0"
+    },
+    {
+      "id": "documentation",
+      "name": "Human documentation",
+      "version": "2.0.0"
+    },
+    {
+      "id": "security",
+      "name": "Static security inspection",
+      "version": "2.0.0"
+    },
+    {
+      "id": "reproducibility",
+      "name": "Reproducibility",
+      "version": "1.0.0"
+    }
+  ],
+  "validatorErrors": [],
+  "durationMs": 0,
+  "configuration": {
+    "schemaVersion": 1,
+    "strictMode": false,
+    "policy": "strict",
+    "enabledValidators": [
+      "task-structure",
+      "metadata",
+      "instruction",
+      "environment",
+      "verifier",
+      "test",
+      "documentation",
+      "security",
+      "reproducibility"
+    ],
+    "benchmarkVersion": "harbor-3",
+    "validatorOptions": {
+      "schemaVersion": 1,
+      "minInstructionCharacters": 40,
+      "maxExcerptCharacters": 400,
+      "maxExcerptLines": 12
+    }
+  }
+}

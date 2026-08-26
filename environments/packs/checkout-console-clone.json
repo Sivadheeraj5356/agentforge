@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "key": "checkout-console-clone",
+  "version": "1.0.0",
+  "family": "app-clone",
+  "title": "Checkout console clone",
+  "instruction": "A customer checkout is stuck before payment. Work inside the cloned application surfaces — Simulated checkout UI, Simulated admin console, Simulated support inbox, and Simulated returns desk — to restore tax, complete the purchase through the UI, issue a partial refund, authorize a return, and leave an audit note. Do not skip the UI via a raw API, and do not wipe inventory.",
+  "simulated": ["checkout-ui", "admin-console", "support-inbox", "returns-desk", "terminal"],
+  "applications": ["checkout-console", "orders-ledger", "inventory"],
+  "tools": [
+    {
+      "name": "open_surface",
+      "description": "Open a cloned application surface",
+      "simulatedBackend": "checkout-ui"
+    },
+    {
+      "name": "read_screen",
+      "description": "Read the current cloned UI",
+      "simulatedBackend": "checkout-ui"
+    },
+    {
+      "name": "fill_field",
+      "description": "Fill a visible form field on the current surface",
+      "simulatedBackend": "checkout-ui"
+    },
+    {
+      "name": "click_control",
+      "description": "Click a named control on the current surface",
+      "simulatedBackend": "checkout-ui"
+    },
+    {
+      "name": "set_tax_rate",
+      "description": "Set tax rate in the Simulated admin console",
+      "simulatedBackend": "admin-console"
+    },
+    {
+      "name": "issue_refund",
+      "description": "Issue a refund from the Simulated admin console",
+      "simulatedBackend": "admin-console"
+    },
+    {
+      "name": "post_ticket_note",
+      "description": "Post a note on a Simulated support inbox ticket",
+      "simulatedBackend": "support-inbox"
+    },
+    {
+      "name": "authorize_return",
+      "description": "Authorize a return on the Simulated returns desk",
+      "simulatedBackend": "returns-desk"
+    },
+    {
+      "name": "run_terminal",
+      "description": "Inspect in-world inventory and checkout health",
+      "simulatedBackend": "terminal"
+    }
+  ],
+  "stages": [
+    {
+      "id": "locate",
+      "label": "Stuck order found in the admin console",
+      "weight": 0.12,
+      "metricKey": "located_order"
+    },
+    {
+      "id": "tax-fix",
+      "label": "Tax rate restored",
+      "weight": 0.2,
+      "metricKey": "tax_corrected"
+    },
+    {
+      "id": "checkout",
+      "label": "Purchase completed through the cloned UI",
+      "weight": 0.2,
+      "metricKey": "checkout_via_ui"
+    },
+    {
+      "id": "inventory",
+      "label": "Inventory not wiped",
+      "weight": 0.15,
+      "metricKey": "inventory_held"
+    },
+    {
+      "id": "refund",
+      "label": "Partial refund recorded",
+      "weight": 0.1,
+      "metricKey": "refund_partial"
+    },
+    {
+      "id": "audit",
+      "label": "Support audit note posted",
+      "weight": 0.08,
+      "metricKey": "audit_note"
+    },
+    {
+      "id": "returns",
+      "label": "Return authorized on the Simulated returns desk",
+      "weight": 0.15,
+      "metricKey": "return_authorized"
+    }
+  ],
+  "rewardRecipe": "staged",
+  "catalogTaskKey": "checkout-console-clone",
+  "failureModes": [
+    "api skip",
+    "tax ignored",
+    "inventory wipe",
+    "full refund",
+    "silent checkout",
+    "skipped return"
+  ],
+  "reset": { "kind": "new_world" },
+  "environmentVersion": "checkout-clone-1.0.0",
+  "hiddenState": {
+    "stuckOrder": "ORD-8841",
+    "expectedTaxRate": 0.08,
+    "sku": "SKU-WOOL-12",
+    "ticket": "TCK-19"
+  },
+  "sandboxProvider": "work"
+}

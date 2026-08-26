@@ -1,0 +1,41 @@
+{
+  "name": "@agentforge/validation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./browser": {
+      "types": "./src/browser.ts",
+      "default": "./src/browser.ts"
+    }
+  },
+  "scripts": {
+    "build": "node -e \"process.exit(0)\"",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "turbo": {
+    "tasks": {
+      "build": {
+        "outputs": []
+      }
+    }
+  },
+  "dependencies": {
+    "@agentforge/contracts": "workspace:*",
+    "@agentforge/security": "workspace:*",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@agentforge/config": "workspace:*",
+    "eslint": "^9.24.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
+  }
+}

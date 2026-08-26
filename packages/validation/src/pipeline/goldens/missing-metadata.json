@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "terminus",
+  "benchmarkVersion": "2.0.0",
+  "artifact": {
+    "contentHash": "<sha256>",
+    "byteSize": 0
+  },
+  "detection": {
+    "matched": true,
+    "adapterId": "terminus",
+    "confidence": 0.7,
+    "reasons": ["instruction.md", "environment definition", "test entrypoint"]
+  },
+  "tasks": [
+    {
+      "rootPath": "",
+      "externalKey": "task",
+      "name": "task",
+      "version": null
+    }
+  ],
+  "outcome": "fail",
+  "policy": "strict",
+  "summary": {
+    "total": 4,
+    "critical": 0,
+    "error": 2,
+    "warning": 0,
+    "info": 2
+  },
+  "findings": [
+    {
+      "code": "TASK_STRUCTURE_MISSING_METADATA",
+      "category": "structure",
+      "severity": "error",
+      "title": "Task metadata file is not present",
+      "message": "None of task.toml, task.yaml, task.yml was found in the package.",
+      "evidencePath": ".",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Add Harbor-style task.toml or classic Terminal Bench task.yaml.",
+      "validatorId": "task-structure",
+      "fingerprint": "364eb8aeeaebe569bf5861cd72ea9c93fa3e18c4798bbe4cd3b199fff5d4928d",
+      "ordinal": 0
+    },
+    {
+      "code": "TASK_METADATA_MISSING",
+      "category": "metadata",
+      "severity": "error",
+      "title": "Task metadata is not available",
+      "message": "No metadata document was found at task.toml, task.yaml, task.yml.",
+      "evidencePath": ".",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Add task.toml (Harbor/Terminus) or task.yaml (classic Terminal Bench).",
+      "validatorId": "metadata",
+      "fingerprint": "ba9de571ee5763aae40eb8d12ed0bbf540f6c3154f2a294863ea7b266feaaafe",
+      "ordinal": 1
+    },
+    {
+      "code": "TASK_REPRODUCIBILITY_TASK_VERSION_MISSING",
+      "category": "reproducibility",
+      "severity": "info",
+      "title": "Task declares no version",
+      "message": "The metadata document for . declares no version field, so revisions cannot be distinguished by version.",
+      "evidencePath": ".",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Add a version field to the task metadata document.",
+      "validatorId": "reproducibility",
+      "fingerprint": "7d3c6af2055d6efa42e5813696f5bdad09f776afadb36750c17c938cd7f68334",
+      "ordinal": 2
+    },
+    {
+      "code": "TASK_REPRODUCIBILITY_TIMEOUT_UNDECLARED",
+      "category": "reproducibility",
+      "severity": "info",
+      "title": "Timeout is not declared explicitly",
+      "message": "verifier.timeout_sec is not declared, so the harness default applies and may change between harness versions.",
+      "evidencePath": ".",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": null,
+      "remediation": "Declare verifier.timeout_sec in the task metadata document.",
+      "validatorId": "reproducibility",
+      "fingerprint": "2521387770ffc6d7ae77acf3f82a17f1797fe7f08c4011e012aab25a6fa79e3a",
+      "ordinal": 3
+    }
+  ],
+  "validators": [
+    {
+      "id": "task-structure",
+      "name": "Task structure",
+      "version": "2.0.0"
+    },
+    {
+      "id": "metadata",
+      "name": "Task metadata",
+      "version": "2.0.0"
+    },
+    {
+      "id": "instruction",
+      "name": "Instruction content",
+      "version": "2.0.0"
+    },
+    {
+      "id": "environment",
+      "name": "Environment definition",
+      "version": "2.0.0"
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier configuration",
+      "version": "2.0.0"
+    },
+    {
+      "id": "test",
+      "name": "Test entrypoint",
+      "version": "2.0.0"
+    },
+    {
+      "id": "documentation",
+      "name": "Human documentation",
+      "version": "2.0.0"
+    },
+    {
+      "id": "security",
+      "name": "Static security inspection",
+      "version": "2.0.0"
+    },
+    {
+      "id": "reproducibility",
+      "name": "Reproducibility",
+      "version": "1.0.0"
+    }
+  ],
+  "validatorErrors": [],
+  "durationMs": 0,
+  "configuration": {
+    "schemaVersion": 1,
+    "strictMode": false,
+    "policy": "strict",
+    "enabledValidators": [
+      "task-structure",
+      "metadata",
+      "instruction",
+      "environment",
+      "verifier",
+      "test",
+      "documentation",
+      "security",
+      "reproducibility"
+    ],
+    "benchmarkVersion": "harbor-3",
+    "validatorOptions": {
+      "schemaVersion": 1,
+      "minInstructionCharacters": 40,
+      "maxExcerptCharacters": 400,
+      "maxExcerptLines": 12
+    }
+  }
+}

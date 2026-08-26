@@ -1,0 +1,7 @@
+version = "1.0"
+
+[metadata]
+name = "silent-wrong-total"
+description = "Correct order totals that fail silently."
+category = "debugging"
+difficulty = "medium"

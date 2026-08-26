@@ -1,0 +1,31 @@
+{
+  "name": "@agentforge/security",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "node -e \"process.exit(0)\"",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "turbo": {
+    "tasks": {
+      "build": {
+        "outputs": []
+      }
+    }
+  },
+  "devDependencies": {
+    "@agentforge/config": "workspace:*",
+    "eslint": "^9.24.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
+  }
+}

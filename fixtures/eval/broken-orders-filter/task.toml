@@ -1,0 +1,7 @@
+version = "1.0"
+
+[metadata]
+name = "broken-orders-filter"
+description = "Fix status filter crashes on GET /orders."
+category = "debugging"
+difficulty = "medium"

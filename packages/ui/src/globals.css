@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@source "../../../apps/web/src/**/*.{ts,tsx}";
+@source "./**/*.{ts,tsx}";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-agentforge-sans), "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-agentforge-serif), "Source Serif 4", ui-serif, Georgia, serif;
+  --font-mono: var(--font-agentforge-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-background: var(--agentforge-background);
+  --color-foreground: var(--agentforge-foreground);
+  --color-muted: var(--agentforge-muted);
+  --color-muted-foreground: var(--agentforge-muted-foreground);
+  --color-border: var(--agentforge-border);
+  --color-surface: var(--agentforge-surface);
+  --color-primary: var(--agentforge-primary);
+  --color-primary-foreground: var(--agentforge-primary-foreground);
+  --color-accent: var(--agentforge-accent);
+  --color-accent-foreground: var(--agentforge-accent-foreground);
+  --color-danger: var(--agentforge-danger);
+  --color-warning: var(--agentforge-warning);
+  --color-success: var(--agentforge-success);
+  --color-focus: var(--agentforge-focus);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+
+  --shadow-sm: 0 1px 2px rgb(23 23 23 / 0.04);
+  --shadow-md: 0 4px 12px rgb(23 23 23 / 0.06);
+
+  --spacing-page: 1.5rem;
+  --content-width: 72rem;
+
+  --height-control: 2.25rem;
+  --height-nav-item: 2rem;
+}
+
+@layer base {
+  :root {
+    /* Warm off-white light mode */
+    --agentforge-background: #f4f2ec;
+    --agentforge-foreground: #1c1b19;
+    --agentforge-muted: #e8e5dc;
+    --agentforge-muted-foreground: #5f5c55;
+    --agentforge-border: #d9d5cb;
+    --agentforge-surface: #faf8f3;
+    --agentforge-primary: #0f3d2e;
+    --agentforge-primary-foreground: #f4faf7;
+    --agentforge-accent: #0f766e;
+    --agentforge-accent-foreground: #f0fdfa;
+    --agentforge-danger: #b42318;
+    --agentforge-warning: #b54708;
+    --agentforge-success: #067647;
+    --agentforge-focus: #0f766e;
+    --agentforge-texture: rgb(28 27 25 / 0.035);
+  }
+
+  .dark {
+    /* Near-black warm dark mode */
+    --agentforge-background: #121110;
+    --agentforge-foreground: #ece8e1;
+    --agentforge-muted: #1c1b19;
+    --agentforge-muted-foreground: #a39e94;
+    --agentforge-border: #2a2825;
+    --agentforge-surface: #181716;
+    --agentforge-primary: #14b8a6;
+    --agentforge-primary-foreground: #042f2e;
+    --agentforge-accent: #2dd4bf;
+    --agentforge-accent-foreground: #042f2e;
+    --agentforge-danger: #f97066;
+    --agentforge-warning: #fdb022;
+    --agentforge-success: #47cd89;
+    --agentforge-focus: #2dd4bf;
+    --agentforge-texture: rgb(236 232 225 / 0.03);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.35);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings:
+      "ss01" on,
+      "cv11" on;
+    background-image: radial-gradient(var(--agentforge-texture) 0.7px, transparent 0.7px);
+    background-size: 18px 18px;
+  }
+
+  :focus-visible {
+    @apply outline-focus outline-2 outline-offset-2;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

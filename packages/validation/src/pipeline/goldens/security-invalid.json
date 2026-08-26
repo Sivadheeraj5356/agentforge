@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "terminus",
+  "benchmarkVersion": "2.0.0",
+  "artifact": {
+    "contentHash": "<sha256>",
+    "byteSize": 0
+  },
+  "detection": {
+    "matched": true,
+    "adapterId": "terminus",
+    "confidence": 1,
+    "reasons": ["instruction.md", "task.toml", "environment definition", "test entrypoint"]
+  },
+  "tasks": [
+    {
+      "rootPath": "",
+      "externalKey": "task",
+      "name": "task",
+      "version": "1.0.0"
+    }
+  ],
+  "outcome": "fail",
+  "policy": "strict",
+  "summary": {
+    "total": 4,
+    "critical": 2,
+    "error": 0,
+    "warning": 2,
+    "info": 0
+  },
+  "findings": [
+    {
+      "code": "TASK_SECURITY_DOCKER_SOCKET",
+      "category": "security",
+      "severity": "critical",
+      "title": "Package references the host Docker socket",
+      "message": "A file references the Docker socket path. Mounting it would give the task control of the host daemon.",
+      "evidencePath": "environment/Dockerfile",
+      "evidenceLine": 3,
+      "evidenceFieldPath": null,
+      "excerpt": "VOLUME /var/run/docker.sock",
+      "remediation": "Remove docker.sock mounts and host-docker usage from the package.",
+      "validatorId": "security",
+      "fingerprint": "897f4b0fcad4e15b62159d5805ba0b96755fc74bc06875af076bbee8844cbbd6",
+      "ordinal": 0
+    },
+    {
+      "code": "TASK_SECURITY_PRIVILEGED",
+      "category": "security",
+      "severity": "critical",
+      "title": "Package requests a privileged container",
+      "message": "A file requests privileged container execution, which removes container isolation from the sandbox.",
+      "evidencePath": "docker-compose.yaml",
+      "evidenceLine": 4,
+      "evidenceFieldPath": null,
+      "excerpt": "    privileged: true",
+      "remediation": "Drop privileged execution and request only the capabilities the task needs.",
+      "validatorId": "security",
+      "fingerprint": "186ea784e716ed62e602be70fc0cd5f03a027952a55e6606fb663d0456bb2c16",
+      "ordinal": 1
+    },
+    {
+      "code": "TASK_SECURITY_PIPE_SHELL",
+      "category": "security",
+      "severity": "warning",
+      "title": "Package pipes a remote script into a shell",
+      "message": "A file downloads a script and pipes it to a shell. The content is not pinned, so the environment is not reproducible and not reviewable.",
+      "evidencePath": "environment/Dockerfile",
+      "evidenceLine": 4,
+      "evidenceFieldPath": null,
+      "excerpt": "RUN curl -fsSL https://example.test/install.sh | sh",
+      "remediation": "Download to a file, pin a checksum, then run it.",
+      "validatorId": "security",
+      "fingerprint": "2e41fd49bd54c5892336d07f31b7b7b41edc754f3f26eb21e962649dc18fc53a",
+      "ordinal": 2
+    },
+    {
+      "code": "TASK_REPRODUCIBILITY_MUTABLE_IMAGE_REF",
+      "category": "reproducibility",
+      "severity": "warning",
+      "title": "Base image reference is mutable",
+      "message": "FROM ubuntu has no digest and no immutable tag, so a rebuild can produce a different environment.",
+      "evidencePath": "environment/Dockerfile",
+      "evidenceLine": 1,
+      "evidenceFieldPath": null,
+      "excerpt": "FROM ubuntu",
+      "remediation": "Pin the base image to a version tag or a @sha256 digest.",
+      "validatorId": "reproducibility",
+      "fingerprint": "97cc5f32d80890a74bad802bd3ce79964c51144a5c013a38f3ebd98a89e9a197",
+      "ordinal": 3
+    }
+  ],
+  "validators": [
+    {
+      "id": "task-structure",
+      "name": "Task structure",
+      "version": "2.0.0"
+    },
+    {
+      "id": "metadata",
+      "name": "Task metadata",
+      "version": "2.0.0"
+    },
+    {
+      "id": "instruction",
+      "name": "Instruction content",
+      "version": "2.0.0"
+    },
+    {
+      "id": "environment",
+      "name": "Environment definition",
+      "version": "2.0.0"
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier configuration",
+      "version": "2.0.0"
+    },
+    {
+      "id": "test",
+      "name": "Test entrypoint",
+      "version": "2.0.0"
+    },
+    {
+      "id": "documentation",
+      "name": "Human documentation",
+      "version": "2.0.0"
+    },
+    {
+      "id": "security",
+      "name": "Static security inspection",
+      "version": "2.0.0"
+    },
+    {
+      "id": "reproducibility",
+      "name": "Reproducibility",
+      "version": "1.0.0"
+    }
+  ],
+  "validatorErrors": [],
+  "durationMs": 0,
+  "configuration": {
+    "schemaVersion": 1,
+    "strictMode": false,
+    "policy": "strict",
+    "enabledValidators": [
+      "task-structure",
+      "metadata",
+      "instruction",
+      "environment",
+      "verifier",
+      "test",
+      "documentation",
+      "security",
+      "reproducibility"
+    ],
+    "benchmarkVersion": "harbor-3",
+    "validatorOptions": {
+      "schemaVersion": 1,
+      "minInstructionCharacters": 40,
+      "maxExcerptCharacters": 400,
+      "maxExcerptLines": 12
+    }
+  }
+}

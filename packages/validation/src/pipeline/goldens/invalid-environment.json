@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "terminus",
+  "benchmarkVersion": "2.0.0",
+  "artifact": {
+    "contentHash": "<sha256>",
+    "byteSize": 0
+  },
+  "detection": {
+    "matched": true,
+    "adapterId": "terminus",
+    "confidence": 1,
+    "reasons": ["instruction.md", "task.toml", "environment definition", "test entrypoint"]
+  },
+  "tasks": [
+    {
+      "rootPath": "",
+      "externalKey": "task",
+      "name": "task",
+      "version": "1.0.0"
+    }
+  ],
+  "outcome": "fail",
+  "policy": "strict",
+  "summary": {
+    "total": 3,
+    "critical": 0,
+    "error": 2,
+    "warning": 1,
+    "info": 0
+  },
+  "findings": [
+    {
+      "code": "TASK_ENVIRONMENT_INVALID_CONFIGURATION",
+      "category": "environment",
+      "severity": "error",
+      "title": "Environment configuration value is not usable",
+      "message": "environment.cpus: Number must be greater than 0",
+      "evidencePath": "task.toml",
+      "evidenceLine": 14,
+      "evidenceFieldPath": "environment.cpus",
+      "excerpt": null,
+      "remediation": "Declare positive numeric cpus, memory_mb, and build_timeout_sec values.",
+      "validatorId": "environment",
+      "fingerprint": "20104fc9eade5b09e608233e5274dae3da61309d2d104a9d43746a2dd932ef6d",
+      "ordinal": 0
+    },
+    {
+      "code": "TASK_ENVIRONMENT_SOLUTION_LEAK",
+      "category": "environment",
+      "severity": "error",
+      "title": "Environment copies solution or test paths into the agent image",
+      "message": "A COPY directive references a solution or test path, which would make the answer visible to the agent.",
+      "evidencePath": "environment/Dockerfile",
+      "evidenceLine": 2,
+      "evidenceFieldPath": null,
+      "excerpt": "COPY tests/ /app/tests/",
+      "remediation": "Copy only the files the agent is meant to see.",
+      "validatorId": "environment",
+      "fingerprint": "a4cf3574382ac0c079e965f9d9b0fb75702920dbefc40872f6fae9004c63bc5d",
+      "ordinal": 1
+    },
+    {
+      "code": "TASK_ENVIRONMENT_WORKDIR_MISSING",
+      "category": "environment",
+      "severity": "warning",
+      "title": "Dockerfile declares no WORKDIR",
+      "message": "No WORKDIR directive was found, so the agent's working directory depends on the base image.",
+      "evidencePath": "environment/Dockerfile",
+      "evidenceLine": null,
+      "evidenceFieldPath": null,
+      "excerpt": "FROM ubuntu:24.04\nCOPY tests/ /app/tests/\n",
+      "remediation": "Add WORKDIR with the path the instruction refers to.",
+      "validatorId": "environment",
+      "fingerprint": "354f4e6284589489724dc9184f5afe95e19b552bbe2d72d5077e4cc01a77c1b5",
+      "ordinal": 2
+    }
+  ],
+  "validators": [
+    {
+      "id": "task-structure",
+      "name": "Task structure",
+      "version": "2.0.0"
+    },
+    {
+      "id": "metadata",
+      "name": "Task metadata",
+      "version": "2.0.0"
+    },
+    {
+      "id": "instruction",
+      "name": "Instruction content",
+      "version": "2.0.0"
+    },
+    {
+      "id": "environment",
+      "name": "Environment definition",
+      "version": "2.0.0"
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier configuration",
+      "version": "2.0.0"
+    },
+    {
+      "id": "test",
+      "name": "Test entrypoint",
+      "version": "2.0.0"
+    },
+    {
+      "id": "documentation",
+      "name": "Human documentation",
+      "version": "2.0.0"
+    },
+    {
+      "id": "security",
+      "name": "Static security inspection",
+      "version": "2.0.0"
+    },
+    {
+      "id": "reproducibility",
+      "name": "Reproducibility",
+      "version": "1.0.0"
+    }
+  ],
+  "validatorErrors": [],
+  "durationMs": 0,
+  "configuration": {
+    "schemaVersion": 1,
+    "strictMode": false,
+    "policy": "strict",
+    "enabledValidators": [
+      "task-structure",
+      "metadata",
+      "instruction",
+      "environment",
+      "verifier",
+      "test",
+      "documentation",
+      "security",
+      "reproducibility"
+    ],
+    "benchmarkVersion": "harbor-3",
+    "validatorOptions": {
+      "schemaVersion": 1,
+      "minInstructionCharacters": 40,
+      "maxExcerptCharacters": 400,
+      "maxExcerptLines": 12
+    }
+  }
+}

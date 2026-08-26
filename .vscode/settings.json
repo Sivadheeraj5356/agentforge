@@ -1,0 +1,18 @@
+{
+  "files.exclude": {
+    "**/.research": true
+  },
+  "files.watcherExclude": {
+    "**/.research/**": true
+  },
+  "search.exclude": {
+    "**/.research": true
+  },
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.research/**",
+    "**/.next/**",
+    "**/dist/**"
+  ]
+}

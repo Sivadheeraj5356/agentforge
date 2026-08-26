@@ -1,0 +1,16 @@
+version = "1.0"
+
+[metadata]
+name = "broken-orders-api"
+description = "Diagnose 500s on GET /orders without changing the API contract."
+category = "debugging"
+difficulty = "medium"
+
+[environment]
+build_timeout_sec = 300
+cpus = 1
+memory_mb = 512
+storage_mb = 1024
+
+[verifier]
+timeout_sec = 60

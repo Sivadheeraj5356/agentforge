@@ -1,0 +1,26 @@
+---
+description: Permanent AgentForge architectural and engineering constraints
+alwaysApply: true
+---
+
+# AgentForge permanent constraints
+
+## Architecture
+
+- Control plane and execution plane stay separated. Trusted apps orchestrate; they never sandboxes or shells.
+- NEVER execute user-supplied code, commands, scripts, or task bundles in the trusted control plane (`apps/web`, shared TS packages).
+- Task versions are immutable once published. Create a new version instead of mutating.
+- Database tenancy is org-scoped. Queries and policies must include organization boundaries.
+- Validate schemas (Zod / contracts) at every trust boundary — HTTP, queue payloads, adapter I/O.
+- Supabase service role is server-only. Never expose it to client bundles or `NEXT_PUBLIC_*`.
+- Benchmark, model, agent, and sandbox integrations go behind adapters (`BenchmarkAdapter`, `ModelProvider`, `AgentAdapter`, `SandboxProvider`, `ArtifactStore`, `JobQueue`, `EnvironmentAdapter`, `CiCheckAdapter`).
+
+## Engineering
+
+- No unnecessary dependencies. Prefer stdlib / existing workspace packages.
+- Strict TypeScript. No `any`. Prefer branded IDs and Zod inference.
+- Do not claim done without running relevant tests (unit at minimum; Playwright smoke when UI changes).
+- Update docs/ADRs when architecture changes.
+- Accessibility and design-system tokens matter. Use `@agentforge/ui` primitives; avoid ad-hoc purple SaaS aesthetics.
+- Do not implement billing, Kafka, Kubernetes, ClickHouse, or invented scores unless explicitly requested.
+- Harbor, sandboxes, and training run only in `services/evaluator` and `services/training`. Never in `apps/web` or shared TS packages.

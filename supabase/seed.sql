@@ -1,0 +1,2 @@
+-- Chunk 2 seed intentionally empty.
+-- Auth users and personal workspaces are created via Auth + ensure_personal_organization().

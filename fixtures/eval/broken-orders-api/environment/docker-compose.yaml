@@ -1,0 +1,23 @@
+# Harbor compose: API + Postgres. Isolated does not mount docker.sock;
+# it grades the same OFFSET 2 bug via TestClient + sqlite.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vortex
+      POSTGRES_PASSWORD: vortex
+      POSTGRES_DB: orders
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vortex -d orders"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://vortex:vortex@db:5432/orders
+    ports:
+      - "8000:8000"

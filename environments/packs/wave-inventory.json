@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "key": "wave-inventory",
+  "version": "1.0.0",
+  "family": "evolving-spec",
+  "title": "Wave inventory — revising spec",
+  "instruction": "Inventory policy arrives in three waves on the Simulated inventory console and Simulated spec board. WAVE-1 holds 4 units. WAVE-2 revises that: ship-ready and reserve 1. WAVE-3 posts a handoff naming ship-ready and reserved=1. Do not keep the WAVE-1 hold, and do not wipe holds.",
+  "simulated": ["inventory-console", "spec-board", "terminal"],
+  "applications": ["inventory", "spec-board"],
+  "tools": [
+    {
+      "name": "reveal_wave",
+      "description": "Open the next specification wave on the Simulated spec board",
+      "simulatedBackend": "spec-board"
+    },
+    {
+      "name": "read_board",
+      "description": "Read the Simulated inventory console",
+      "simulatedBackend": "inventory-console"
+    },
+    {
+      "name": "apply_policy",
+      "description": "Apply the current wave's inventory policy",
+      "simulatedBackend": "inventory-console"
+    },
+    {
+      "name": "set_reserved",
+      "description": "Set the reserved count on the Simulated inventory console",
+      "simulatedBackend": "inventory-console"
+    },
+    {
+      "name": "post_handoff",
+      "description": "Post the wave-3 handoff note",
+      "simulatedBackend": "spec-board"
+    },
+    {
+      "name": "run_terminal",
+      "description": "Inspect in-world inventory status",
+      "simulatedBackend": "terminal"
+    }
+  ],
+  "stages": [
+    { "id": "wave-1", "label": "WAVE-1 hold applied", "weight": 0.15, "metricKey": "wave1_applied" },
+    { "id": "wave-2", "label": "WAVE-2 revision applied (ship-ready, reserve 1)", "weight": 0.25, "metricKey": "wave2_revised" },
+    { "id": "wave-3", "label": "WAVE-3 handoff posted", "weight": 0.2, "metricKey": "wave3_handoff" },
+    { "id": "inherit", "label": "Later waves inherit earlier mutations", "weight": 0.15, "metricKey": "state_inherited" },
+    { "id": "holds", "label": "Holds not wiped", "weight": 0.1, "metricKey": "holds_held" },
+    { "id": "order", "label": "Waves revealed in order", "weight": 0.15, "metricKey": "wave_order" }
+  ],
+  "rewardRecipe": "staged",
+  "catalogTaskKey": "wave-inventory",
+  "failureModes": ["kept first spec", "skipped wave", "wiped holds", "silent handoff"],
+  "reset": { "kind": "new_world" },
+  "environmentVersion": "wave-inventory-1.0.0",
+  "hiddenState": {
+    "sku": "SKU-BIN-7",
+    "waves": ["wave-1", "wave-2", "wave-3"],
+    "revisedReserve": 1
+  },
+  "sandboxProvider": "work"
+}

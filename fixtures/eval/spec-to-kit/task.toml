@@ -1,0 +1,10 @@
+version = "1.0"
+
+[metadata]
+name = "spec-to-kit"
+description = "Implement cutlist_span from SPEC.md. Do not import lookalike packages."
+category = "spec"
+difficulty = "hard"
+
+[verifier]
+timeout_sec = 60

@@ -1,0 +1,1 @@
+"""Spec kit package stub."""

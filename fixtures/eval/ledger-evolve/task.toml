@@ -1,0 +1,10 @@
+version = "1.0"
+
+[metadata]
+name = "ledger-evolve"
+description = "Evolve a tiny ledger: idempotent POST, migrate existing rows, update the CLI."
+category = "evolution"
+difficulty = "hard"
+
+[verifier]
+timeout_sec = 60

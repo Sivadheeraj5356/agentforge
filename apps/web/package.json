@@ -1,0 +1,43 @@
+{
+  "name": "@agentforge/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@agentforge/contracts": "workspace:*",
+    "@agentforge/security": "workspace:*",
+    "@agentforge/ui": "workspace:*",
+    "@agentforge/validation": "workspace:*",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.2",
+    "motion": "^13.1.1",
+    "next": "^15.3.1",
+    "next-themes": "^0.4.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@agentforge/config": "workspace:*",
+    "@eslint/eslintrc": "^3.3.1",
+    "@playwright/test": "^1.52.0",
+    "@tailwindcss/postcss": "^4.1.4",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/three": "^0.185.4",
+    "eslint": "^9.24.0",
+    "eslint-config-next": "^15.3.1",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
+  }
+}
