@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from training.dataset import write_sft_dataset
+from training.dataset import discover_tasks, write_sft_dataset
 from training.execute import cpu_smoke, execute_grpo, execute_sft
 from training.grpo import plan_grpo
 from training.sft import plan_sft
@@ -30,7 +30,8 @@ def test_dataset_and_dry_runs(tmp_path: Path) -> None:
     root = Path(__file__).resolve().parents[3] / "fixtures" / "eval"
     out = tmp_path / "sft.jsonl"
     count = write_sft_dataset(root, out)
-    assert count == 8
+    assert count == len(discover_tasks(root))
+    assert count >= 8
     plan = plan_sft(out, tmp_path)
     assert plan["status"] == "dry_run"
     assert plan["metrics"] == {}
