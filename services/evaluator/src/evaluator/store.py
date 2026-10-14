@@ -56,7 +56,10 @@ class EvaluatorStore:
         if result is None or result == []:
             return None
         if isinstance(result, list):
-            return result[0] if result else None
+            result = result[0] if result else None
+        # PostgREST returns an all-null row when the RPC returns a null composite (empty queue).
+        if not isinstance(result, dict) or not result.get("id"):
+            return None
         return result
 
     def get_run(self, run_id: str) -> dict[str, Any]:
