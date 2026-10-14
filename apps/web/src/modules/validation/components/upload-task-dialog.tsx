@@ -1,11 +1,17 @@
 "use client";
 
-import { useActionState, useEffect, useId, useRef, useState, type ReactElement } from "react";
+import { useId, useRef, useState, type ReactElement } from "react";
+import { useRouter } from "next/navigation";
 import { Button, Input, Label } from "@agentforge/ui";
 
-import { uploadTaskPackageAction, type UploadTaskActionResult } from "@/modules/validation/actions";
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import {
+  createUploadTargetAction,
+  ingestUploadedTaskAction,
+} from "@/modules/validation/direct-upload-actions";
 
-const initialState: UploadTaskActionResult | undefined = undefined;
+const ARTIFACT_BUCKET = "agentforge-artifacts";
+const MAX_BYTES = 32 * 1024 * 1024;
 
 export function UploadTaskDialog({
   organizationSlug,
@@ -18,14 +24,8 @@ export function UploadTaskDialog({
   const titleId = useId();
   const descriptionId = useId();
   const [sizeError, setSizeError] = useState<string | null>(null);
-  const [state, formAction, pending] = useActionState(uploadTaskPackageAction, initialState);
-
-  useEffect(() => {
-    if (state?.ok === false) {
-      dialogRef.current?.showModal();
-    }
-  }, [state]);
-
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
   return (
     <>
       <Button type="button" onClick={() => dialogRef.current?.showModal()}>
@@ -54,18 +54,55 @@ export function UploadTaskDialog({
           </Button>
         </form>
         <form
-          action={formAction}
           onSubmit={(event) => {
+            event.preventDefault();
             const input = event.currentTarget.elements.namedItem("package");
             const file = input instanceof HTMLInputElement ? input.files?.[0] : undefined;
-            if (file && file.size > 4 * 1024 * 1024) {
-              event.preventDefault();
-              setSizeError("This ZIP is over 4 MB. The hosted deployment accepts task packages up to 4 MB.");
-            } else {
-              setSizeError(null);
+            if (!file) {
+              setSizeError("Choose a ZIP task package.");
+              return;
             }
+            if (file.size > MAX_BYTES) {
+              setSizeError("This ZIP is over 32 MB, the upload limit.");
+              return;
+            }
+            setSizeError(null);
+            setBusy(true);
+            void (async () => {
+              try {
+                const target = await createUploadTargetAction({ organizationSlug, projectSlug });
+                if (!target.ok) {
+                  setSizeError(target.error);
+                  return;
+                }
+                const { error } = await createSupabaseBrowserClient()
+                  .storage.from(ARTIFACT_BUCKET)
+                  .uploadToSignedUrl(target.path, target.token, file, {
+                    contentType: "application/zip",
+                  });
+                if (error) {
+                  setSizeError("The upload failed. Try again.");
+                  return;
+                }
+                const result = await ingestUploadedTaskAction({
+                  organizationSlug,
+                  projectSlug,
+                  uploadId: target.uploadId,
+                });
+                if (!result.ok) {
+                  setSizeError(result.error);
+                  return;
+                }
+                router.push(result.redirectTo);
+              } catch {
+                setSizeError("The upload failed. Try again.");
+              } finally {
+                setBusy(false);
+              }
+            })();
           }}
-          className="flex flex-col gap-4 px-5 py-4">
+          className="flex flex-col gap-4 px-5 py-4"
+        >
           <input type="hidden" name="organizationSlug" value={organizationSlug} />
           <input type="hidden" name="projectSlug" value={projectSlug} />
           <div className="flex flex-col gap-2">
@@ -78,7 +115,7 @@ export function UploadTaskDialog({
               required
             />
           </div>
-          {pending ? (
+          {busy ? (
             <p role="status" className="text-muted-foreground text-sm">
               Uploading and validating…
             </p>
@@ -88,22 +125,17 @@ export function UploadTaskDialog({
               {sizeError}
             </p>
           ) : null}
-          {state && !state.ok ? (
-            <p role="alert" className="text-danger text-sm">
-              {state.error}
-            </p>
-          ) : null}
           <div className="flex justify-end gap-2 pt-1">
             <Button
               type="button"
               variant="outline"
               onClick={() => dialogRef.current?.close()}
-              disabled={pending}
+              disabled={busy}
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={pending}>
-              {pending ? "Validating…" : "Upload and validate"}
+            <Button type="submit" disabled={busy}>
+              {busy ? "Validating…" : "Upload and validate"}
             </Button>
           </div>
         </form>
