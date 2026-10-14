@@ -1,10 +1,9 @@
 name: Evaluator worker
 
-# Free execution plane: GitHub-hosted Ubuntu runners include Docker.
-# Claims queued evaluation jobs from the hosted Supabase project and writes scores back.
+# Manual run of the evaluator worker on a GitHub-hosted runner (Docker available) to verify the
+# evaluation pipeline against the hosted Supabase project. Not scheduled: GitHub's Actions terms
+# do not allow using Actions as a standing serverless/background service.
 on:
-  schedule:
-    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 concurrency:
@@ -35,7 +34,7 @@ jobs:
       - name: Drain queue
         run: |
           idle=0
-          for i in $(seq 1 120); do
+          for i in $(seq 1 40); do
             out=$(python -m evaluator worker | tail -1)
             echo "$i: $out"
             if [ "$out" = "idle" ]; then idle=$((idle+1)); else idle=0; fi
