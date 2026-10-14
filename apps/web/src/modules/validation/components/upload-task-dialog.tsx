@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useId, useRef, type ReactElement } from "react";
+import { useActionState, useEffect, useId, useRef, useState, type ReactElement } from "react";
 import { Button, Input, Label } from "@agentforge/ui";
 
 import { uploadTaskPackageAction, type UploadTaskActionResult } from "@/modules/validation/actions";
@@ -17,6 +17,7 @@ export function UploadTaskDialog({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const descriptionId = useId();
+  const [sizeError, setSizeError] = useState<string | null>(null);
   const [state, formAction, pending] = useActionState(uploadTaskPackageAction, initialState);
 
   useEffect(() => {
@@ -52,7 +53,19 @@ export function UploadTaskDialog({
             Close
           </Button>
         </form>
-        <form action={formAction} className="flex flex-col gap-4 px-5 py-4">
+        <form
+          action={formAction}
+          onSubmit={(event) => {
+            const input = event.currentTarget.elements.namedItem("package");
+            const file = input instanceof HTMLInputElement ? input.files?.[0] : undefined;
+            if (file && file.size > 4 * 1024 * 1024) {
+              event.preventDefault();
+              setSizeError("This ZIP is over 4 MB. The hosted deployment accepts task packages up to 4 MB.");
+            } else {
+              setSizeError(null);
+            }
+          }}
+          className="flex flex-col gap-4 px-5 py-4">
           <input type="hidden" name="organizationSlug" value={organizationSlug} />
           <input type="hidden" name="projectSlug" value={projectSlug} />
           <div className="flex flex-col gap-2">
@@ -68,6 +81,11 @@ export function UploadTaskDialog({
           {pending ? (
             <p role="status" className="text-muted-foreground text-sm">
               Uploading and validating…
+            </p>
+          ) : null}
+          {sizeError ? (
+            <p role="alert" className="text-danger text-sm">
+              {sizeError}
             </p>
           ) : null}
           {state && !state.ok ? (
