@@ -40,10 +40,30 @@
     }
   ],
   "stages": [
-    { "id": "wave-1", "label": "WAVE-1 list-10 applied", "weight": 0.15, "metricKey": "wave1_applied" },
-    { "id": "wave-2", "label": "WAVE-2 revision applied (list-8)", "weight": 0.25, "metricKey": "wave2_revised" },
-    { "id": "wave-3", "label": "WAVE-3 handoff posted", "weight": 0.2, "metricKey": "wave3_handoff" },
-    { "id": "inherit", "label": "Later waves inherit earlier mutations", "weight": 0.15, "metricKey": "state_inherited" },
+    {
+      "id": "wave-1",
+      "label": "WAVE-1 list-10 applied",
+      "weight": 0.15,
+      "metricKey": "wave1_applied"
+    },
+    {
+      "id": "wave-2",
+      "label": "WAVE-2 revision applied (list-8)",
+      "weight": 0.25,
+      "metricKey": "wave2_revised"
+    },
+    {
+      "id": "wave-3",
+      "label": "WAVE-3 handoff posted",
+      "weight": 0.2,
+      "metricKey": "wave3_handoff"
+    },
+    {
+      "id": "inherit",
+      "label": "Later waves inherit earlier mutations",
+      "weight": 0.15,
+      "metricKey": "state_inherited"
+    },
     { "id": "safety", "label": "Prices not wiped", "weight": 0.1, "metricKey": "holds_held" },
     { "id": "order", "label": "Waves revealed in order", "weight": 0.15, "metricKey": "wave_order" }
   ],

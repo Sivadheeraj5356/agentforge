@@ -90,9 +90,7 @@ export async function GET(request: Request): Promise<Response> {
   }));
   const runIds = [
     ...new Set(
-      scored
-        .map((row) => row.evaluationRunId)
-        .filter((id): id is string => typeof id === "string"),
+      scored.map((row) => row.evaluationRunId).filter((id): id is string => typeof id === "string"),
     ),
   ];
   const trialsByRun = new Map<string, unknown>();
@@ -109,9 +107,7 @@ export async function GET(request: Request): Promise<Response> {
     }
   }
   const filename =
-    kind === "preference"
-      ? "agentforge-preferences.jsonl"
-      : `agentforge-rollouts-${kind}.jsonl`;
+    kind === "preference" ? "agentforge-preferences.jsonl" : `agentforge-rollouts-${kind}.jsonl`;
   if (kind === "preference") {
     const pairs = preferencePairs(scored);
     const lines = pairs

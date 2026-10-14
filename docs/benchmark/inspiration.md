@@ -4,14 +4,14 @@ Research clones live in gitignored `.research/`. They are **not** part of the pr
 
 AgentForge Horizon is a private bench protocol (pinned env, hidden grader, staged reward, failed rollouts). This site does not store or display a Fable 5 score ([ADR-036](../architecture/decisions/ADR-036-agentforge-is-the-bench.md)).
 
-| Source | Horizon (Awesome T0–T3) | Job we took | AgentForge original id | What we did **not** copy |
-|---|---|---|---|---|
-| SWE-bench family | T1 | One principal repair + hidden tests | Existing Isolated fixtures (`broken-orders-api` and siblings) | Issue text, gold patches, repo snapshots |
-| [SWE-EVO](https://github.com/SWE-EVO/SWE-EVO) | T2 (near T3) | Multi-obligation evolution: API + data + CLI | `ledger-evolve` | Django/NumPy histories, SRS dumps, OpenHands/SWE-agent trees |
-| [DeNovoSWE](https://github.com/AweAI-Team/DeNovoSWE) | T2 | Spec → small library; anti-cheat against installing a lookalike | `spec-to-kit` | Hugging Face rows, `document` fields, PyPI names, Docker image URLs |
-| SWE-Chain / T3 papers | T3 | Requirements revise mid-run; later work inherits earlier mutations | `wave-inventory` | Chained release datasets |
-| [mattpocock/skills](https://github.com/mattpocock/skills) | n/a (skills, not a bench) | Agent ignores a written constraint when a shortcut exists | `skill-constraint` | Their SKILL.md files, installer, newsletter copy |
-| SaaSBench / app-clone papers | T2 | Multi-surface product work, simulated | Existing `checkout-console-clone` | Live SaaS logins, competitor UIs |
+| Source                                                    | Horizon (Awesome T0–T3)   | Job we took                                                        | AgentForge original id                                        | What we did **not** copy                                            |
+| --------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------- |
+| SWE-bench family                                          | T1                        | One principal repair + hidden tests                                | Existing Isolated fixtures (`broken-orders-api` and siblings) | Issue text, gold patches, repo snapshots                            |
+| [SWE-EVO](https://github.com/SWE-EVO/SWE-EVO)             | T2 (near T3)              | Multi-obligation evolution: API + data + CLI                       | `ledger-evolve`                                               | Django/NumPy histories, SRS dumps, OpenHands/SWE-agent trees        |
+| [DeNovoSWE](https://github.com/AweAI-Team/DeNovoSWE)      | T2                        | Spec → small library; anti-cheat against installing a lookalike    | `spec-to-kit`                                                 | Hugging Face rows, `document` fields, PyPI names, Docker image URLs |
+| SWE-Chain / T3 papers                                     | T3                        | Requirements revise mid-run; later work inherits earlier mutations | `wave-inventory`                                              | Chained release datasets                                            |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | n/a (skills, not a bench) | Agent ignores a written constraint when a shortcut exists          | `skill-constraint`                                            | Their SKILL.md files, installer, newsletter copy                    |
+| SaaSBench / app-clone papers                              | T2                        | Multi-surface product work, simulated                              | Existing `checkout-console-clone`                             | Live SaaS logins, competitor UIs                                    |
 
 ## Taxonomy we use in docs
 

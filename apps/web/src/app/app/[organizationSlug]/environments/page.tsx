@@ -1,10 +1,6 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
-import {
-  EXPERIENCE_PACK_CATALOG,
-  recoveryPackVariants,
-  type Json,
-} from "@agentforge/contracts";
+import { EXPERIENCE_PACK_CATALOG, recoveryPackVariants, type Json } from "@agentforge/contracts";
 import { assertNeverExecutesUserCode } from "@agentforge/security";
 
 import { DomainEmptyState } from "@/components/domain-empty-state";
@@ -78,7 +74,9 @@ export default async function EnvironmentsPage({
           environmentVersionId={latestEnv?.id ?? null}
         />
       ) : (
-        <p className="text-muted-foreground text-sm">Owner or admin role required to start packs.</p>
+        <p className="text-muted-foreground text-sm">
+          Owner or admin role required to start packs.
+        </p>
       )}
 
       <section className="grid gap-8 lg:grid-cols-2">
@@ -136,7 +134,9 @@ export default async function EnvironmentsPage({
             ))}
           </ul>
         )}
-        <p className="mt-4 text-sm">Generate more experiences for recovery (queue of pack variants):</p>
+        <p className="mt-4 text-sm">
+          Generate more experiences for recovery (queue of pack variants):
+        </p>
         <ul className="text-muted-foreground mt-1 list-disc pl-5 text-sm">
           {recoveryQueue.map((key) => (
             <li key={key}>{key}</li>

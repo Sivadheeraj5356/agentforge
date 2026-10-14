@@ -37,7 +37,9 @@ test.describe("auth entry smoke @smoke", () => {
     await expect(page).not.toHaveURL(/\/login/);
     await expect(page.getByRole("heading", { name: "Overview", exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Search docs" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "RL environments", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "RL environments", exact: true })).toHaveCount(
+      0,
+    );
     await expect(page.getByText(/Terminal-Bench 4/i)).toHaveCount(0);
 
     await page
@@ -52,12 +54,16 @@ test.describe("auth entry smoke @smoke", () => {
     await expect(page.getByRole("heading", { name: "Overview", exact: true })).toHaveCount(0);
 
     await page.goto("/docs/private-eval");
-    await expect(page.getByRole("heading", { name: "Private long-horizon eval", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Private long-horizon eval", exact: true }),
+    ).toBeVisible();
     await expect(page.getByText(/pinned environment/i).first()).toBeVisible();
     await expect(page.getByText(/we score \d+%/i)).toHaveCount(0);
 
     await page.goto("/docs/benchmark");
-    await expect(page.getByRole("heading", { name: "AgentForge Horizon", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "AgentForge Horizon", exact: true }),
+    ).toBeVisible();
     await expect(page.getByText(/not a Fable 5 leaderboard/i).first()).toBeVisible();
     await expect(page.getByText(/Fable 5 scored/i)).toHaveCount(0);
 

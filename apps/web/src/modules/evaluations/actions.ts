@@ -38,7 +38,8 @@ async function enqueueParsed(parsed: {
   if (MODEL_KINDS.has(parsed.agentKind) && parsed.sandboxProvider === "fake") {
     return {
       ok: false,
-      error: "Reference, multi-agent, and BYO runs require Isolated or Work. Fake is fixtures-only.",
+      error:
+        "Reference, multi-agent, and BYO runs require Isolated or Work. Fake is fixtures-only.",
     };
   }
   const { organization, project } = await requireProjectBySlug(
@@ -51,7 +52,9 @@ async function enqueueParsed(parsed: {
   if (project.status === "archived") {
     return { ok: false, error: "Archived projects cannot enqueue evaluations." };
   }
-  const catalogTask = parsed.catalogTaskKey ? await getCatalogTaskByKey(parsed.catalogTaskKey) : null;
+  const catalogTask = parsed.catalogTaskKey
+    ? await getCatalogTaskByKey(parsed.catalogTaskKey)
+    : null;
   if (!catalogTask) {
     return { ok: false, error: "Unknown catalog task." };
   }

@@ -40,7 +40,15 @@ export function CreateSuiteForm({
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="suite-gate">Fail if pass@1 &lt;</Label>
-        <Input id="suite-gate" name="minPassAt1" type="number" min={0} max={1} step="0.01" defaultValue="1" />
+        <Input
+          id="suite-gate"
+          name="minPassAt1"
+          type="number"
+          min={0}
+          max={1}
+          step="0.01"
+          defaultValue="1"
+        />
       </div>
       {pending ? <p className="text-muted-foreground text-sm">Saving…</p> : null}
       {state && !state.ok ? (

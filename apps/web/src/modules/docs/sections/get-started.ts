@@ -1,9 +1,4 @@
-import {
-  heading,
-  numbered,
-  paragraph,
-  type DocsSection,
-} from "../types";
+import { heading, numbered, paragraph, type DocsSection } from "../types";
 
 export const GET_STARTED_SECTION: DocsSection = {
   id: "get-started",

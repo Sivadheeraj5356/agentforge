@@ -21,8 +21,8 @@ export default function TaskInspectorError({
         This report could not be assembled
       </h1>
       <p className="text-muted-foreground text-sm leading-relaxed">
-        The task and its validation history are stored and unchanged. AgentForge could not read one of
-        the pieces it needs to show them — usually the run&rsquo;s findings or its file list.
+        The task and its validation history are stored and unchanged. AgentForge could not read one
+        of the pieces it needs to show them — usually the run&rsquo;s findings or its file list.
       </p>
       <p className="text-muted-foreground text-sm leading-relaxed">
         Try again. If it keeps failing, share the reference below so an operator can find the log

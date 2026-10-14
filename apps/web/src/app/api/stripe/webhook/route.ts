@@ -19,9 +19,7 @@ export async function POST(request: Request): Promise<Response> {
     return NextResponse.json({ error: "Stripe webhook is not configured." }, { status: 503 });
   }
   const payload = await request.text();
-  if (
-    !verifyStripeSignature(payload, request.headers.get("stripe-signature"), secret)
-  ) {
+  if (!verifyStripeSignature(payload, request.headers.get("stripe-signature"), secret)) {
     return NextResponse.json({ error: "Invalid signature." }, { status: 400 });
   }
   const event = parseStripeEvent(payload);
@@ -32,9 +30,9 @@ export async function POST(request: Request): Promise<Response> {
   const supabase = createSupabaseServiceRoleClient();
 
   if (event.type === "checkout.session.completed") {
-    const organizationId = asString(object.client_reference_id) ?? asString(
-      (object.metadata as Record<string, unknown> | undefined)?.organization_id,
-    );
+    const organizationId =
+      asString(object.client_reference_id) ??
+      asString((object.metadata as Record<string, unknown> | undefined)?.organization_id);
     const customerId = asString(object.customer);
     const subscriptionId = asString(object.subscription);
     if (!organizationId || !customerId) {

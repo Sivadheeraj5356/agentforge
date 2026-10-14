@@ -72,7 +72,10 @@ export function createArtifactStore(): ArtifactStore {
   if (r2) {
     return createR2ArtifactStore(r2);
   }
-  if (process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() && process.env.AGENTFORGE_ARTIFACT_BACKEND !== "local") {
+  if (
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() &&
+    process.env.AGENTFORGE_ARTIFACT_BACKEND !== "local"
+  ) {
     return createSupabaseArtifactStore();
   }
   return createLocalFilesystemArtifactStore();

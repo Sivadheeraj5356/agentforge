@@ -37,7 +37,7 @@ export function SiteChrome({
         Skip to content
       </a>
       <header className="border-border bg-background/70 sticky top-0 z-20 border-b backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-(--spacing-page)">
+        <div className="px-(--spacing-page) mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4">
           <Link
             href="/"
             className="text-foreground font-mono text-lg font-medium tracking-tight sm:text-xl"
@@ -70,7 +70,7 @@ export function SiteChrome({
         {children}
       </main>
       <footer className="border-border border-t">
-        <div className="text-muted-foreground mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-(--spacing-page) py-6 text-sm">
+        <div className="text-muted-foreground px-(--spacing-page) mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 py-6 text-sm">
           <p className="font-mono text-xs tracking-tight">AgentForge</p>
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/docs" className={headerLinkClass}>

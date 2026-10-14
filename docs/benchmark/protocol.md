@@ -14,12 +14,12 @@ This is the citable recipe for a private AgentForge run. It is not SWE-bench, no
 
 ## Harness labels
 
-| Label | Meaning |
-| --- | --- |
-| oracle | Known-good trajectory. Expect reward 1.0. |
-| NOP | Empty or no-op trajectory. Must not score 1.0. |
-| reference | AgentForge OpenAI/Anthropic tool loop on the evaluator. Requires worker keys. |
-| byo | Operator command or HTTP/stdio loop on the evaluator. Control plane never receives the binary. |
+| Label     | Meaning                                                                                        |
+| --------- | ---------------------------------------------------------------------------------------------- |
+| oracle    | Known-good trajectory. Expect reward 1.0.                                                      |
+| NOP       | Empty or no-op trajectory. Must not score 1.0.                                                 |
+| reference | AgentForge OpenAI/Anthropic tool loop on the evaluator. Requires worker keys.                  |
+| byo       | Operator command or HTTP/stdio loop on the evaluator. Control plane never receives the binary. |
 
 Missing model keys fail the job. They do not score like NOP.
 

@@ -1,11 +1,4 @@
-import {
-  bullet,
-  heading,
-  note,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { bullet, heading, note, paragraph, table, type DocsSection } from "../types";
 
 export const OVERVIEW_SECTION: DocsSection = {
   id: "overview",
@@ -27,8 +20,16 @@ export const OVERVIEW_SECTION: DocsSection = {
     table(
       ["Plane", "Lives in", "Does"],
       [
-        ["Control", "apps/web and shared TypeScript packages", "Auth, tenancy, queue metadata, display records"],
-        ["Execution", "services/evaluator", "Worlds, tools, hidden graders, staged reward, trajectories"],
+        [
+          "Control",
+          "apps/web and shared TypeScript packages",
+          "Auth, tenancy, queue metadata, display records",
+        ],
+        [
+          "Execution",
+          "services/evaluator",
+          "Worlds, tools, hidden graders, staged reward, trajectories",
+        ],
       ],
       "Control plane versus execution plane",
     ),

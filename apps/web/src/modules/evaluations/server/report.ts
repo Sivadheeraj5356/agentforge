@@ -4,7 +4,11 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAuthenticatedUser } from "@/modules/auth/server/require-authenticated-user";
 import { stageScoresFromMetrics } from "@/modules/environments/server/packs";
 import { getEvaluationRunForOrganization } from "@/modules/evaluations/server/evaluation-runs";
-import { finiteNumber, harnessLabel, medianOrNull } from "@/modules/evaluations/server/report-metrics";
+import {
+  finiteNumber,
+  harnessLabel,
+  medianOrNull,
+} from "@/modules/evaluations/server/report-metrics";
 import { listTrialsForRun } from "@/modules/evaluations/server/trials";
 
 export type EvaluationJsonReport = {
@@ -97,7 +101,11 @@ export async function buildEvaluationJsonReport(
   const config = asRecord(run.evaluator_configuration);
   const firstTrial = trials[0];
   const trialRecord = firstTrial
-    ? (firstTrial as { model_provider?: string | null; model_id?: string | null; model_snapshot?: string | null })
+    ? (firstTrial as {
+        model_provider?: string | null;
+        model_id?: string | null;
+        model_snapshot?: string | null;
+      })
     : null;
 
   const { data: result } = await supabase
@@ -171,18 +179,11 @@ export async function buildEvaluationJsonReport(
     ...stageScoresFromMetrics((payload as Json | null) ?? null),
     ...stageScoresFromMetrics(firstTrial?.metrics ?? null),
   };
-  const recordedCost =
-    finiteNumber(payload?.costUsd) ??
-    finiteNumber(firstTrial?.cost_usd) ??
-    null;
+  const recordedCost = finiteNumber(payload?.costUsd) ?? finiteNumber(firstTrial?.cost_usd) ?? null;
   const recordedPrompt =
-    finiteNumber(payload?.promptTokens) ??
-    finiteNumber(firstTrial?.prompt_tokens) ??
-    null;
+    finiteNumber(payload?.promptTokens) ?? finiteNumber(firstTrial?.prompt_tokens) ?? null;
   const recordedCompletion =
-    finiteNumber(payload?.completionTokens) ??
-    finiteNumber(firstTrial?.completion_tokens) ??
-    null;
+    finiteNumber(payload?.completionTokens) ?? finiteNumber(firstTrial?.completion_tokens) ?? null;
 
   return {
     schemaVersion: 1,
@@ -224,8 +225,7 @@ export async function buildEvaluationJsonReport(
       meanReward: numberOrNull(payload?.meanReward) ?? run.meanReward,
       medianReward: numberOrNull(payload?.medianReward) ?? medianOrNull(rewards),
       meanLatencyMs:
-        numberOrNull(payload?.meanLatencyMs) ??
-        (latencies.length === 0 ? null : mean(latencies)),
+        numberOrNull(payload?.meanLatencyMs) ?? (latencies.length === 0 ? null : mean(latencies)),
       meanToolCalls:
         numberOrNull(payload?.meanToolCalls) ??
         (toolCounts.length === 0
@@ -244,8 +244,7 @@ export async function buildEvaluationJsonReport(
     promptTokens: recordedPrompt,
     completionTokens: recordedCompletion,
     labels: {
-      oracleFailIsNotAgentFail:
-        "An Oracle fail is a task/verifier problem, not an agent failure.",
+      oracleFailIsNotAgentFail: "An Oracle fail is a task/verifier problem, not an agent failure.",
       nopPassMeansVerifierIntegrity:
         "A NOP pass means the verifier accepted an empty or no-op trajectory and is not intact.",
       timeoutIsInfrastructure: "A timeout is infrastructure, not a model score.",

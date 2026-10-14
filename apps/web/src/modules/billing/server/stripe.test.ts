@@ -7,9 +7,11 @@ import { parseStripeEvent, verifyStripeSignature } from "./stripe";
 describe("verifyStripeSignature", () => {
   it("accepts a timely v1 signature", () => {
     const secret = "whsec_test";
-    const payload = "{\"id\":\"evt_1\"}";
+    const payload = '{"id":"evt_1"}';
     const timestamp = 1_700_000_000;
-    const signature = createHmac("sha256", secret).update(`${timestamp}.${payload}`, "utf8").digest("hex");
+    const signature = createHmac("sha256", secret)
+      .update(`${timestamp}.${payload}`, "utf8")
+      .digest("hex");
     expect(
       verifyStripeSignature(payload, `t=${timestamp},v1=${signature}`, secret, timestamp),
     ).toBe(true);
@@ -20,7 +22,9 @@ describe("verifyStripeSignature", () => {
     const secret = "whsec_test";
     const payload = "{}";
     const timestamp = 1;
-    const signature = createHmac("sha256", secret).update(`${timestamp}.${payload}`, "utf8").digest("hex");
+    const signature = createHmac("sha256", secret)
+      .update(`${timestamp}.${payload}`, "utf8")
+      .digest("hex");
     expect(
       verifyStripeSignature(payload, `t=${timestamp},v1=${signature}`, secret, 1_700_000_000),
     ).toBe(false);

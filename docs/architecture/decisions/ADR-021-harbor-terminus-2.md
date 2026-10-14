@@ -15,7 +15,7 @@ Next.js, and without mounting the host Docker socket.
 - Catalog agent `harbor/terminus-2/1.0.0` is metadata. `AgentAdapter` lives in
   `services/evaluator`.
 - `HarborSandbox` maps `agent` / `multi_agent` to `harbor run --agent terminus-2
-  --model $HARBOR_MODEL` and passes OpenAI-compatible `OPENAI_BASE_URL` /
+--model $HARBOR_MODEL` and passes OpenAI-compatible `OPENAI_BASE_URL` /
   `OPENAI_API_KEY` as Harbor `--ae` only. Logs redact secret values.
 - Forbidden args stay `docker.sock`, `--privileged`, `--pid=host`, `--network=host`.
 - Control plane may enqueue `agentKind=agent`. It never starts Harbor or stores keys.

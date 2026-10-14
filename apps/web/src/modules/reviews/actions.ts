@@ -66,7 +66,10 @@ export async function submitFindingReviewAction(
     evidence: toJson({ summary: evidenceSummary }),
   });
   if (error) {
-    return { ok: false, error: "Review could not be recorded. A second independent review may already exist." };
+    return {
+      ok: false,
+      error: "Review could not be recorded. A second independent review may already exist.",
+    };
   }
   revalidatePath(`/app/${organization.slug}/reviews`);
   return { ok: true, message: "Review submitted." };

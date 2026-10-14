@@ -62,7 +62,9 @@ export function LabForms({
             {scenarioState.error}
           </p>
         ) : null}
-        {scenarioState && scenarioState.ok ? <p className="text-sm">{scenarioState.message}</p> : null}
+        {scenarioState && scenarioState.ok ? (
+          <p className="text-sm">{scenarioState.message}</p>
+        ) : null}
         <Button type="submit">Save scenario</Button>
       </form>
 

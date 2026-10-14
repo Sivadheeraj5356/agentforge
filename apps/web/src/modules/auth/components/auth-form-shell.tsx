@@ -14,7 +14,7 @@ export function AuthFormShell({
 }): ReactElement {
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-12">
-      <div className="w-full max-w-88">
+      <div className="max-w-88 w-full">
         <div className="mb-8 flex flex-col gap-3">
           <Link
             href="/"

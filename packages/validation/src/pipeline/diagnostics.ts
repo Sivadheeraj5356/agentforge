@@ -1,7 +1,11 @@
 import type { ValidatorId } from "@agentforge/contracts";
 
 export type DiagnosticEventName =
-  "archive.rejected" | "benchmark.undetected" | "benchmark.refused" | "validator.failed" | "findings.truncated";
+  | "archive.rejected"
+  | "benchmark.undetected"
+  | "benchmark.refused"
+  | "validator.failed"
+  | "findings.truncated";
 
 /**
  * Operator-facing diagnostic. The pipeline never writes to the console itself and

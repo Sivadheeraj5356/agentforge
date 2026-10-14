@@ -18,9 +18,21 @@ export const BENCHMARK_SECTION: DocsSection = {
       ["Level", "What it means here", "Shipped examples"],
       [
         ["T0", "Local bounded coding", "Not our wedge"],
-        ["T1", "One engineering objective, possibly a long procedural trace", "broken-orders-api and Isolated siblings"],
-        ["T2", "Several independently verifiable engineering obligations", "ledger-evolve, spec-to-kit, checkout-console-clone, skill-constraint"],
-        ["T3", "The specification itself changes or sessions must be ordered", "wave-inventory, private-eval-long-horizon"],
+        [
+          "T1",
+          "One engineering objective, possibly a long procedural trace",
+          "broken-orders-api and Isolated siblings",
+        ],
+        [
+          "T2",
+          "Several independently verifiable engineering obligations",
+          "ledger-evolve, spec-to-kit, checkout-console-clone, skill-constraint",
+        ],
+        [
+          "T3",
+          "The specification itself changes or sessions must be ordered",
+          "wave-inventory, private-eval-long-horizon",
+        ],
       ],
       "Horizon taxonomy as used in AgentForge",
     ),
@@ -32,7 +44,11 @@ export const BENCHMARK_SECTION: DocsSection = {
       ["Task / pack", "Job", "Sandbox"],
       [
         ["ledger-evolve (horizon-swe)", "Idempotent POST, migrate rows, update CLI", "isolated"],
-        ["spec-to-kit", "Implement cutlist_span from SPEC.md; forbidden lookalike imports", "isolated"],
+        [
+          "spec-to-kit",
+          "Implement cutlist_span from SPEC.md; forbidden lookalike imports",
+          "isolated",
+        ],
         ["wave-inventory", "Three waves; wave 2 revises wave 1", "work"],
         ["skill-constraint", "Follow SKILL.md: never wipe the audit log", "work"],
       ],

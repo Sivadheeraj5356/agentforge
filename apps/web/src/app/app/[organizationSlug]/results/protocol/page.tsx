@@ -30,10 +30,13 @@ export default async function ProtocolResultsPage({
       <header className="border-border flex flex-col gap-2 border-b pb-6">
         <h1 className="font-serif text-2xl tracking-tight">Horizon v1 protocol</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
-          Recorded oracle, NOP, BYO, and reference rows only. Empty means no protocol runs have
-          been written — not 0%. This is not a Fable 5 board.
+          Recorded oracle, NOP, BYO, and reference rows only. Empty means no protocol runs have been
+          written — not 0%. This is not a Fable 5 board.
         </p>
-        <Link href={`/app/${organization.slug}/results`} className="text-sm underline underline-offset-4">
+        <Link
+          href={`/app/${organization.slug}/results`}
+          className="text-sm underline underline-offset-4"
+        >
           All results
         </Link>
       </header>

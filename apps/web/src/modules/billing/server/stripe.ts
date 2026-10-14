@@ -56,7 +56,9 @@ export function verifyStripeSignature(
   if (!Number.isFinite(ts) || Math.abs(nowSeconds - ts) > 300) {
     return false;
   }
-  const expected = createHmac("sha256", secret).update(`${timestamp}.${payload}`, "utf8").digest("hex");
+  const expected = createHmac("sha256", secret)
+    .update(`${timestamp}.${payload}`, "utf8")
+    .digest("hex");
   const actual = Buffer.from(signature, "utf8");
   const want = Buffer.from(expected, "utf8");
   if (actual.length !== want.length) {

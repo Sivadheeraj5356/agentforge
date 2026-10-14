@@ -43,7 +43,9 @@ export function DocsShell({
   return (
     <div className="flex flex-col gap-8">
       <div className="border-border flex flex-wrap items-center justify-between gap-3 border-b pb-5">
-        <p className="text-muted-foreground font-mono text-base uppercase tracking-[0.16em]">Docs</p>
+        <p className="text-muted-foreground font-mono text-base uppercase tracking-[0.16em]">
+          Docs
+        </p>
         <DocsSearch basePath={basePath} />
       </div>
 
@@ -58,7 +60,10 @@ export function DocsShell({
                 <ul className="flex flex-row flex-wrap gap-x-3 gap-y-1 xl:flex-col xl:gap-0">
                   {group.sections.map((item) => (
                     <li key={item.id}>
-                      <Link href={docsPageHref(basePath, item.id)} className={currentLinkClass(item.id === section.id)}>
+                      <Link
+                        href={docsPageHref(basePath, item.id)}
+                        className={currentLinkClass(item.id === section.id)}
+                      >
                         {item.title}
                       </Link>
                     </li>
@@ -75,7 +80,9 @@ export function DocsShell({
               {groupLabel}
             </p>
             <h1 className="font-serif text-5xl font-semibold tracking-tight">{section.title}</h1>
-            <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">{section.summary}</p>
+            <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
+              {section.summary}
+            </p>
           </header>
           <DocsArticle section={section} />
 

@@ -17,12 +17,7 @@ export function CreateWebhookForm({
     <form action={action} className="flex max-w-md flex-col gap-3">
       <input type="hidden" name="organizationSlug" value={organizationSlug} />
       <Label htmlFor="webhook-url">Signed webhook URL</Label>
-      <Input
-        id="webhook-url"
-        name="url"
-        required
-        placeholder="http://127.0.0.1:8787/hooks"
-      />
+      <Input id="webhook-url" name="url" required placeholder="http://127.0.0.1:8787/hooks" />
       <p className="text-muted-foreground text-xs">
         Events: evaluation.completed, evaluation.failed, regression.detected. The evaluator POSTs
         with X-AgentForge-Signature. GitHub App checks stay behind an unconfigured adapter.
@@ -33,7 +28,7 @@ export function CreateWebhookForm({
           {state.error}
         </p>
       ) : null}
-      {state && state.ok ? <p className="text-sm break-all">{state.message}</p> : null}
+      {state && state.ok ? <p className="break-all text-sm">{state.message}</p> : null}
       <Button type="submit" variant="outline">
         Create webhook
       </Button>

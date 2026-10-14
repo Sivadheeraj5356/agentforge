@@ -51,12 +51,7 @@
     "forbidden-test-rewrite",
     "stale-health-payload"
   ],
-  "failureModes": [
-    "wrong patch",
-    "contract break",
-    "grader tamper",
-    "ignored context"
-  ],
+  "failureModes": ["wrong patch", "contract break", "grader tamper", "ignored context"],
   "reset": { "kind": "new_workspace" },
   "environmentVersion": "orders-ops-1.0.0",
   "contextMount": "families/orders-ops/context",

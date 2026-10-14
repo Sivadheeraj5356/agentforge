@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
 
-import { DOCS_INDEX_SLUG, docsPageDescription, docsDocumentTitle, getDocsSection } from "@/modules/docs/content";
+import {
+  DOCS_INDEX_SLUG,
+  docsPageDescription,
+  docsDocumentTitle,
+  getDocsSection,
+} from "@/modules/docs/content";
 import { ProductDocs } from "@/modules/docs/product-docs";
 
 const overview = getDocsSection(DOCS_INDEX_SLUG);
@@ -18,7 +23,7 @@ export default function PublicDocsPage(): ReactElement {
     throw new Error("Docs overview is missing.");
   }
   return (
-    <div className="mx-auto w-full max-w-7xl px-(--spacing-page) py-12">
+    <div className="px-(--spacing-page) mx-auto w-full max-w-7xl py-12">
       <ProductDocs section={overview} basePath="/docs" />
     </div>
   );

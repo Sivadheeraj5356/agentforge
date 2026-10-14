@@ -51,7 +51,10 @@ export async function POST(
   }
   const spec = env.spec;
   const packKey =
-    typeof spec === "object" && spec !== null && !Array.isArray(spec) && typeof spec.packKey === "string"
+    typeof spec === "object" &&
+    spec !== null &&
+    !Array.isArray(spec) &&
+    typeof spec.packKey === "string"
       ? spec.packKey
       : "";
   if (!packKey || !getExperiencePack(packKey)) {

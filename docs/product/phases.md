@@ -2,14 +2,14 @@
 
 AgentForge maps EvalForge phases 1–6 onto slices A–H. EvalForge chunks 1–11 and the old Vortex execution work are already in the tree.
 
-| EvalForge phase | AgentForge slice | What it is |
-| --- | --- | --- |
-| 1–2 foundation | Shipped + **A** rename + **B** honesty | Auth, orgs, inspector, queue, Harbor/Isolated, task report |
-| 3 review | **C** | Independent human review / adjudication |
-| 4 APIs | **D** | Second adapter boundary + `/api/v1` |
-| 5 CI | **E** | Suites, gates, signed webhooks, org concurrency |
-| 5–6 private evals | **F** | Org-private scenarios; EnvironmentAdapter refuses fake SaaS |
-| 6 RL / lab | **G**–**H** | Immutable env versions, rollouts, PRIVATE datasets, enterprise stubs |
+| EvalForge phase   | AgentForge slice                       | What it is                                                           |
+| ----------------- | -------------------------------------- | -------------------------------------------------------------------- |
+| 1–2 foundation    | Shipped + **A** rename + **B** honesty | Auth, orgs, inspector, queue, Harbor/Isolated, task report           |
+| 3 review          | **C**                                  | Independent human review / adjudication                              |
+| 4 APIs            | **D**                                  | Second adapter boundary + `/api/v1`                                  |
+| 5 CI              | **E**                                  | Suites, gates, signed webhooks, org concurrency                      |
+| 5–6 private evals | **F**                                  | Org-private scenarios; EnvironmentAdapter refuses fake SaaS          |
+| 6 RL / lab        | **G**–**H**                            | Immutable env versions, rollouts, PRIVATE datasets, enterprise stubs |
 
 ## Slice A — AgentForge name
 
@@ -61,14 +61,14 @@ AgentForge maps EvalForge phases 1–6 onto slices A–H. EvalForge chunks 1–1
 
 Private executable packs (not TB4). See [product/work-environments/](product/work-environments/).
 
-| Slice | What it is |
-| --- | --- |
-| **W1** | Pack schema, docs, Lab Environments chrome, ADR-031/032/033 |
+| Slice  | What it is                                                                                        |
+| ------ | ------------------------------------------------------------------------------------------------- |
+| **W1** | Pack schema, docs, Lab Environments chrome, ADR-031/032/033                                       |
 | **W2** | orders-ops family, staged reward, `eval_scenarios` overlay in the worker, read-only context mount |
-| **W3** | One Production Incident world + MCP JSON-RPC loop in `services/evaluator` |
-| **W4** | `/api/v1/environments/start` and reset; rollout reward fetch |
-| **W5** | PRIVATE trajectory / preference export; capability-gap from real `failure_category` counts |
-| **W6** | Tests: staged math, MCP handlers, pgTAP tenancy, Playwright chrome, Isolated oracle/NOP |
+| **W3** | One Production Incident world + MCP JSON-RPC loop in `services/evaluator`                         |
+| **W4** | `/api/v1/environments/start` and reset; rollout reward fetch                                      |
+| **W5** | PRIVATE trajectory / preference export; capability-gap from real `failure_category` counts        |
+| **W6** | Tests: staged math, MCP handlers, pgTAP tenancy, Playwright chrome, Isolated oracle/NOP           |
 
 ## Permanent outs
 

@@ -97,13 +97,7 @@ export const BenchmarkManifestSchema = z
     }
   });
 
-export const EvaluationAgentKindSchema = z.enum([
-  "oracle",
-  "nop",
-  "agent",
-  "multi_agent",
-  "byo",
-]);
+export const EvaluationAgentKindSchema = z.enum(["oracle", "nop", "agent", "multi_agent", "byo"]);
 
 export function harnessCatalogLookup(kind: EvaluationAgentKind): {
   readonly provider: string;

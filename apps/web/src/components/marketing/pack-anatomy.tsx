@@ -37,7 +37,7 @@ export function PackAnatomy({
   return (
     <aside
       aria-label={`${pack.title} pack anatomy`}
-      className="border-border bg-surface overflow-hidden rounded-lg border border-l-[3px] border-l-accent shadow-md"
+      className="border-border bg-surface border-l-accent overflow-hidden rounded-lg border border-l-[3px] shadow-md"
     >
       <div className="border-border flex items-baseline justify-between gap-3 border-b px-4 py-3">
         <p className="font-mono text-[11px] uppercase tracking-[0.14em]">Experience pack</p>
@@ -113,7 +113,10 @@ export function PackAnatomy({
 
 export function PackCatalog(): ReactElement {
   return (
-    <ul aria-label="Shipped packs" className="border-border divide-border divide-y rounded-lg border">
+    <ul
+      aria-label="Shipped packs"
+      className="border-border divide-border divide-y rounded-lg border"
+    >
       {EXPERIENCE_PACK_CATALOG.map((pack) => (
         <li key={pack.key} className="bg-surface flex flex-col gap-3 px-5 py-5 sm:px-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2">

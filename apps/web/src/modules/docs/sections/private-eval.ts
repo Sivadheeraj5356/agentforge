@@ -11,10 +11,10 @@ import {
 
 export const PRIVATE_EVAL_SECTION: DocsSection = {
   id: "private-eval",
-    title: "Private long-horizon eval",
-    group: "packs",
-    summary:
-      "A private long-horizon pack for multi-session release-train work. AgentForge is the bench: pin the environment, run hidden staged graders, and keep failed rollouts. Not a live leaderboard.",
+  title: "Private long-horizon eval",
+  group: "packs",
+  summary:
+    "A private long-horizon pack for multi-session release-train work. AgentForge is the bench: pin the environment, run hidden staged graders, and keep failed rollouts. Not a live leaderboard.",
   blocks: [
     paragraph(
       "Private eval — stalled release train is a long-horizon pack in the private-eval family. The agent has to finish three operator sessions in order: triage, repair, and handoff. It cannot solve the job in a single tool call. Versions are immutable once published. Runs stay inside your organization.",
@@ -30,7 +30,11 @@ export const PRIVATE_EVAL_SECTION: DocsSection = {
       ["Session", "What must happen", "Hidden stage"],
       [
         ["triage", "Read alerts, read the runbook, identify the blocked train", "triage_done"],
-        ["repair", "Apply the config patch, re-run the check so it is actually green", "repair_done, check_green"],
+        [
+          "repair",
+          "Apply the config patch, re-run the check so it is actually green",
+          "repair_done, check_green",
+        ],
         ["handoff", "Post a handoff note after the check is green", "handoff_done"],
       ],
       "Operator sessions on private-eval-long-horizon",

@@ -35,7 +35,12 @@ function signingKey(secret: string, date: string, region: string): Buffer {
 function encodeObjectKey(key: string): string {
   return key
     .split("/")
-    .map((segment) => encodeURIComponent(segment).replace(/[!'()*]/g, (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`))
+    .map((segment) =>
+      encodeURIComponent(segment).replace(
+        /[!'()*]/g,
+        (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`,
+      ),
+    )
     .join("/");
 }
 

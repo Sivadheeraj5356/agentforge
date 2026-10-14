@@ -23,10 +23,6 @@ export default async function InAppDocsSlugPage({
     notFound();
   }
   return (
-    <ProductDocs
-      section={section}
-      basePath={basePath}
-      workspaceHref={`/app/${organizationSlug}`}
-    />
+    <ProductDocs section={section} basePath={basePath} workspaceHref={`/app/${organizationSlug}`} />
   );
 }

@@ -9,10 +9,10 @@
 | Auth / DB        | Supabase Auth + Postgres + RLS                             |
 | Domain           | Organizations, projects, evaluation model, validation runs |
 | Supabase clients | `@supabase/ssr` + `@supabase/supabase-js`                  |
-| Styling          | Tailwind CSS v4 + `@agentforge/ui` tokens                      |
+| Styling          | Tailwind CSS v4 + `@agentforge/ui` tokens                  |
 | Components       | shadcn-style primitives (Radix Slot, CVA)                  |
 | Theming          | `next-themes` (light / dark / system)                      |
-| Validation       | Zod in `@agentforge/contracts`                                 |
+| Validation       | Zod in `@agentforge/contracts`                             |
 | Unit tests       | Vitest                                                     |
 | DB tests         | pgTAP via `supabase test db`                               |
 | E2E smoke        | Playwright                                                 |
@@ -29,10 +29,10 @@
 
 ## Wired in this tree (test / operator)
 
-| Area      | Choice                         | Notes                                      |
-| --------- | ------------------------------ | ------------------------------------------ |
-| Artifacts | Local filesystem, or R2 when `R2_*` is set | ADR-004; signed GET on R2 only    |
-| Payments  | Stripe **test mode**           | Org subscription rows; does not gate eval  |
+| Area      | Choice                                     | Notes                                     |
+| --------- | ------------------------------------------ | ----------------------------------------- |
+| Artifacts | Local filesystem, or R2 when `R2_*` is set | ADR-004; signed GET on R2 only            |
+| Payments  | Stripe **test mode**                       | Org subscription rows; does not gate eval |
 
 ## Explicitly deferred
 

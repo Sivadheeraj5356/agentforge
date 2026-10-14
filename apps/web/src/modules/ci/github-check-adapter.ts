@@ -12,8 +12,6 @@ export class GitHubCheckAdapter implements CiCheckAdapter {
     readonly conclusion: CiCheckConclusion;
     readonly detailsUrl: string;
   }): Promise<void> {
-    return Promise.reject(
-      new Error("GitHub App is not configured. CI checks are not published."),
-    );
+    return Promise.reject(new Error("GitHub App is not configured. CI checks are not published."));
   }
 }

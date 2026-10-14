@@ -47,8 +47,8 @@ export default async function EvaluationsPage({
       <header className="border-border flex flex-col gap-2 border-b pb-6">
         <h1 className="font-serif text-2xl tracking-tight">Evaluations</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
-          Queue Oracle, NOP, reference, BYO, or multi-agent trials against a pinned catalog task. The
-          control plane stores job metadata; the evaluator worker starts the sandbox.
+          Queue Oracle, NOP, reference, BYO, or multi-agent trials against a pinned catalog task.
+          The control plane stores job metadata; the evaluator worker starts the sandbox.
         </p>
         <WorkspaceShortcutLinks
           organizationSlug={organization.slug}

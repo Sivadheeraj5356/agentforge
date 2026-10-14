@@ -1,12 +1,4 @@
-import {
-  code,
-  diagram,
-  heading,
-  note,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { code, diagram, heading, note, paragraph, table, type DocsSection } from "../types";
 
 export const RLVR_SECTION: DocsSection = {
   id: "rlvr",
@@ -28,7 +20,7 @@ export const RLVR_SECTION: DocsSection = {
       "Staged reward",
     ),
     paragraph(
-      "TypeScript and Python share the same sum. stagedReward in @agentforge/contracts is for tests and docs. apply_recipe(\"staged\", …) / staged_breakdown in services/evaluator is what a trial actually uses. Per-stage values persist on evaluation_trials.metrics as stage_<id> (hyphens become underscores).",
+      'TypeScript and Python share the same sum. stagedReward in @agentforge/contracts is for tests and docs. apply_recipe("staged", …) / staged_breakdown in services/evaluator is what a trial actually uses. Per-stage values persist on evaluation_trials.metrics as stage_<id> (hyphens become underscores).',
     ),
     code(
       "ts",

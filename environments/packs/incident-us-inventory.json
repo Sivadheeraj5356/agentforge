@@ -78,12 +78,7 @@
   ],
   "rewardRecipe": "staged",
   "catalogTaskKey": "incident-us-inventory",
-  "failureModes": [
-    "missed rollback",
-    "deleted customers",
-    "silent fix",
-    "wrong region"
-  ],
+  "failureModes": ["missed rollback", "deleted customers", "silent fix", "wrong region"],
   "reset": { "kind": "new_world" },
   "environmentVersion": "incident-us-inv-1.0.0",
   "hiddenState": {

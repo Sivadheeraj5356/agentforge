@@ -37,7 +37,7 @@ function DocsTable({
               {row.map((cell, cellIndex) => (
                 <td
                   key={`${rowIndex}-${cellIndex}-${cell.slice(0, 24)}`}
-                  className="text-foreground align-top py-3 pr-4 leading-relaxed"
+                  className="text-foreground py-3 pr-4 align-top leading-relaxed"
                 >
                   {cell}
                 </td>
@@ -61,7 +61,9 @@ function DocsBlockView({ block }: { block: DocsBlock }): ReactElement {
         </h2>
       );
     case "code":
-      return <DocsCodeBlock language={block.language} code={block.code} filename={block.filename} />;
+      return (
+        <DocsCodeBlock language={block.language} code={block.code} filename={block.filename} />
+      );
     case "table":
       return <DocsTable headers={block.headers} rows={block.rows} caption={block.caption} />;
     case "list":
@@ -89,7 +91,10 @@ function DocsBlockView({ block }: { block: DocsBlock }): ReactElement {
               {block.title}
             </figcaption>
           ) : null}
-          <pre className="p-4 font-mono text-base leading-relaxed" aria-label={block.title ?? "Diagram"}>
+          <pre
+            className="p-4 font-mono text-base leading-relaxed"
+            aria-label={block.title ?? "Diagram"}
+          >
             {block.lines.join("\n")}
           </pre>
         </figure>

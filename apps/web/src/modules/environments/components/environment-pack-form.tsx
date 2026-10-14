@@ -1,7 +1,11 @@
 "use client";
 
 import { useActionState, type ReactElement } from "react";
-import { EXPERIENCE_PACK_CATALOG, simulatedLabel, type ExperiencePack } from "@agentforge/contracts";
+import {
+  EXPERIENCE_PACK_CATALOG,
+  simulatedLabel,
+  type ExperiencePack,
+} from "@agentforge/contracts";
 import { Button, Label } from "@agentforge/ui";
 
 import {
@@ -148,8 +152,7 @@ export function PackStageList({ pack }: { pack: ExperiencePack }): ReactElement 
     <ol className="text-muted-foreground mt-2 list-decimal space-y-1 pl-5 text-sm">
       {pack.stages.map((stage) => (
         <li key={stage.id}>
-          {stage.label}{" "}
-          <span className="font-mono text-xs">({stage.weight.toFixed(2)})</span>
+          {stage.label} <span className="font-mono text-xs">({stage.weight.toFixed(2)})</span>
         </li>
       ))}
     </ol>

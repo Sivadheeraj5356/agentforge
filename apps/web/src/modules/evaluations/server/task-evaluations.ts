@@ -114,8 +114,7 @@ export function modelComparisonFromRuns(
     }
     const trials = trialsByRunId.get(run.id) ?? [];
     const snapshotTrial = trials[0] as
-      | (TrialView & { model_snapshot?: string | null; latency_ms?: number | null })
-      | undefined;
+      (TrialView & { model_snapshot?: string | null; latency_ms?: number | null }) | undefined;
     const latencies = trials
       .map((trial) => {
         const extra = trial as TrialView & { latency_ms?: number | null };

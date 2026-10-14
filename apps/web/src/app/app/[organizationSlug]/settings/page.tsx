@@ -74,7 +74,9 @@ export default async function SettingsPage({
           <Button type="submit">Assign workflow role</Button>
         </form>
       ) : (
-        <p className="text-muted-foreground text-sm">Owner or admin required to assign workflow roles.</p>
+        <p className="text-muted-foreground text-sm">
+          Owner or admin required to assign workflow roles.
+        </p>
       )}
       {canAssign ? <CreateWebhookForm organizationSlug={organization.slug} /> : null}
 
@@ -83,20 +85,20 @@ export default async function SettingsPage({
           Billing
         </h2>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Stripe test mode only. A paid row is org metadata for a future gate. Local evaluation
-          does not require a subscription.
+          Stripe test mode only. A paid row is org metadata for a future gate. Local evaluation does
+          not require a subscription.
         </p>
         {!stripeReady ? (
           <p className="text-muted-foreground text-sm">Stripe test mode is not configured.</p>
         ) : canAssign ? (
           <StartStripeCheckoutForm organizationSlug={organization.slug} />
         ) : (
-          <p className="text-muted-foreground text-sm">Owner or admin required to start checkout.</p>
+          <p className="text-muted-foreground text-sm">
+            Owner or admin required to start checkout.
+          </p>
         )}
         {subscription ? (
-          <p className="text-muted-foreground font-mono text-xs">
-            status {subscription.status}
-          </p>
+          <p className="text-muted-foreground font-mono text-xs">status {subscription.status}</p>
         ) : (
           <p className="text-muted-foreground text-sm">No subscription row.</p>
         )}

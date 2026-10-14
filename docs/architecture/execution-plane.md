@@ -11,14 +11,14 @@ Run untrusted and privileged evaluation work away from the Next.js control plane
 
 ## Components (Chunks 8–16)
 
-| Component              | Role                                                          |
-| ---------------------- | ------------------------------------------------------------- |
-| `services/evaluator`   | DB-backed worker (`evaluation_jobs`, `SKIP LOCKED` + heartbeat) |
+| Component              | Role                                                                      |
+| ---------------------- | ------------------------------------------------------------------------- |
+| `services/evaluator`   | DB-backed worker (`evaluation_jobs`, `SKIP LOCKED` + heartbeat)           |
 | `HarborSandbox`        | Legacy Harbor CLI behind `AGENTFORGE_ENABLE_HARBOR`; not the product path |
-| `IsolatedSandbox`      | Two Docker runs: agent workspace ≠ `/hidden` grader           |
-| `FakeSandbox`          | Deterministic oracle/NOP for tests only                       |
-| `TerminalBenchAdapter` | Structural parse of TB2 / Harbor layout                       |
-| `services/training`    | SFT/GRPO dataset, `--execute` CPU smoke, experiment records   |
+| `IsolatedSandbox`      | Two Docker runs: agent workspace ≠ `/hidden` grader                       |
+| `FakeSandbox`          | Deterministic oracle/NOP for tests only                                   |
+| `TerminalBenchAdapter` | Structural parse of TB2 / Harbor layout                                   |
+| `services/training`    | SFT/GRPO dataset, `--execute` CPU smoke, experiment records               |
 
 ## Trust model
 

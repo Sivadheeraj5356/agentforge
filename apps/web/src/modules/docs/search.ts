@@ -21,7 +21,11 @@ export type DocsSearchHit = {
 };
 
 function pageHaystack(section: DocsSection): string {
-  return [section.title, section.summary, ...section.blocks.flatMap((block) => blockPlainText(block))]
+  return [
+    section.title,
+    section.summary,
+    ...section.blocks.flatMap((block) => blockPlainText(block)),
+  ]
     .join("\n")
     .toLowerCase();
 }
@@ -106,7 +110,9 @@ export function searchDocs(
       score: scoreEntry(entry, tokens),
     }))
     .filter((hit) => hit.score > 0)
-    .sort((left, right) => right.score - left.score || left.pageTitle.localeCompare(right.pageTitle));
+    .sort(
+      (left, right) => right.score - left.score || left.pageTitle.localeCompare(right.pageTitle),
+    );
 
   const seen = new Set<string>();
   const unique: DocsSearchHit[] = [];

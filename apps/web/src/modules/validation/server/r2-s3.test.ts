@@ -42,7 +42,9 @@ describe("createR2ArtifactStore", () => {
     expect(fetchImpl).toHaveBeenCalledOnce();
     const first = fetchImpl.mock.calls[0] as unknown as [string] | undefined;
     const url = String(first?.[0] ?? "");
-    expect(url).toContain("/agentforge-artifacts/orgs/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa/obj.bin");
+    expect(url).toContain(
+      "/agentforge-artifacts/orgs/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa/obj.bin",
+    );
   });
 });
 

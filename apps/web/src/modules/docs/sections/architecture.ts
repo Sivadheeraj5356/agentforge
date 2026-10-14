@@ -1,11 +1,4 @@
-import {
-  bullet,
-  diagram,
-  heading,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { bullet, diagram, heading, paragraph, table, type DocsSection } from "../types";
 
 export const ARCHITECTURE_SECTION: DocsSection = {
   id: "architecture",
@@ -40,10 +33,19 @@ export const ARCHITECTURE_SECTION: DocsSection = {
     table(
       ["Boundary", "Contract"],
       [
-        ["HTTP", "StartEnvironmentInputSchema, ResetEnvironmentInputSchema, RolloutExportKindSchema"],
-        ["Queue job", "EvaluatorConfigurationSchema (staged, packKey, sandboxProvider, attemptCount)"],
+        [
+          "HTTP",
+          "StartEnvironmentInputSchema, ResetEnvironmentInputSchema, RolloutExportKindSchema",
+        ],
+        [
+          "Queue job",
+          "EvaluatorConfigurationSchema (staged, packKey, sandboxProvider, attemptCount)",
+        ],
         ["Pack file", "ExperiencePackSchema in TS; load_pack weight sum in Python"],
-        ["Tenancy", "organization_id on environment_versions, rollouts, trials; RLS on session queries"],
+        [
+          "Tenancy",
+          "organization_id on environment_versions, rollouts, trials; RLS on session queries",
+        ],
         ["Secrets", "Supabase service role is server-only. Never NEXT_PUBLIC_*"],
       ],
       "Validation at trust boundaries",
@@ -58,6 +60,7 @@ export const ARCHITECTURE_SECTION: DocsSection = {
     ]),
     heading("architecture-adapters", "Adapters"),
     paragraph(
-      "Benchmark, model, agent, sandbox, artifact, queue, environment, and CI check integrations sit behind adapters (BenchmarkAdapter, ModelProvider, AgentAdapter, SandboxProvider, ArtifactStore, JobQueue, EnvironmentAdapter, CiCheckAdapter). The work sandbox id is work. Isolated is isolated. The website does not construct those runtimes."),
+      "Benchmark, model, agent, sandbox, artifact, queue, environment, and CI check integrations sit behind adapters (BenchmarkAdapter, ModelProvider, AgentAdapter, SandboxProvider, ArtifactStore, JobQueue, EnvironmentAdapter, CiCheckAdapter). The work sandbox id is work. Isolated is isolated. The website does not construct those runtimes.",
+    ),
   ],
 };

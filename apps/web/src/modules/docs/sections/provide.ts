@@ -1,10 +1,4 @@
-import {
-  heading,
-  note,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { heading, note, paragraph, table, type DocsSection } from "../types";
 
 export const PROVIDE_SECTION: DocsSection = {
   id: "provide",
@@ -53,9 +47,18 @@ export const PROVIDE_SECTION: DocsSection = {
       ["Authoring check", "Pass condition"],
       [
         ["Oracle harness", "Reward 1.0 on the published pack"],
-        ["NOP harness", "Reward strictly less than 1.0; partial credit only for stages that are true at reset (for example inventory held)"],
-        ["Hard split", "Frontier solve rate targeted near 30% by construction, not displayed as a live score"],
-        ["Recovery variants", "Sibling keys queued from real failure modes, not invented percentages"],
+        [
+          "NOP harness",
+          "Reward strictly less than 1.0; partial credit only for stages that are true at reset (for example inventory held)",
+        ],
+        [
+          "Hard split",
+          "Frontier solve rate targeted near 30% by construction, not displayed as a live score",
+        ],
+        [
+          "Recovery variants",
+          "Sibling keys queued from real failure modes, not invented percentages",
+        ],
       ],
       "How hardness is checked",
     ),

@@ -288,7 +288,7 @@ export function TaskInspector({
       </div>
 
       <div
-        className="border-border flex min-h-0 flex-1 md:h-[calc(100dvh-17rem)] md:min-h-128 md:rounded-md md:border"
+        className="border-border md:min-h-128 flex min-h-0 flex-1 md:h-[calc(100dvh-17rem)] md:rounded-md md:border"
         style={{ ["--tree-width" as string]: `${treeWidth}px` }}
       >
         <section

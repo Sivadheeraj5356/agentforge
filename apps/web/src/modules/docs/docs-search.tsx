@@ -199,8 +199,8 @@ export function DocsSearch({ basePath }: { basePath: string }): ReactElement {
                     }}
                     className={
                       active
-                        ? "bg-muted text-foreground relative flex w-full items-start gap-3 px-4 py-2.5 text-left before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-accent"
-                        : "text-foreground relative flex w-full items-start gap-3 px-4 py-2.5 text-left hover:bg-muted before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-transparent hover:before:bg-accent"
+                        ? "bg-muted text-foreground before:bg-accent relative flex w-full items-start gap-3 px-4 py-2.5 text-left before:absolute before:inset-y-0 before:left-0 before:w-[3px]"
+                        : "text-foreground hover:bg-muted hover:before:bg-accent relative flex w-full items-start gap-3 px-4 py-2.5 text-left before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-transparent"
                     }
                   >
                     <span className="flex min-w-0 flex-col gap-0.5">

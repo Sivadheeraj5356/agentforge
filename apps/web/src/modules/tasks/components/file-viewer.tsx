@@ -222,8 +222,7 @@ export function FileViewer({
                   className={cn(
                     "group align-top",
                     lineFindings.length > 0 && "bg-warning/8 cursor-pointer",
-                    isActive &&
-                      "bg-accent/15 outline-accent/40 outline -outline-offset-1",
+                    isActive && "bg-accent/15 outline-accent/40 outline -outline-offset-1",
                     !isActive && isMatch && "bg-accent/10",
                   )}
                 >
@@ -242,7 +241,7 @@ export function FileViewer({
                       </span>
                     ) : null}
                   </td>
-                  <td className="whitespace-pre-wrap wrap-break-word pe-3 ps-1">
+                  <td className="wrap-break-word whitespace-pre-wrap pe-3 ps-1">
                     {line.length === 0 ? "\u00A0" : <LineTokens text={line} language={language} />}
                   </td>
                 </tr>

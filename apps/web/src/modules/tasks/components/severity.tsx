@@ -1,5 +1,9 @@
 import type { ReactElement } from "react";
-import type { ValidationOutcome, ValidationRunStatus, ValidationSeverity } from "@agentforge/contracts";
+import type {
+  ValidationOutcome,
+  ValidationRunStatus,
+  ValidationSeverity,
+} from "@agentforge/contracts";
 
 import { cn } from "@agentforge/ui";
 

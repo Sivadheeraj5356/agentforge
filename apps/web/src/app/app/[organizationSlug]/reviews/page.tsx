@@ -3,7 +3,10 @@ import { assertNeverExecutesUserCode } from "@agentforge/security";
 
 import { DomainEmptyState } from "@/components/domain-empty-state";
 import { FindingReviewForm } from "@/modules/reviews/components/finding-review-form";
-import { listFindingsForReview, listReviewsForOrganization } from "@/modules/reviews/server/reviews";
+import {
+  listFindingsForReview,
+  listReviewsForOrganization,
+} from "@/modules/reviews/server/reviews";
 import { requireOrganizationBySlug } from "@/modules/organizations/server/access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAuthenticatedUser } from "@/modules/auth/server/require-authenticated-user";
@@ -36,13 +39,14 @@ export default async function ReviewsPage({
       <header className="border-border flex flex-col gap-2 border-b pb-6">
         <h1 className="font-serif text-2xl tracking-tight">Reviews</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
-          Reviewer and adjudicator are workflow roles, separate from organization owner/admin/member.
-          Independent second review hides the other rationale until you submit. Deterministic
-          validators still do not call ReviewProvider.
+          Reviewer and adjudicator are workflow roles, separate from organization
+          owner/admin/member. Independent second review hides the other rationale until you submit.
+          Deterministic validators still do not call ReviewProvider.
         </p>
       </header>
       <p className="text-muted-foreground text-xs">
-        Workflow seats: {(memberships ?? []).length === 0 ? "none assigned" : `${memberships?.length} assigned`}
+        Workflow seats:{" "}
+        {(memberships ?? []).length === 0 ? "none assigned" : `${memberships?.length} assigned`}
       </p>
       {findingsByReview.length === 0 ? (
         <DomainEmptyState
@@ -52,7 +56,10 @@ export default async function ReviewsPage({
       ) : (
         <ul className="flex flex-col gap-6">
           {findingsByReview.map(({ review, findings }) => (
-            <li key={review.id} className="border-border flex flex-col gap-3 rounded-lg border px-4 py-3">
+            <li
+              key={review.id}
+              className="border-border flex flex-col gap-3 rounded-lg border px-4 py-3"
+            >
               <p className="text-sm font-medium">
                 Review {review.id.slice(0, 8)} · {review.status}
               </p>

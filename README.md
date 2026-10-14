@@ -53,82 +53,82 @@ Protocol pin: **`horizon-v1.0.0`**. Recipe: [docs/benchmark/protocol.md](docs/be
 
 Original FastAPI / CLI / ledger jobs. Hidden tests live in `_shared/tests` (not mounted into the agent).
 
-| Key | Task |
-| --- | --- |
-| `broken-orders-api` | Diagnose 500s on `GET /orders` without changing the contract |
-| `broken-orders-filter` | Fix status filter crashes |
-| `healthcheck-missing` | Restore `GET /health` |
-| `contract-extra-field` | Remove leaked debug field |
-| `silent-wrong-total` | Correct totals that fail silently |
-| `empty-orders-crash` | Empty store returns `[]`, not 500 |
-| `forbidden-test-rewrite` | Rewriting tests must not yield reward 1 |
-| `stale-health-payload` | Restore the health payload contract |
-| `ledger-evolve` | Idempotent POST, migrate legacy rows, update CLI |
-| `spec-to-kit` | Implement `cutlist_span` from `SPEC.md` |
-| `refund-double-apply` | Refund helper debit applied twice |
-| `timezone-cutoff-orders` | Business-day cutoff must use UTC |
-| `webhook-retry-storm` | Retries reuse `delivery_id`; ingest is idempotent |
-| `migration-partial-rows` | Migrator stamps only the first legacy row |
-| `cli-flag-drift` | `--format=v2` is the contract, not the legacy pipe dump |
+| Key                      | Task                                                         |
+| ------------------------ | ------------------------------------------------------------ |
+| `broken-orders-api`      | Diagnose 500s on `GET /orders` without changing the contract |
+| `broken-orders-filter`   | Fix status filter crashes                                    |
+| `healthcheck-missing`    | Restore `GET /health`                                        |
+| `contract-extra-field`   | Remove leaked debug field                                    |
+| `silent-wrong-total`     | Correct totals that fail silently                            |
+| `empty-orders-crash`     | Empty store returns `[]`, not 500                            |
+| `forbidden-test-rewrite` | Rewriting tests must not yield reward 1                      |
+| `stale-health-payload`   | Restore the health payload contract                          |
+| `ledger-evolve`          | Idempotent POST, migrate legacy rows, update CLI             |
+| `spec-to-kit`            | Implement `cutlist_span` from `SPEC.md`                      |
+| `refund-double-apply`    | Refund helper debit applied twice                            |
+| `timezone-cutoff-orders` | Business-day cutoff must use UTC                             |
+| `webhook-retry-storm`    | Retries reuse `delivery_id`; ingest is idempotent            |
+| `migration-partial-rows` | Migrator stamps only the first legacy row                    |
+| `cli-flag-drift`         | `--format=v2` is the contract, not the legacy pipe dump      |
 
 ### Work environment packs (`environments/packs/`)
 
 Saleable worlds: instruction + tools + hidden stage verifiers + staged reward + reset. MCP runs in the evaluator only.
 
-| Key | Pack |
-| --- | --- |
+| Key                               | Pack                                                          |
+| --------------------------------- | ------------------------------------------------------------- |
 | `production-incident-eu-payments` | EU payments incident (simulated Slack, GitHub, Jira, Grafana) |
-| `incident-us-inventory` | US-east warehouse allocation incident |
-| `checkout-console-clone` | Checkout UI / admin console / support inbox clone |
-| `support-desk-clone` | Claim, macro, SLA hold, note on simulated ticket surfaces |
-| `private-eval-long-horizon` | Stalled release train (ops console, runbook, handoff board) |
-| `wave-inventory` | Three-wave revising spec |
-| `wave-pricing` | Three waves; WAVE-2 revises WAVE-1 list price |
-| `skill-constraint` | Follow in-world `SKILL.md` (never wipe the audit log) |
+| `incident-us-inventory`           | US-east warehouse allocation incident                         |
+| `checkout-console-clone`          | Checkout UI / admin console / support inbox clone             |
+| `support-desk-clone`              | Claim, macro, SLA hold, note on simulated ticket surfaces     |
+| `private-eval-long-horizon`       | Stalled release train (ops console, runbook, handoff board)   |
+| `wave-inventory`                  | Three-wave revising spec                                      |
+| `wave-pricing`                    | Three waves; WAVE-2 revises WAVE-1 list price                 |
+| `skill-constraint`                | Follow in-world `SKILL.md` (never wipe the audit log)         |
 
 `orders-ops` is the Isolated family overlay on the orders API fixtures. Sibling queue keys such as `private-eval-skipped-session` are not extra catalog rows.
 
 ## Harness labels
 
-| Label | Meaning |
-| --- | --- |
-| **oracle** | Known-good trajectory. Expect reward **1.0**. |
-| **NOP** | Empty / no-op. Must **not** score 1.0. |
-| **reference** | AgentForge OpenAI/Anthropic tool loop on the evaluator. Requires worker keys. Missing keys fail the job; they do not score like NOP. |
-| **byo** | Operator command or HTTP/stdio loop on the evaluator. Examples: `examples/byo-isolated`, `examples/byo-work`. The control plane never receives the binary. |
+| Label         | Meaning                                                                                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **oracle**    | Known-good trajectory. Expect reward **1.0**.                                                                                                              |
+| **NOP**       | Empty / no-op. Must **not** score 1.0.                                                                                                                     |
+| **reference** | AgentForge OpenAI/Anthropic tool loop on the evaluator. Requires worker keys. Missing keys fail the job; they do not score like NOP.                       |
+| **byo**       | Operator command or HTTP/stdio loop on the evaluator. Examples: `examples/byo-isolated`, `examples/byo-work`. The control plane never receives the binary. |
 
 Default sandbox is **Isolated**. Harbor/Terminus-2 is legacy-only behind `AGENTFORGE_ENABLE_HARBOR=1`.
 
 ## Product surface
 
-| Area | What ships |
-| --- | --- |
-| Auth & tenancy | Supabase Auth, personal org bootstrap, org-scoped RLS |
-| Projects & tasks | CRUD, archive, immutable task versions, ZIP ingest (structure only — no script execution) |
-| Lab | Catalog runs, work environments, suites, signed webhooks, rollouts |
-| Review | Independent reviewer / adjudicator roles; second review hides the other rationale |
-| API | `/api/v1/evaluations` (create/get/cancel/results/artifacts/trajectory/report), `/api/v1/rollouts`, `/api/v1/environments/start` + reset |
-| Protocol board | `/app/{org}/results/protocol` — recorded rows only |
-| Training | `services/training` SFT/GRPO dry-run and CPU `--execute` smoke. Held-out eval stays the evaluator’s job |
-| Billing | Stripe **test mode** rows only. A paid subscription does **not** gate local eval |
-| Artifacts | Local `.data/` or Cloudflare R2 when `R2_*` is set |
-| Adapters | Terminus + Terminal Bench layouts. SWE-bench **detects and refuses** until a licensed fixture exists |
+| Area             | What ships                                                                                                                              |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Auth & tenancy   | Supabase Auth, personal org bootstrap, org-scoped RLS                                                                                   |
+| Projects & tasks | CRUD, archive, immutable task versions, ZIP ingest (structure only — no script execution)                                               |
+| Lab              | Catalog runs, work environments, suites, signed webhooks, rollouts                                                                      |
+| Review           | Independent reviewer / adjudicator roles; second review hides the other rationale                                                       |
+| API              | `/api/v1/evaluations` (create/get/cancel/results/artifacts/trajectory/report), `/api/v1/rollouts`, `/api/v1/environments/start` + reset |
+| Protocol board   | `/app/{org}/results/protocol` — recorded rows only                                                                                      |
+| Training         | `services/training` SFT/GRPO dry-run and CPU `--execute` smoke. Held-out eval stays the evaluator’s job                                 |
+| Billing          | Stripe **test mode** rows only. A paid subscription does **not** gate local eval                                                        |
+| Artifacts        | Local `.data/` or Cloudflare R2 when `R2_*` is set                                                                                      |
+| Adapters         | Terminus + Terminal Bench layouts. SWE-bench **detects and refuses** until a licensed fixture exists                                    |
 
 SSO/SAML/SCIM/CMK and GitHub App CI checks are ADR stubs until a named customer.
 
 ## Stack
 
-| Layer | Choice |
-| --- | --- |
-| Monorepo | pnpm 9.15 + Turborepo |
-| Control plane | Next.js 15 App Router, React 19, TypeScript strict |
-| UI | Tailwind CSS v4 + `@agentforge/ui` (shadcn-style primitives) |
-| Auth / DB | Supabase Auth + Postgres + RLS + pgTAP |
-| Contracts | Zod in `@agentforge/contracts` at every trust boundary |
-| Execution | Python 3.11+ `agentforge-evaluator`, Docker image `agentforge-eval-python:3.12` |
-| Training | Python `agentforge-training` |
-| Tests | Vitest, Playwright, pytest, pgTAP |
-| CI | GitHub Actions (`quality` + `database`) |
+| Layer         | Choice                                                                          |
+| ------------- | ------------------------------------------------------------------------------- |
+| Monorepo      | pnpm 9.15 + Turborepo                                                           |
+| Control plane | Next.js 15 App Router, React 19, TypeScript strict                              |
+| UI            | Tailwind CSS v4 + `@agentforge/ui` (shadcn-style primitives)                    |
+| Auth / DB     | Supabase Auth + Postgres + RLS + pgTAP                                          |
+| Contracts     | Zod in `@agentforge/contracts` at every trust boundary                          |
+| Execution     | Python 3.11+ `agentforge-evaluator`, Docker image `agentforge-eval-python:3.12` |
+| Training      | Python `agentforge-training`                                                    |
+| Tests         | Vitest, Playwright, pytest, pgTAP                                               |
+| CI            | GitHub Actions (`quality` + `database`)                                         |
 
 Packages: `@agentforge/web`, `@agentforge/ui`, `@agentforge/contracts`, `@agentforge/validation`, `@agentforge/security`, `@agentforge/config`.
 
@@ -225,20 +225,20 @@ Full evaluator notes: [services/evaluator/README.md](services/evaluator/README.m
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start development servers |
-| `pnpm build` | Production build |
-| `pnpm lint` | Lint all packages |
-| `pnpm typecheck` | TypeScript project references |
-| `pnpm test` | Unit tests (Vitest) |
-| `pnpm test:e2e` | Playwright smoke / auth / projects |
-| `pnpm format` / `pnpm format:check` | Prettier |
-| `pnpm db:start` / `stop` / `status` | Local Supabase |
-| `pnpm db:reset` | Reset from migrations + seed |
-| `pnpm db:lint` | Lint SQL |
-| `pnpm db:test` | pgTAP |
-| `pnpm db:types` | Generate `packages/contracts` DB types |
+| Command                             | Description                            |
+| ----------------------------------- | -------------------------------------- |
+| `pnpm dev`                          | Start development servers              |
+| `pnpm build`                        | Production build                       |
+| `pnpm lint`                         | Lint all packages                      |
+| `pnpm typecheck`                    | TypeScript project references          |
+| `pnpm test`                         | Unit tests (Vitest)                    |
+| `pnpm test:e2e`                     | Playwright smoke / auth / projects     |
+| `pnpm format` / `pnpm format:check` | Prettier                               |
+| `pnpm db:start` / `stop` / `status` | Local Supabase                         |
+| `pnpm db:reset`                     | Reset from migrations + seed           |
+| `pnpm db:lint`                      | Lint SQL                               |
+| `pnpm db:test`                      | pgTAP                                  |
+| `pnpm db:types`                     | Generate `packages/contracts` DB types |
 
 Evaluator: `python -m pytest` from `services/evaluator`. Set `AGENTFORGE_SKIP_ISOLATED_SANDBOX=1` only when Docker is unavailable.
 
@@ -246,15 +246,15 @@ Evaluator: `python -m pytest` from `services/evaluator`. Set `AGENTFORGE_SKIP_IS
 
 Canonical prefix is `AGENTFORGE_*`. `VORTEX_*` and existing `HARBOR_*` names are one-release aliases. See [`.env.example`](.env.example).
 
-| Variable | Where | Notes |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `apps/web` | Browser-safe. Local demo keys only. |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server / worker | **Never** `NEXT_PUBLIC_*`. Not used for normal user queries. |
-| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` | Evaluator only | Reference agent. Missing keys fail the job. |
-| `AGENTFORGE_BYO_CMD` / `AGENTFORGE_BYO_HTTP_URL` | Evaluator | Isolated command or work-pack HTTP/stdio |
-| `R2_ACCOUNT_ID` + access keys + bucket | Control plane | ArtifactStore; otherwise local disk |
-| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `STRIPE_PRICE_ID` | Control plane | Test mode. Does not gate eval. |
-| `TB_FIXTURES_DIR` | Evaluator | Gitignored licensed Terminal Bench checkout — do not commit dumps |
+| Variable                                                          | Where           | Notes                                                             |
+| ----------------------------------------------------------------- | --------------- | ----------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`      | `apps/web`      | Browser-safe. Local demo keys only.                               |
+| `SUPABASE_SERVICE_ROLE_KEY`                                       | Server / worker | **Never** `NEXT_PUBLIC_*`. Not used for normal user queries.      |
+| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`                            | Evaluator only  | Reference agent. Missing keys fail the job.                       |
+| `AGENTFORGE_BYO_CMD` / `AGENTFORGE_BYO_HTTP_URL`                  | Evaluator       | Isolated command or work-pack HTTP/stdio                          |
+| `R2_ACCOUNT_ID` + access keys + bucket                            | Control plane   | ArtifactStore; otherwise local disk                               |
+| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `STRIPE_PRICE_ID` | Control plane   | Test mode. Does not gate eval.                                    |
+| `TB_FIXTURES_DIR`                                                 | Evaluator       | Gitignored licensed Terminal Bench checkout — do not commit dumps |
 
 ## Security
 
@@ -271,16 +271,16 @@ See [docs/security/trust-boundaries.md](docs/security/trust-boundaries.md) and [
 
 Start at [docs/README.md](docs/README.md).
 
-| Topic | Doc |
-| --- | --- |
-| Vision & wedge | [docs/product/vision.md](docs/product/vision.md) |
-| Phases / slices A–H and W1–W6 | [docs/product/phases.md](docs/product/phases.md) |
-| Glossary | [docs/product/glossary.md](docs/product/glossary.md) |
-| Work environments | [docs/product/work-environments/](docs/product/work-environments/) |
-| Architecture | [docs/architecture/overview.md](docs/architecture/overview.md) |
-| Horizon protocol | [docs/benchmark/protocol.md](docs/benchmark/protocol.md) |
-| Getting started | [docs/development/getting-started.md](docs/development/getting-started.md) |
-| ADRs | [docs/architecture/decisions/](docs/architecture/decisions/) |
+| Topic                         | Doc                                                                        |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| Vision & wedge                | [docs/product/vision.md](docs/product/vision.md)                           |
+| Phases / slices A–H and W1–W6 | [docs/product/phases.md](docs/product/phases.md)                           |
+| Glossary                      | [docs/product/glossary.md](docs/product/glossary.md)                       |
+| Work environments             | [docs/product/work-environments/](docs/product/work-environments/)         |
+| Architecture                  | [docs/architecture/overview.md](docs/architecture/overview.md)             |
+| Horizon protocol              | [docs/benchmark/protocol.md](docs/benchmark/protocol.md)                   |
+| Getting started               | [docs/development/getting-started.md](docs/development/getting-started.md) |
+| ADRs                          | [docs/architecture/decisions/](docs/architecture/decisions/)               |
 
 Naming decision: [ADR-024](docs/architecture/decisions/ADR-024-agentforge-naming.md). Bench (not Terminus-2): [ADR-036](docs/architecture/decisions/ADR-036-agentforge-is-the-bench.md). Protocol freeze: [ADR-037](docs/architecture/decisions/ADR-037-horizon-v1-protocol.md). Control vs execution: [ADR-002](docs/architecture/decisions/ADR-002-control-execution-separation.md).
 

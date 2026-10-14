@@ -60,19 +60,20 @@ export default async function EvaluationRunPage({
         {report ? (
           <dl className="text-muted-foreground grid max-w-3xl gap-2 text-sm sm:grid-cols-2">
             <div>
-              <dt className="font-medium text-foreground">pass@1 / pass@k</dt>
+              <dt className="text-foreground font-medium">pass@1 / pass@k</dt>
               <dd className="font-mono text-xs">
                 {formatReward(report.scores.passAt1)} / {formatReward(report.scores.passAtK)}
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-foreground">mean / median reward</dt>
+              <dt className="text-foreground font-medium">mean / median reward</dt>
               <dd className="font-mono text-xs">
-                {formatReward(report.scores.meanReward)} / {formatReward(report.scores.medianReward)}
+                {formatReward(report.scores.meanReward)} /{" "}
+                {formatReward(report.scores.medianReward)}
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-foreground">latency / tool calls</dt>
+              <dt className="text-foreground font-medium">latency / tool calls</dt>
               <dd className="font-mono text-xs">
                 {report.scores.meanLatencyMs === null
                   ? "—"
@@ -81,7 +82,7 @@ export default async function EvaluationRunPage({
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-foreground">cost / tokens</dt>
+              <dt className="text-foreground font-medium">cost / tokens</dt>
               <dd className="font-mono text-xs">
                 {report.costUsd === null ? "—" : `$${report.costUsd.toFixed(4)}`} /{" "}
                 {report.promptTokens ?? "—"} / {report.completionTokens ?? "—"}
@@ -90,7 +91,7 @@ export default async function EvaluationRunPage({
           </dl>
         ) : null}
         {report && Object.keys(report.stageScores).length > 0 ? (
-          <p className="font-mono text-muted-foreground text-xs">
+          <p className="text-muted-foreground font-mono text-xs">
             stages:{" "}
             {Object.entries(report.stageScores)
               .map(([key, value]) => `${key}=${value.toFixed(2)}`)
@@ -105,7 +106,10 @@ export default async function EvaluationRunPage({
             JSON report
           </Link>
           <span aria-hidden="true"> · </span>
-          <Link href={report?.failedRolloutsHref ?? "/api/v1/rollouts?kind=failed"} className="underline underline-offset-4">
+          <Link
+            href={report?.failedRolloutsHref ?? "/api/v1/rollouts?kind=failed"}
+            className="underline underline-offset-4"
+          >
             Failed rollouts
           </Link>
         </p>

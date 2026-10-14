@@ -42,13 +42,7 @@ export type DocsNote = {
 };
 
 export type DocsBlock =
-  | DocsParagraph
-  | DocsHeading
-  | DocsCode
-  | DocsTable
-  | DocsList
-  | DocsDiagram
-  | DocsNote;
+  DocsParagraph | DocsHeading | DocsCode | DocsTable | DocsList | DocsDiagram | DocsNote;
 
 export const DOCS_NAV_GROUP_IDS = ["get-started", "product", "packs", "architecture"] as const;
 
@@ -78,7 +72,9 @@ export function heading(id: string, title: string): DocsHeading {
 }
 
 export function code(language: string, source: string, filename?: string): DocsCode {
-  return filename ? { kind: "code", language, code: source, filename } : { kind: "code", language, code: source };
+  return filename
+    ? { kind: "code", language, code: source, filename }
+    : { kind: "code", language, code: source };
 }
 
 export function table(
@@ -114,11 +110,7 @@ export function blockPlainText(block: DocsBlock): readonly string[] {
     case "code":
       return block.filename ? [block.filename, block.code] : [block.code];
     case "table":
-      return [
-        ...(block.caption ? [block.caption] : []),
-        ...block.headers,
-        ...block.rows.flat(),
-      ];
+      return [...(block.caption ? [block.caption] : []), ...block.headers, ...block.rows.flat()];
     case "list":
       return block.items;
     case "diagram":

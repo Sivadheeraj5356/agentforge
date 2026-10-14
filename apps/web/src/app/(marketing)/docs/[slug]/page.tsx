@@ -33,7 +33,9 @@ export async function generateMetadata({ params }: DocsSlugParams): Promise<Meta
   };
 }
 
-export default async function PublicDocsSlugPage({ params }: DocsSlugParams): Promise<ReactElement> {
+export default async function PublicDocsSlugPage({
+  params,
+}: DocsSlugParams): Promise<ReactElement> {
   const { slug } = await params;
   if (slug === DOCS_INDEX_SLUG) {
     redirect("/docs");
@@ -43,7 +45,7 @@ export default async function PublicDocsSlugPage({ params }: DocsSlugParams): Pr
     notFound();
   }
   return (
-    <div className="mx-auto w-full max-w-7xl px-(--spacing-page) py-12">
+    <div className="px-(--spacing-page) mx-auto w-full max-w-7xl py-12">
       <ProductDocs section={section} basePath="/docs" />
     </div>
   );

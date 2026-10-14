@@ -10,7 +10,7 @@ import { extractZipEntries } from "./zip";
 import { ArchiveError } from "./bytes";
 
 export async function withTempWorkspace<T>(fn: (dir: string) => Promise<T>): Promise<T> {
-    const dir = await mkdtemp(path.join(tmpdir(), "agentforge-ingest-"));
+  const dir = await mkdtemp(path.join(tmpdir(), "agentforge-ingest-"));
   try {
     return await fn(dir);
   } finally {

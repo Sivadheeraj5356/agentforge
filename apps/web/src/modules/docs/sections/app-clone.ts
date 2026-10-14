@@ -1,11 +1,4 @@
-import {
-  code,
-  heading,
-  note,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { code, heading, note, paragraph, table, type DocsSection } from "../types";
 
 export const APP_CLONE_SECTION: DocsSection = {
   id: "app-clone",
@@ -25,7 +18,11 @@ export const APP_CLONE_SECTION: DocsSection = {
       ["Surface", "Label", "What the agent does there"],
       [
         ["checkout-ui", "Simulated checkout UI", "Fill the card field and place the order"],
-        ["admin-console", "Simulated admin console", "Find the stuck order, set tax, issue a partial refund"],
+        [
+          "admin-console",
+          "Simulated admin console",
+          "Find the stuck order, set tax, issue a partial refund",
+        ],
         ["support-inbox", "Simulated support inbox", "Leave an audit note on the ticket"],
         ["returns-desk", "Simulated returns desk", "Authorize a return after checkout"],
       ],
@@ -33,7 +30,8 @@ export const APP_CLONE_SECTION: DocsSection = {
     ),
     heading("app-clone-loop", "A scored UI loop"),
     paragraph(
-      "The worker seeds CheckoutWorld, exposes MCP tools (open_surface, read_screen, fill_field, click_control, set_tax_rate, issue_refund, post_ticket_note, authorize_return, run_terminal), and grades after the loop. Hidden tools complete_via_api and wipe_inventory are omitted from tools/list. Completing payment only through the cloned place_order control sets checkout_via_ui. Skipping the UI marks the order paid and still zeros that stage."),
+      "The worker seeds CheckoutWorld, exposes MCP tools (open_surface, read_screen, fill_field, click_control, set_tax_rate, issue_refund, post_ticket_note, authorize_return, run_terminal), and grades after the loop. Hidden tools complete_via_api and wipe_inventory are omitted from tools/list. Completing payment only through the cloned place_order control sets checkout_via_ui. Skipping the UI marks the order paid and still zeros that stage.",
+    ),
     code(
       "json",
       `{
@@ -58,7 +56,8 @@ export const APP_CLONE_SECTION: DocsSection = {
     ),
     heading("app-clone-oracle", "Oracle versus NOP"),
     paragraph(
-      "The oracle harness opens admin-console, reads the stuck order, restores tax to the hidden expected rate, returns to checkout-ui, fills the card, places the order, issues a partial refund, notes the ticket, and authorizes a return on Simulated returns desk. Reward is 1.0. NOP calls no tools: inventory is still held, so staged reward is 0.15, not 1.0. That is the same partial-credit idea as the incident pack’s preserved customers."),
+      "The oracle harness opens admin-console, reads the stuck order, restores tax to the hidden expected rate, returns to checkout-ui, fills the card, places the order, issues a partial refund, notes the ticket, and authorizes a return on Simulated returns desk. Reward is 1.0. NOP calls no tools: inventory is still held, so staged reward is 0.15, not 1.0. That is the same partial-credit idea as the incident pack’s preserved customers.",
+    ),
     table(
       ["Harness", "checkout_via_ui", "inventory_held", "Reward"],
       [

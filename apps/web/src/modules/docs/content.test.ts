@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { docsDocumentTitle, docsSectionSlugs, getDocsSection, productDocsPlainText, PRODUCT_DOCS_SECTIONS } from "./content";
+import {
+  docsDocumentTitle,
+  docsSectionSlugs,
+  getDocsSection,
+  productDocsPlainText,
+  PRODUCT_DOCS_SECTIONS,
+} from "./content";
 import { adjacentDocsPages, docsNavGroups, docsPageHref, isDocsSlug } from "./routing";
 import { normalizeDocsQuery, searchDocs } from "./search";
 

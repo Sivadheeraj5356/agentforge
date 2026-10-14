@@ -50,7 +50,12 @@ export async function ensureEnvironmentVersion(
   organizationId: string,
   pack: ExperiencePack,
 ): Promise<string> {
-  const adapterId = pack.sandboxProvider === "work" ? "work" : pack.sandboxProvider === "harbor" ? "harbor" : "isolated";
+  const adapterId =
+    pack.sandboxProvider === "work"
+      ? "work"
+      : pack.sandboxProvider === "harbor"
+        ? "harbor"
+        : "isolated";
   const { data: existing } = await supabase
     .from("environment_versions")
     .select("id")
@@ -175,7 +180,11 @@ export async function enqueuePackRun(input: {
   const { data, error } = await input.supabase.rpc("enqueue_evaluation", {
     p_project_id: input.projectId,
     p_kind: "internal_package",
-    p_metadata: toJson({ schemaVersion: 1, packKey: pack.key, catalogTaskKey: pack.catalogTaskKey }),
+    p_metadata: toJson({
+      schemaVersion: 1,
+      packKey: pack.key,
+      catalogTaskKey: pack.catalogTaskKey,
+    }),
     p_benchmark_version_id: catalog.task.benchmark_version_id,
     p_task_version_id: catalog.version.id,
     p_agent_id: agent.id,
@@ -188,7 +197,7 @@ export async function enqueuePackRun(input: {
   if (!runId) {
     throw new Error("Unable to enqueue pack run.");
   }
-    return { runId, environmentVersionId };
+  return { runId, environmentVersionId };
 }
 
 export type FailureCategoryCount = {

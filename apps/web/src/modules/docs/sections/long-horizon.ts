@@ -1,10 +1,4 @@
-import {
-  bullet,
-  heading,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { bullet, heading, paragraph, table, type DocsSection } from "../types";
 
 export const LONG_HORIZON_SECTION: DocsSection = {
   id: "long-horizon",
@@ -20,10 +14,16 @@ export const LONG_HORIZON_SECTION: DocsSection = {
     table(
       ["Role", "Job"],
       [
-        ["planner", "Read the instruction and the visible world. List what must change. Do not edit hidden tests."],
+        [
+          "planner",
+          "Read the instruction and the visible world. List what must change. Do not edit hidden tests.",
+        ],
         ["coder", "Apply the fix in the workspace or through in-world tools only."],
         ["tester", "Run non-hidden sanity checks. The grader owns /hidden."],
-        ["reviewer", "Reject diffs that rewrite tests or touch grader paths. Close the loop (status, ticket, audit note)."],
+        [
+          "reviewer",
+          "Reject diffs that rewrite tests or touch grader paths. Close the loop (status, ticket, audit note).",
+        ],
       ],
       "Evaluator multi-agent roles",
     ),
@@ -37,7 +37,10 @@ export const LONG_HORIZON_SECTION: DocsSection = {
     table(
       ["Axis", "Values in this tree"],
       [
-        ["Horizon", "Investigate → patch → verify (orders-ops); multi-tool incident loop; multi-surface UI loop"],
+        [
+          "Horizon",
+          "Investigate → patch → verify (orders-ops); multi-tool incident loop; multi-surface UI loop",
+        ],
         ["Composition", "single harness, or planner/coder/tester/reviewer"],
         ["Sandbox", "isolated (agent ≠ grader containers), work (in-process simulated world)"],
         ["Verifier", "Hidden stages; weights sum to 1; implementations off the agent FS"],
@@ -95,7 +98,8 @@ export const LONG_HORIZON_SECTION: DocsSection = {
     ),
     heading("long-horizon-recovery", "Recovery variants"),
     paragraph(
-      "siblingTaskKeys are a queue of related experiences, not extra leaderboard rows. orders-ops points at the FastAPI fixture keys (broken-orders-filter, silent-wrong-total, forbidden-test-rewrite, …). horizon-swe points at spec-to-kit. Unseeded recovery keys are not listed as catalog rows. The Environments page lists that queue from real catalog data. It does not print a 31/24/19 pie."),
+      "siblingTaskKeys are a queue of related experiences, not extra leaderboard rows. orders-ops points at the FastAPI fixture keys (broken-orders-filter, silent-wrong-total, forbidden-test-rewrite, …). horizon-swe points at spec-to-kit. Unseeded recovery keys are not listed as catalog rows. The Environments page lists that queue from real catalog data. It does not print a 31/24/19 pie.",
+    ),
     bullet([
       "Hard split: the published pack, authored to the ~30% frontier target.",
       "Recovery split: variants that replay a specific failureMode (wrong patch, api skip, inventory wipe).",

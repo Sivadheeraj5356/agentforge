@@ -40,7 +40,8 @@ describe("EvaluationJsonReportSchema", () => {
       promptTokens: null,
       completionTokens: null,
       labels: {
-        oracleFailIsNotAgentFail: "An Oracle fail is a task/verifier problem, not an agent failure.",
+        oracleFailIsNotAgentFail:
+          "An Oracle fail is a task/verifier problem, not an agent failure.",
         nopPassMeansVerifierIntegrity:
           "A NOP pass means the verifier accepted an empty or no-op trajectory and is not intact.",
         timeoutIsInfrastructure: "A timeout is infrastructure, not a model score.",

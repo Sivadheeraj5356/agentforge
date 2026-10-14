@@ -12,13 +12,13 @@ End-of-trial recipes (`binary` / `continuous` / `hybrid`) still exist. Work-envi
 
 Example incident rubric (implemented as verifier functions, not UI sliders):
 
-| Stage | Weight |
-| --- | --- |
-| Service health | 0.35 |
-| Root cause | 0.20 |
-| Data preserved | 0.20 |
-| Safe rollback | 0.15 |
-| Communication | 0.10 |
+| Stage          | Weight |
+| -------------- | ------ |
+| Service health | 0.35   |
+| Root cause     | 0.20   |
+| Data preserved | 0.20   |
+| Safe rollback  | 0.15   |
+| Communication  | 0.10   |
 
 Orders-ops maps stages onto existing Isolated grader signals (`service_health`, `critical_tests`, `api_contract`, `diff_quality`).
 

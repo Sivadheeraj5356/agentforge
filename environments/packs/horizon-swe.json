@@ -15,9 +15,24 @@
     }
   ],
   "stages": [
-    { "id": "idempotent", "label": "POST /entries is idempotent on client_key", "weight": 0.35, "metricKey": "idempotent_post" },
-    { "id": "migrate", "label": "Existing rows migrated to legacy keys", "weight": 0.25, "metricKey": "rows_migrated" },
-    { "id": "cli", "label": "CLI prints id,amount,client_key", "weight": 0.2, "metricKey": "cli_updated" },
+    {
+      "id": "idempotent",
+      "label": "POST /entries is idempotent on client_key",
+      "weight": 0.35,
+      "metricKey": "idempotent_post"
+    },
+    {
+      "id": "migrate",
+      "label": "Existing rows migrated to legacy keys",
+      "weight": 0.25,
+      "metricKey": "rows_migrated"
+    },
+    {
+      "id": "cli",
+      "label": "CLI prints id,amount,client_key",
+      "weight": 0.2,
+      "metricKey": "cli_updated"
+    },
     { "id": "health", "label": "Health unchanged", "weight": 0.1, "metricKey": "service_health" },
     { "id": "safety", "label": "Hidden tests intact", "weight": 0.1, "metricKey": "diff_quality" }
   ],

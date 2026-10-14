@@ -4,11 +4,11 @@ The Next.js app (`apps/web`) can run on Vercel. Isolated grading **cannot**. Doc
 
 ## Split
 
-| Plane | Where | Secrets |
-| --- | --- | --- |
-| Control plane | Vercel (`apps/web`) | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_APP_URL`. Server-only: `SUPABASE_SERVICE_ROLE_KEY` (never `NEXT_PUBLIC_*`), optional `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `STRIPE_PRICE_ID`, optional `R2_*`. |
-| Data | Supabase cloud project | Service role stays server-only. |
-| Execution | Long-running evaluator on a Docker host | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `AGENTFORGE_FIXTURES_DIR`, `AGENTFORGE_ENVIRONMENTS_DIR`, optional model keys, `AGENTFORGE_BYO_CMD`. |
+| Plane         | Where                                   | Secrets                                                                                                                                                                                                                                            |
+| ------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Control plane | Vercel (`apps/web`)                     | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_APP_URL`. Server-only: `SUPABASE_SERVICE_ROLE_KEY` (never `NEXT_PUBLIC_*`), optional `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `STRIPE_PRICE_ID`, optional `R2_*`. |
+| Data          | Supabase cloud project                  | Service role stays server-only.                                                                                                                                                                                                                    |
+| Execution     | Long-running evaluator on a Docker host | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `AGENTFORGE_FIXTURES_DIR`, `AGENTFORGE_ENVIRONMENTS_DIR`, optional model keys, `AGENTFORGE_BYO_CMD`.                                                                                                  |
 
 Do not put OpenAI/Anthropic keys in Vercel `NEXT_PUBLIC_*`. Do not run Harbor, Isolated, or user code in Next.js.
 

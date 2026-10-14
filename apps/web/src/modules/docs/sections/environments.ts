@@ -1,12 +1,4 @@
-import {
-  bullet,
-  code,
-  diagram,
-  heading,
-  paragraph,
-  table,
-  type DocsSection,
-} from "../types";
+import { bullet, code, diagram, heading, paragraph, table, type DocsSection } from "../types";
 
 export const ENVIRONMENTS_SECTION: DocsSection = {
   id: "environments",
@@ -25,7 +17,10 @@ export const ENVIRONMENTS_SECTION: DocsSection = {
     table(
       ["Field", "Meaning"],
       [
-        ["family", "orders-ops, production-incident, app-clone, private-eval, horizon-swe, evolving-spec, skill-follow"],
+        [
+          "family",
+          "orders-ops, production-incident, app-clone, private-eval, horizon-swe, evolving-spec, skill-follow",
+        ],
         ["instruction", "What the agent is asked to do"],
         ["simulated", "Backends the agent may reach, always labeled simulated"],
         ["tools", "MCP tool manifest (work sandbox) or terminal-only (Isolated)"],

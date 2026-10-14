@@ -91,16 +91,16 @@ export function LandingExperience({
         <HeroFlow />
         <div
           aria-hidden="true"
-          className="from-background/55 via-background/20 to-background pointer-events-none absolute inset-0 bg-linear-to-b"
+          className="from-background/55 via-background/20 to-background bg-linear-to-b pointer-events-none absolute inset-0"
         />
-        <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-(--spacing-page) py-24 text-center">
+        <div className="px-(--spacing-page) relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center gap-6 py-24 text-center">
           <p className="border-border bg-surface/80 text-muted-foreground rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] backdrop-blur-sm">
             {LANDING_BADGE}
           </p>
-          <h1 className="font-serif text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-[3.5rem] lg:leading-[1.12]">
+          <h1 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.12]">
             {LANDING_HEADLINE}
           </h1>
-          <p className="text-muted-foreground max-w-xl text-base leading-relaxed text-pretty">
+          <p className="text-muted-foreground max-w-xl text-pretty text-base leading-relaxed">
             {LANDING_SUBHEAD}
           </p>
           <CtaPair primaryHref={primaryHref} primaryLabel={primaryLabel} />
@@ -108,9 +108,12 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-y" aria-label="Product facts">
-        <ul className="mx-auto grid w-full max-w-6xl gap-8 px-(--spacing-page) py-12 sm:grid-cols-3 sm:divide-x sm:divide-border sm:gap-0">
+        <ul className="px-(--spacing-page) sm:divide-border mx-auto grid w-full max-w-6xl gap-8 py-12 sm:grid-cols-3 sm:gap-0 sm:divide-x">
           {LANDING_PROOF.map((item) => (
-            <li key={item.label} className="flex flex-col gap-1 text-center sm:px-8 sm:text-left first:sm:pl-0 last:sm:pr-0">
+            <li
+              key={item.label}
+              className="flex flex-col gap-1 text-center sm:px-8 sm:text-left first:sm:pl-0 last:sm:pr-0"
+            >
               <p className="text-sm font-medium tracking-tight">{item.label}</p>
               <p className="text-muted-foreground text-sm leading-relaxed">{item.detail}</p>
             </li>
@@ -119,16 +122,16 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-b" aria-labelledby="provide-heading">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-(--spacing-page) py-24">
+        <div className="px-(--spacing-page) mx-auto flex w-full max-w-6xl flex-col gap-12 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>{LANDING_PROVIDE_EYEBROW}</Eyebrow>
             <h2
               id="provide-heading"
-              className="font-serif mt-4 text-3xl tracking-tight text-balance sm:text-4xl"
+              className="mt-4 text-balance font-serif text-3xl tracking-tight sm:text-4xl"
             >
               {LANDING_PROVIDE_HEADING}
             </h2>
-            <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty">
+            <p className="text-muted-foreground mt-4 text-pretty text-base leading-relaxed">
               {LANDING_PROVIDE_LEAD}
             </p>
           </Reveal>
@@ -136,7 +139,7 @@ export function LandingExperience({
             {LANDING_PROVIDE.map((item, index) => (
               <li
                 key={item.title}
-                className="border-border flex flex-col gap-2 border-b p-8 sm:odd:border-r lg:border-r lg:nth-[3n]:border-r-0 sm:nth-[n+5]:border-b-0 lg:nth-[n+4]:border-b-0"
+                className="border-border lg:nth-[3n]:border-r-0 sm:nth-[n+5]:border-b-0 lg:nth-[n+4]:border-b-0 flex flex-col gap-2 border-b p-8 sm:odd:border-r lg:border-r"
               >
                 <Reveal delay={reduce ? 0 : 0.04 * index} className="flex flex-col gap-2">
                   <h3 className="font-serif text-lg tracking-tight">{item.title}</h3>
@@ -149,17 +152,17 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-b" aria-labelledby="problem-heading">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-(--spacing-page) py-24 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-16">
+        <div className="px-(--spacing-page) mx-auto grid w-full max-w-6xl gap-10 py-24 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-16">
           <Reveal>
             <h2
               id="problem-heading"
-              className="font-serif text-3xl tracking-tight text-balance sm:text-4xl"
+              className="text-balance font-serif text-3xl tracking-tight sm:text-4xl"
             >
               {LANDING_PROBLEM.title}
             </h2>
           </Reveal>
           <Reveal delay={0.08} className="flex items-center">
-            <p className="text-muted-foreground max-w-xl text-base leading-relaxed text-pretty lg:text-lg">
+            <p className="text-muted-foreground max-w-xl text-pretty text-base leading-relaxed lg:text-lg">
               {LANDING_PROBLEM.body}
             </p>
           </Reveal>
@@ -167,14 +170,17 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-b" aria-labelledby="pack-heading">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-(--spacing-page) py-24">
+        <div className="px-(--spacing-page) mx-auto flex w-full max-w-6xl flex-col gap-14 py-24">
           <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,26rem)]">
             <Reveal className="flex flex-col gap-4">
               <Eyebrow>{LANDING_PACK_EYEBROW}</Eyebrow>
-              <h2 id="pack-heading" className="font-serif text-3xl tracking-tight text-balance sm:text-4xl">
+              <h2
+                id="pack-heading"
+                className="text-balance font-serif text-3xl tracking-tight sm:text-4xl"
+              >
                 {LANDING_PACK_HEADING}
               </h2>
-              <p className="text-muted-foreground max-w-xl text-base leading-relaxed text-pretty">
+              <p className="text-muted-foreground max-w-xl text-pretty text-base leading-relaxed">
                 {LANDING_PACK_LEAD}
               </p>
             </Reveal>
@@ -189,16 +195,19 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-b" aria-labelledby="run-heading">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-(--spacing-page) py-24">
+        <div className="px-(--spacing-page) mx-auto flex w-full max-w-6xl flex-col gap-12 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>{LANDING_RUN_EYEBROW}</Eyebrow>
-            <h2 id="run-heading" className="font-serif mt-4 text-3xl tracking-tight">
+            <h2 id="run-heading" className="mt-4 font-serif text-3xl tracking-tight">
               {LANDING_RUN_HEADING}
             </h2>
           </Reveal>
-          <ol className="border-border grid overflow-hidden rounded-lg border sm:grid-cols-3 sm:divide-x sm:divide-border">
+          <ol className="border-border sm:divide-border grid overflow-hidden rounded-lg border sm:grid-cols-3 sm:divide-x">
             {LANDING_RUN_PATH.map((step, index) => (
-              <li key={step.label} className="border-border border-b p-8 last:border-b-0 sm:border-b-0">
+              <li
+                key={step.label}
+                className="border-border border-b p-8 last:border-b-0 sm:border-b-0"
+              >
                 <Reveal delay={0.06 * index} className="flex flex-col gap-3">
                   <p className="text-muted-foreground font-mono text-[11px] tabular-nums tracking-[0.14em]">
                     {String(index + 1).padStart(2, "0")}
@@ -213,14 +222,14 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-b" aria-labelledby="benefits-heading">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-(--spacing-page) py-24">
+        <div className="px-(--spacing-page) mx-auto flex w-full max-w-6xl flex-col gap-12 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>{LANDING_BENEFITS_EYEBROW}</Eyebrow>
-            <h2 id="benefits-heading" className="font-serif mt-4 text-3xl tracking-tight">
+            <h2 id="benefits-heading" className="mt-4 font-serif text-3xl tracking-tight">
               {LANDING_BENEFITS_HEADING}
             </h2>
           </Reveal>
-          <ul className="divide-border divide-y border-border border-y">
+          <ul className="divide-border border-border divide-y border-y">
             {LANDING_BENEFITS.map((item, index) => (
               <li key={item.title}>
                 <Reveal
@@ -237,20 +246,20 @@ export function LandingExperience({
       </section>
 
       <section className="border-border border-b" aria-labelledby="audience-heading">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-(--spacing-page) py-24">
+        <div className="px-(--spacing-page) mx-auto flex w-full max-w-6xl flex-col gap-12 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>{LANDING_AUDIENCE_EYEBROW}</Eyebrow>
             <h2
               id="audience-heading"
-              className="font-serif mt-4 text-3xl tracking-tight text-balance sm:text-4xl"
+              className="mt-4 text-balance font-serif text-3xl tracking-tight sm:text-4xl"
             >
               {LANDING_AUDIENCE_HEADING}
             </h2>
-            <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty">
+            <p className="text-muted-foreground mt-4 text-pretty text-base leading-relaxed">
               {LANDING_AUDIENCE_LEAD}
             </p>
           </Reveal>
-          <ul className="border-border grid gap-10 border-t pt-12 md:grid-cols-2 md:gap-0 md:divide-x md:divide-border">
+          <ul className="border-border md:divide-border grid gap-10 border-t pt-12 md:grid-cols-2 md:gap-0 md:divide-x">
             {LANDING_AUDIENCE.map((item, index) => (
               <li key={item.title} className="md:px-12 md:first:pl-0 md:last:pr-0">
                 <Reveal delay={0.06 * index} className="flex flex-col gap-3">
@@ -264,11 +273,11 @@ export function LandingExperience({
       </section>
 
       <section aria-labelledby="final-cta-heading">
-        <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-(--spacing-page) py-24 text-center">
+        <div className="px-(--spacing-page) mx-auto flex w-full max-w-3xl flex-col items-center gap-6 py-24 text-center">
           <Reveal>
             <h2
               id="final-cta-heading"
-              className="font-serif text-3xl tracking-tight text-balance sm:text-4xl"
+              className="text-balance font-serif text-3xl tracking-tight sm:text-4xl"
             >
               {LANDING_FINAL_HEADING}
             </h2>

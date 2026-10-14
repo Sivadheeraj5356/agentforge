@@ -83,13 +83,12 @@ export async function POST(request: Request): Promise<Response> {
   }
   const input = parsed.data;
   if (!input.catalogTaskKey || !input.projectSlug) {
-    return NextResponse.json({ error: "catalogTaskKey and projectSlug are required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "catalogTaskKey and projectSlug are required" },
+      { status: 400 },
+    );
   }
-  const scoped = await resolveProject(
-    session.supabase,
-    input.organizationSlug,
-    input.projectSlug,
-  );
+  const scoped = await resolveProject(session.supabase, input.organizationSlug, input.projectSlug);
   if (!scoped) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
