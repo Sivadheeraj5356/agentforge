@@ -10,6 +10,8 @@ import { canManageProjects } from "@/modules/projects/permissions";
 import { requireProjectBySlug } from "@/modules/projects/server/projects";
 import { executeValidationJob, ValidationJobError } from "@/modules/validation/server/ingest";
 
+const MAX_HOSTED_UPLOAD_BYTES = 4 * 1024 * 1024;
+
 export type UploadTaskActionResult = { ok: true } | { ok: false; error: string };
 
 export async function uploadTaskPackageAction(
@@ -25,6 +27,12 @@ export async function uploadTaskPackageAction(
   const file = formData.get("package");
   if (!(file instanceof File)) {
     return { ok: false, error: "Choose a ZIP task package." };
+  }
+  if (file.size > MAX_HOSTED_UPLOAD_BYTES) {
+    return {
+      ok: false,
+      error: "The ZIP is larger than the 4 MB limit of this hosted deployment.",
+    };
   }
   if (file.size > MAX_UPLOAD_ARCHIVE_BYTES) {
     return { ok: false, error: "The ZIP is larger than the upload limit." };
