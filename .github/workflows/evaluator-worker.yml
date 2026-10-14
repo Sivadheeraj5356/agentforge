@@ -35,9 +35,12 @@ jobs:
         run: |
           idle=0
           for i in $(seq 1 40); do
-            out=$(python -m evaluator worker | tail -1)
+            python -m evaluator worker > /tmp/w.out 2>&1; cat /tmp/w.out >> /tmp/worker.log; out=$(tail -1 /tmp/w.out)
             echo "$i: $out"
             if [ "$out" = "idle" ]; then idle=$((idle+1)); else idle=0; fi
             [ "$idle" -ge 3 ] && break
             sleep 5
           done
+      - name: First worker error (summary)
+        if: always()
+        run: grep -m1 -n "Traceback" /tmp/worker.log | head -1; awk '/Traceback/{c++} c==1' /tmp/worker.log | head -60 | cut -c1-300
