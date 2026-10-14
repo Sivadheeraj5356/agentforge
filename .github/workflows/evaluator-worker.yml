@@ -1,0 +1,44 @@
+name: Evaluator worker
+
+# Free execution plane: GitHub-hosted Ubuntu runners include Docker.
+# Claims queued evaluation jobs from the hosted Supabase project and writes scores back.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: evaluator-worker
+  cancel-in-progress: false
+
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SUPABASE_URL: https://mzkievjmtexqduqxhmcm.supabase.co
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      ALLOW_FAKE: "false"
+      SANDBOX_PROVIDER: isolated
+      AGENTFORGE_FIXTURES_DIR: ${{ github.workspace }}/fixtures/eval
+      AGENTFORGE_ENVIRONMENTS_DIR: ${{ github.workspace }}/environments
+      AGENTFORGE_EVAL_IMAGE: agentforge-eval-python:3.12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install evaluator
+        run: pip install -e "services/evaluator"
+      - name: Build isolated eval image
+        run: docker build -t agentforge-eval-python:3.12 -f services/evaluator/docker/eval-python.Dockerfile .
+      - name: Drain queue
+        run: |
+          idle=0
+          for i in $(seq 1 120); do
+            out=$(python -m evaluator worker | tail -1)
+            echo "$i: $out"
+            if [ "$out" = "idle" ]; then idle=$((idle+1)); else idle=0; fi
+            [ "$idle" -ge 3 ] && break
+            sleep 5
+          done
