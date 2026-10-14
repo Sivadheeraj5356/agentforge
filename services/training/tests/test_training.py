@@ -52,8 +52,8 @@ def test_execute_cpu_smoke_is_honest(tmp_path: Path) -> None:
     held = metrics["held_out"]
     assert isinstance(train, dict) and train["passAt1"] is None
     assert isinstance(held, dict) and held["passAt1"] is None
-    assert "28" not in str(result)
-    assert "54" not in str(result)
+    assert "28" not in str(metrics)
+    assert "54" not in str(metrics)
     assert (tmp_path / "held-out-eval.json").is_file()
     grpo = execute_grpo(reward_recipe="continuous", out_dir=tmp_path, parent=None)
     assert grpo["status"] == "cpu_smoke"
