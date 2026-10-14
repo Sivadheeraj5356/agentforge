@@ -81,7 +81,7 @@ export function UploadTaskDialog({
                     contentType: "application/zip",
                   });
                 if (error) {
-                  setSizeError("The upload failed. Try again.");
+                  setSizeError(`The upload to storage failed: ${error.message}`);
                   return;
                 }
                 const result = await ingestUploadedTaskAction({
@@ -94,8 +94,10 @@ export function UploadTaskDialog({
                   return;
                 }
                 router.push(result.redirectTo);
-              } catch {
-                setSizeError("The upload failed. Try again.");
+              } catch (error) {
+                setSizeError(
+                  `The upload failed: ${error instanceof Error ? error.message : "unknown error"}`,
+                );
               } finally {
                 setBusy(false);
               }
