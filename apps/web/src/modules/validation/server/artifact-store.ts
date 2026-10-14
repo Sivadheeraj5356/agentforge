@@ -5,6 +5,7 @@ import type { ArtifactStore, ArtifactStoreMetadata } from "@agentforge/contracts
 import { ArtifactStorageKeySchema } from "@agentforge/contracts";
 import { isSafeRelativePath } from "@agentforge/security";
 
+import { createSupabaseArtifactStore } from "./supabase-artifact-store";
 import { createR2ArtifactStore, readR2SignerConfig } from "./r2-artifact-store";
 
 function resolveStoreRoot(): string {
@@ -70,6 +71,9 @@ export function createArtifactStore(): ArtifactStore {
   const r2 = readR2SignerConfig();
   if (r2) {
     return createR2ArtifactStore(r2);
+  }
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() && process.env.AGENTFORGE_ARTIFACT_BACKEND !== "local") {
+    return createSupabaseArtifactStore();
   }
   return createLocalFilesystemArtifactStore();
 }
