@@ -30,6 +30,7 @@ const STATIC_ALLOW_DOMAINS = [
   "auth.docker.io",
   "registry-1.docker.io",
   "production.cloudflare.docker.com",
+  "docker-images-prod.s3.dualstack.us-east-1.amazonaws.com",
   "archive.ubuntu.com",
   "security.ubuntu.com",
 ] as const;
