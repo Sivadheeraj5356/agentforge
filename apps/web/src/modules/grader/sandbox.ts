@@ -166,6 +166,11 @@ function streamGraderBootstrap(sandbox: Sandbox): void {
           console.log(`[grader ${sandbox.name}] ${text.slice(-1200)}`);
         }
         if (text.includes("GRADER_DRAIN_DONE") || text.includes("BOOTSTRAP_FAILED")) {
+          try {
+            await sandbox.stop();
+          } catch {
+            // session timeout cleans up regardless
+          }
           break;
         }
       } catch {
