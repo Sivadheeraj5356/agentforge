@@ -51,6 +51,7 @@ const BOOTSTRAP_LINES = [
   "set -euo pipefail",
   "trap 'echo BOOTSTRAP_FAILED at line $LINENO' ERR",
   "export DEBIAN_FRONTEND=noninteractive",
+  "sed -i 's|http://|https://|g' /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources 2>/dev/null || true",
   "apt-get update -qq",
   "apt-get install -y -qq --no-install-recommends docker.io git python3 python3-venv ca-certificates",
   "nohup dockerd >/tmp/dockerd.log 2>&1 &",
