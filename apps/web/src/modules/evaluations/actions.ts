@@ -7,8 +7,10 @@ import {
   ProjectSlugSchema,
 } from "@agentforge/contracts";
 import { revalidatePath } from "next/cache";
+import { after } from "next/server";
 
 import { logServerEvent } from "@/lib/server-log";
+import { launchGraderSandbox } from "@/modules/grader/sandbox";
 import { recordAuditEvent } from "@/modules/audit/server/audit";
 import { getCatalogTaskByKey, getHarnessAgent } from "@/modules/evaluations/server/catalog";
 import {
@@ -23,6 +25,20 @@ import { requireOrganizationBySlug } from "@/modules/organizations/server/access
 export type ActionResult = { ok: true; message?: string } | { ok: false; error: string };
 
 const MODEL_KINDS = new Set(["agent", "multi_agent", "byo"]);
+
+
+// Automatic grading: drain the queue in a disposable Vercel Sandbox microVM.
+// Never block or fail the enqueue on grader launch problems; the daily cron
+// remains as the fallback.
+function scheduleGraderLaunch(): void {
+  after(async () => {
+    try {
+      await launchGraderSandbox("enqueue");
+    } catch (launchError) {
+      console.error("grader launch failed", launchError);
+    }
+  });
+}
 
 async function enqueueParsed(parsed: {
   organizationSlug: string;
@@ -98,7 +114,7 @@ async function enqueueParsed(parsed: {
   revalidatePath(`/app/${organization.slug}/results`);
   return {
     ok: true,
-    message: `Queued run ${run.run_number}. Start the evaluator worker to execute it.`,
+    message: `Queued run ${run.run_number}. Grading starts automatically; the daily cron is the fallback.`,
   };
 }
 
@@ -119,7 +135,11 @@ export async function enqueueEvaluationAction(
     return { ok: false, error: "Check the evaluation fields." };
   }
   try {
-    return await enqueueParsed(parsed.data);
+    const result = await enqueueParsed(parsed.data);
+    if (result.ok) {
+      scheduleGraderLaunch();
+    }
+    return result;
   } catch {
     return { ok: false, error: "Evaluation could not be queued." };
   }
@@ -169,9 +189,11 @@ export async function enqueueAblationAction(
         return last;
       }
     }
+    scheduleGraderLaunch();
     return {
       ok: true,
-      message: "Queued binary, continuous, and hybrid oracle runs. Scores appear after the worker.",
+      message:
+        "Queued binary, continuous, and hybrid oracle runs. Grading starts automatically; the daily cron is the fallback.",
     };
   } catch {
     return { ok: false, error: "Ablation could not be queued." };
