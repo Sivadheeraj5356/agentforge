@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import {
   EnqueueEvaluationInputSchema,
   EvaluatorConfigurationSchema,
@@ -8,6 +8,7 @@ import {
 import { assertNeverExecutesUserCode } from "@agentforge/security";
 
 import { isApiError, requireApiSession, type ApiSupabase } from "@/modules/api/v1/session";
+import { launchGraderSandbox } from "@/modules/grader/sandbox";
 import { toJson } from "@/lib/json";
 
 async function resolveProject(
@@ -117,5 +118,15 @@ export async function POST(request: Request): Promise<Response> {
   if (error || !data) {
     return NextResponse.json({ error: "Unable to enqueue evaluation" }, { status: 400 });
   }
+  // Automatic grading: drain the queue in a disposable Vercel Sandbox microVM.
+  // Never block or fail the enqueue on grader launch problems; the manual
+  // GitHub Actions worker and the daily cron remain as fallbacks.
+  after(async () => {
+    try {
+      await launchGraderSandbox("enqueue");
+    } catch (launchError) {
+      console.error("grader launch failed", launchError);
+    }
+  });
   return NextResponse.json({ evaluation: data }, { status: 201 });
 }

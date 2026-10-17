@@ -1,0 +1,3 @@
+{
+  "crons": [{ "path": "/api/internal/grader-drain", "schedule": "0 3 * * *" }]
+}
