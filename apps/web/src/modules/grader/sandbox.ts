@@ -15,8 +15,8 @@ import { Sandbox } from "@vercel/sandbox";
  */
 
 const GRADER_REPO_URL = "https://github.com/Sivadheeraj5356/agentforge.git";
-const GRADER_SANDBOX_TIMEOUT_MS = 9 * 60 * 1000;
-const GRADER_DRAIN_BUDGET_SECONDS = 330;
+const GRADER_SANDBOX_TIMEOUT_MS = 25 * 60 * 1000;
+const GRADER_DRAIN_BUDGET_SECONDS = 780;
 const EVAL_IMAGE = "agentforge-eval-python:3.12";
 
 /** Package, registry and repo hosts the worker VM needs; nothing else. */
