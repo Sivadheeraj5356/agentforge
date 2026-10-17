@@ -1,4 +1,5 @@
 import { Sandbox } from "@vercel/sandbox";
+import { after } from "next/server";
 
 /**
  * Automatic grading on Vercel Sandbox.
@@ -46,7 +47,9 @@ export function graderAllowDomains(supabaseUrl: string): string[] {
 }
 
 const BOOTSTRAP_LINES = [
+  "exec > >(tee -a /tmp/boot.log) 2>&1",
   "set -euo pipefail",
+  "trap 'echo BOOTSTRAP_FAILED at line $LINENO' ERR",
   "export DEBIAN_FRONTEND=noninteractive",
   "apt-get update -qq",
   "apt-get install -y -qq --no-install-recommends docker.io git python3 python3-venv ca-certificates",
@@ -135,6 +138,7 @@ export async function launchGraderSandbox(reason: string): Promise<GraderLaunchR
       sudo: true,
       detached: true,
     });
+    streamGraderBootstrap(sandbox);
     return { launched: true, sandboxName: sandbox.name, reason };
   } catch (error) {
     return {
@@ -143,4 +147,29 @@ export async function launchGraderSandbox(reason: string): Promise<GraderLaunchR
       error: error instanceof Error ? error.message : String(error),
     };
   }
+}
+
+/** Stream bootstrap/drain progress into Vercel function logs while the
+ * sandbox lives, so failures are diagnosable from Observability. */
+function streamGraderBootstrap(sandbox: Sandbox): void {
+  after(async () => {
+    for (let attempt = 0; attempt < 32; attempt += 1) {
+      await new Promise((resolve) => setTimeout(resolve, 15000));
+      try {
+        const tail = await sandbox.runCommand({
+          cmd: "tail",
+          args: ["-c", "3000", "/tmp/boot.log"],
+        });
+        const text = (await tail.stdout()).trim();
+        if (text) {
+          console.log(`[grader ${sandbox.name}] ${text.slice(-1200)}`);
+        }
+        if (text.includes("GRADER_DRAIN_DONE") || text.includes("BOOTSTRAP_FAILED")) {
+          break;
+        }
+      } catch {
+        break;
+      }
+    }
+  });
 }

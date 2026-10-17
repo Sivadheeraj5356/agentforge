@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { launchGraderSandbox } from "@/modules/grader/sandbox";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 /**
  * Vercel Cron entry point (daily on Hobby): drains any stale queued
