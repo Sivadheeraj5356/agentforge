@@ -63,7 +63,7 @@ const BOOTSTRAP_LINES = [
   'docker build -q -t "$AGENTFORGE_EVAL_IMAGE" -f services/evaluator/docker/eval-python.Dockerfile . >/dev/null',
   "python3 -m venv /opt/venv",
   "/opt/venv/bin/pip install --quiet --disable-pip-version-check -e services/evaluator",
-  "/opt/venv/bin/python -m evaluator.import_tasks --root fixtures/eval --write >/tmp/import.log 2>&1 || rc=$?; rc=${rc:-0}; tail -30 /tmp/import.log; if [ \"$rc\" -eq 0 ]; then echo IMPORT_OK; else echo \"IMPORT_FAILED rc=$rc\"; fi",
+  '/opt/venv/bin/python -m evaluator.import_tasks --root fixtures/eval --write >/tmp/import.log 2>&1 || rc=$?; rc=${rc:-0}; tail -30 /tmp/import.log; if [ "$rc" -eq 0 ]; then echo IMPORT_OK; else echo "IMPORT_FAILED rc=$rc"; fi',
   "idle=0",
   "end=$((SECONDS + GRADER_DRAIN_BUDGET_SECONDS))",
   "while [ $SECONDS -lt $end ]; do",
