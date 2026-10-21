@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+const afterMock = vi.hoisted(() => vi.fn());
 const createMock = vi.hoisted(() => vi.fn());
 const runCommandMock = vi.hoisted(() => vi.fn());
+
+vi.mock("next/server", () => ({ after: afterMock }));
 
 vi.mock("@vercel/sandbox", () => ({
   Sandbox: { create: createMock },
@@ -21,6 +24,7 @@ const BASE_ENV = {
 };
 
 beforeEach(() => {
+  afterMock.mockReset();
   createMock.mockReset();
   runCommandMock.mockReset();
 });
@@ -87,6 +91,7 @@ describe("launchGraderSandbox", () => {
     try {
       const result = await launchGraderSandbox("enqueue");
       expect(result).toEqual({ launched: true, sandboxName: "grader-1", reason: "enqueue" });
+      expect(afterMock).toHaveBeenCalledWith(expect.any(Function));
       const createArgs = createMock.mock.calls[0]![0]!;
       expect(createArgs.persistent).toBe(false);
       expect(createArgs.networkPolicy.allow).toContain("mzkievjmtexqduqxhmcm.supabase.co");
