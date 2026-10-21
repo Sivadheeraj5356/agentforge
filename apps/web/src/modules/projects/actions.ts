@@ -23,6 +23,11 @@ import {
 export type ActionResult = { ok: true; message?: string } | { ok: false; error: string };
 
 function mapProjectError(error: unknown, fallback: string): string {
+  // Framework navigation errors can arise when a stale form loses access.
+  // Keep the action denied without exposing internal error names to the user.
+  if (error instanceof Error && error.message.startsWith("NEXT_")) {
+    return fallback;
+  }
   if (error instanceof Error && error.message) {
     return error.message;
   }
