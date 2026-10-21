@@ -8,7 +8,7 @@ export const LANDING_BADGE = "Now shipping: private work environments";
 export const LANDING_PROOF = [
   { label: "Hidden verifiers", detail: "Stages the agent cannot see" },
   { label: "Staged reward", detail: "Weights sum to 1" },
-  { label: "Trusted control plane", detail: "The website never starts a sandbox" },
+  { label: "Trusted control plane", detail: "Untrusted code runs outside the web app" },
 ] as const;
 
 export const LANDING_PROVIDE_EYEBROW = "Evaluation infrastructure";
