@@ -87,6 +87,7 @@ const PASSTHROUGH_MODEL_ENV = [
   "ANTHROPIC_API_KEY",
   "ANTHROPIC_MODEL",
   "AGENTFORGE_HARBOR_MODEL",
+  "AGENTFORGE_BYO_CMD",
 ] as const;
 
 export function graderSandboxEnv(env: NodeJS.ProcessEnv): Record<string, string> {
