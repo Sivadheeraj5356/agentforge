@@ -1,4 +1,4 @@
-﻿# ADR-004: R2 for artifact storage
+# ADR-004: R2 for artifact storage
 
 ## Status
 
@@ -16,4 +16,4 @@ Store artifacts in **Cloudflare R2** (S3-compatible) when operator credentials a
 
 - Cheap egress relative to some object stores
 - Signed GET URLs exist on the R2 adapter; the task inspector still reads bytes server-side and never issues a storage key to the browser
-- Isolated Docker grading still cannot run on Vercel — only the control plane is hosted there
+- Isolated Docker grading runs in a separate Vercel Sandbox microVM or a managed Docker host, never in the Next.js process
