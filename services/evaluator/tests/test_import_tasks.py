@@ -3,13 +3,14 @@ from pathlib import Path
 from evaluator.import_tasks import discover_task_dirs, main
 
 
-def test_discovers_committed_vortex_fixtures() -> None:
+def test_discovers_committed_agentforge_fixtures() -> None:
     root = Path(__file__).resolve().parents[3] / "fixtures" / "eval"
     names = [path.name for path in discover_task_dirs(root)]
     assert "broken-orders-api" in names
     assert "ledger-evolve" in names
     assert "spec-to-kit" in names
-    assert len(names) == 10
+    assert "isolation-probe" in names
+    assert len(names) == 11
     assert "_shared" not in names
 
 
