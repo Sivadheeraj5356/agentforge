@@ -26,7 +26,6 @@ export type ActionResult = { ok: true; message?: string } | { ok: false; error: 
 
 const MODEL_KINDS = new Set(["agent", "multi_agent", "byo"]);
 
-
 // Automatic grading: drain the queue in a disposable Vercel Sandbox microVM.
 // Never block or fail the enqueue on grader launch problems; the daily cron
 // remains as the fallback.
