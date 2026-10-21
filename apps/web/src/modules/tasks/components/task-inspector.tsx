@@ -139,9 +139,13 @@ export function TaskInspector({
 
     void (async () => {
       try {
-        const response = await fetch(`${fileEndpoint}?path=${encodeURIComponent(selectedPath)}`, {
-          signal: controller.signal,
-        });
+        const response = await fetch(
+          `${fileEndpoint}?cacheVersion=2&path=${encodeURIComponent(selectedPath)}`,
+          {
+            cache: "no-store",
+            signal: controller.signal,
+          },
+        );
         if (requestRef.current !== sequence) {
           return;
         }
