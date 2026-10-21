@@ -24,7 +24,7 @@ Scores exist only when the worker recorded them. Cost and tokens stay `null` unt
 - Terminus-2 as the catalog harness (that is a competing Terminal-Bench agent)
 - A Fable 5 percentage or invented resume score
 - Live Gmail / Slack / Salesforce OAuth (incident and clone tools are **labeled simulated**)
-- Hosted Isolated Docker on Vercel (the worker needs a Docker host)
+- Running untrusted code inside the Next.js process (hosted grading uses a separate Vercel Sandbox microVM)
 - Kafka, Kubernetes, or ClickHouse
 
 ## How a run works
@@ -43,7 +43,7 @@ Browser / API  →  apps/web (auth, org RLS, enqueue)
 2. **Evaluate** — the worker starts Isolated Docker (agent workspace ≠ hidden grader) or an in-process work-pack MCP world.
 3. **Record** — reward, stage scores, trajectory (capped), and failure category land on the trial.
 
-The website never starts a sandbox, never runs `solve.sh`, and never sees model API keys.
+The server-side enqueue and cron routes can launch a disposable Vercel Sandbox microVM. The evaluator inside that VM runs and grades submissions in separate isolated containers; untrusted code never runs in the Next.js process. Model keys, when configured, stay server-side and are not passed into submission containers.
 
 ## Horizon v1 catalog (`agentforge-internal`)
 
