@@ -178,3 +178,11 @@ describe("authenticated file cache isolation", () => {
     expect(inspector).toContain("?cacheVersion=2&path=");
   });
 });
+
+describe("denied stale project forms", () => {
+  it("maps framework navigation errors to safe action feedback", () => {
+    const actions = readFileSync(path.join(WEB_SRC_ROOT, "modules/projects/actions.ts"), "utf8");
+    expect(actions).toContain('error.message.startsWith("NEXT_")');
+    expect(actions).toContain("return fallback;");
+  });
+});
