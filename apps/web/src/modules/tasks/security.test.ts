@@ -161,3 +161,20 @@ describe("task inspector source constraints", () => {
     expect(fileRoutes.map((file) => path.relative(WEB_SRC_ROOT, file))).toHaveLength(1);
   });
 });
+
+describe("authenticated file cache isolation", () => {
+  it("never marks task bytes immutable or cacheable across account switches", () => {
+    const route = readFileSync(
+      path.join(
+        WEB_SRC_ROOT,
+        "app/app/[organizationSlug]/projects/[projectSlug]/tasks/[taskSlug]/runs/[runId]/file/route.ts",
+      ),
+      "utf8",
+    );
+    expect(route).toContain('200, "private, no-store"');
+    expect(route).not.toContain("max-age=");
+    const inspector = readFileSync(path.join(MODULE_ROOT, "components/task-inspector.tsx"), "utf8");
+    expect(inspector).toContain('cache: "no-store"');
+    expect(inspector).toContain("?cacheVersion=2&path=");
+  });
+});
