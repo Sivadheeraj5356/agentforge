@@ -15,7 +15,7 @@ export const OVERVIEW_SECTION: DocsSection = {
     ),
     heading("overview-planes", "Two planes"),
     paragraph(
-      "The trusted web app is the control plane. It authenticates, stores org-scoped metadata, validates payloads, and enqueues jobs. It never starts a sandbox, never runs MCP, never starts Harbor or Docker, and never computes reward. The evaluator service is the execution plane. It claims the job, runs the world, grades with hidden verifiers, and writes trial metrics, logs, and trajectory artifacts.",
+      "The trusted web app is the control plane. It authenticates, stores org-scoped metadata, validates payloads, and enqueues jobs. Its server routes can launch a separate disposable Vercel Sandbox microVM. MCP, Harbor, Docker, untrusted code, and reward computation stay outside the Next.js process. The evaluator service is the execution plane. It claims the job, runs the world, grades with hidden verifiers, and writes trial metrics, logs, and trajectory artifacts.",
     ),
     table(
       ["Plane", "Lives in", "Does"],
