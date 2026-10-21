@@ -79,10 +79,7 @@ export async function GET(
     return json({ error: result.error }, status, "no-store");
   }
 
-  // A completed run is pinned to an immutable artifact, so this body can never
-  // change. Still private: the content belongs to one organization.
-  const immutable =
-    context.run.status === "succeeded" ? "private, max-age=3600, immutable" : "private, no-store";
-
-  return json({ path: result.path, content: result.content }, 200, immutable);
+  // Browser caches are shared across account switches. Even immutable task
+  // bytes must be re-authorized on every request, so never cache this response.
+  return json({ path: result.path, content: result.content }, 200, "private, no-store");
 }
