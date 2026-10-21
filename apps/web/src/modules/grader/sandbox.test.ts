@@ -65,6 +65,18 @@ describe("graderSandboxEnv", () => {
     ).toBe("sk-test");
   });
 
+  it("passes a server-configured BYO command without adding a default", () => {
+    expect(graderSandboxEnv({ ...BASE_ENV } as unknown as NodeJS.ProcessEnv)).not.toHaveProperty(
+      "AGENTFORGE_BYO_CMD",
+    );
+    expect(
+      graderSandboxEnv({
+        ...BASE_ENV,
+        AGENTFORGE_BYO_CMD: "python /opt/byo/agent.py",
+      } as unknown as NodeJS.ProcessEnv).AGENTFORGE_BYO_CMD,
+    ).toBe("python /opt/byo/agent.py");
+  });
+
   it("refuses to launch without the service-role key", () => {
     expect(() =>
       graderSandboxEnv({
