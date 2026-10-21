@@ -39,4 +39,4 @@ Local score JSON from `scripts/horizon-score.py` is gitignored. Do not paste tho
 
 - A public ranking of frontier models
 - A live Fable 5 percentage
-- Hosted Isolated Docker on Vercel (the worker still needs a Docker host)
+- Untrusted execution inside Next.js. Hosted isolated grading uses a separate Vercel Sandbox microVM; it does not run Docker in the web process.
