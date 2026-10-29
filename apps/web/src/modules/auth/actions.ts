@@ -7,6 +7,7 @@ import {
   SignUpInputSchema,
 } from "@agentforge/contracts";
 import { getSafeRedirectPath } from "@agentforge/security";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -86,6 +87,33 @@ export async function signInAction(
     redirect(next);
   }
   redirect(`/app/${organization.slug}`);
+}
+
+/** Start Google sign-in through Supabase Auth (PKCE). The session is created in /auth/callback. */
+export async function signInWithGoogleAction(formData: FormData): Promise<void> {
+  const next = getSafeRedirectPath(String(formData.get("next") || "/app"));
+  const supabase = await createSupabaseServerClient();
+  // Use the host the user is on, so preview deployments return to themselves.
+  const requestHeaders = await headers();
+  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
+  const proto = requestHeaders.get("x-forwarded-proto") ?? "https";
+  const appUrl = host
+    ? `${proto}://${host}`
+    : (process.env.NEXT_PUBLIC_APP_URL ?? "http://127.0.0.1:3000");
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${appUrl}/auth/callback?next=${encodeURIComponent(next)}`,
+      queryParams: { prompt: "select_account" },
+    },
+  });
+
+  if (error || !data.url) {
+    redirect("/login?error=auth");
+  }
+
+  redirect(data.url);
 }
 
 export async function signOutAction(): Promise<void> {
