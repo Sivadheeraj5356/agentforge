@@ -77,7 +77,11 @@ export default function RootLayout({
                 "Evaluation infrastructure for private AI agent work environments and reproducible trials.",
               applicationCategory: "DeveloperApplication",
               operatingSystem: "Any",
-              author: { "@type": "Person", name: "Siva Dheeraj", url: "https://sivadheeraj.vercel.app/" },
+              author: {
+                "@type": "Person",
+                name: "Siva Dheeraj",
+                url: "https://sivadheeraj.vercel.app/",
+              },
             }),
           }}
         />
