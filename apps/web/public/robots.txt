@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://agentforge-omega-khaki.vercel.app/sitemap.xml
