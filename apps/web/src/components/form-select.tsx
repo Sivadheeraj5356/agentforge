@@ -50,12 +50,15 @@ export function FormSelect({
   readonly className?: string;
   readonly triggerClassName?: string;
 }): ReactElement {
+  // Match the native <select> this replaces: with no explicit default, the
+  // first option is the selected value, so server actions always get one.
+  const initialValue = defaultValue ?? (value === undefined ? options[0]?.value : undefined);
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       {hideLabel ? null : <Label id={id ? `${id}-label` : undefined}>{label}</Label>}
       <Select
         name={name}
-        defaultValue={defaultValue}
+        defaultValue={initialValue}
         value={value}
         onValueChange={onValueChange}
         required={required}
