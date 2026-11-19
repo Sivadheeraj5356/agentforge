@@ -11,7 +11,7 @@ import { recordAuditEvent } from "@/modules/audit/server/audit";
 import { canManageProjects } from "@/modules/projects/permissions";
 import { loadTaskManifest, readTaskFile } from "@/modules/tasks/server/file-content";
 import { loadRunFindings, requireTaskRunContext } from "@/modules/tasks/server/task-runs";
-import { generateGeminiJson } from "@/modules/task-review/server/gemini";
+import { generateReviewJson } from "@/modules/task-review/server/providers";
 import {
   buildReviewPrompt,
   parseTaskReview,
@@ -78,7 +78,7 @@ export async function requestTaskReviewAction(
       })),
     });
 
-    const generated = await generateGeminiJson(prompt);
+    const generated = await generateReviewJson(prompt);
     if (!generated.ok) {
       return { ok: false, error: generated.error };
     }
