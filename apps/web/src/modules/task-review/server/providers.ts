@@ -10,13 +10,13 @@ type ChatCompletionResponse = {
   }[];
 };
 
-const REQUEST_TIMEOUT_MS = 30_000;
+const REQUEST_TIMEOUT_MS = 55_000;
 
 const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_DEFAULT_MODEL = "llama-3.3-70b-versatile";
+const GROQ_DEFAULT_MODEL = "openai/gpt-oss-120b";
 
 const OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
-const OPENROUTER_DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct:free";
+const OPENROUTER_DEFAULT_MODEL = "google/gemma-4-31b-it:free";
 
 function envModel(name: string, fallback: string): string {
   const configured = process.env[name];
@@ -39,7 +39,6 @@ async function callChatCompletions(
       body: JSON.stringify({
         model,
         messages: [{ role: "user", content: prompt }],
-        response_format: { type: "json_object" },
         temperature: 0.2,
       }),
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),

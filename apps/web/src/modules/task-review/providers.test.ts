@@ -66,7 +66,7 @@ describe("generateReviewJson", () => {
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.text).toBe('{"summary":"ok"}');
-      expect(result.model).toBe("llama-3.3-70b-versatile");
+      expect(result.model).toBe("openai/gpt-oss-120b");
     }
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });

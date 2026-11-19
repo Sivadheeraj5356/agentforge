@@ -1,6 +1,6 @@
 const DEFAULT_MODEL = "gemini-3.8-flash";
 const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
-const REQUEST_TIMEOUT_MS = 30_000;
+const REQUEST_TIMEOUT_MS = 55_000;
 
 export type GeminiResult =
   | { readonly ok: true; readonly text: string; readonly model: string }
