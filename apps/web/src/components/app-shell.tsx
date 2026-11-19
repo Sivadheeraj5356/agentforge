@@ -52,8 +52,8 @@ export function AppShell({
   const homeHref = `/app/${organizationSlug}`;
 
   return (
-    <div className="flex min-h-dvh">
-      <aside className="border-border bg-surface flex w-56 shrink-0 flex-col border-r">
+    <div className="flex min-h-dvh flex-col md:flex-row">
+      <aside className="border-border bg-surface flex w-full flex-col border-b md:w-56 md:shrink-0 md:border-b-0 md:border-r">
         <div className="flex h-14 items-center px-4">
           <Link
             href={homeHref}
@@ -65,7 +65,7 @@ export function AppShell({
         <Separator />
         <div className="flex flex-1 flex-col gap-6 p-3">
           <nav aria-label="Primary">
-            <ul className="flex flex-col gap-0.5">
+            <ul className="flex flex-row flex-wrap gap-0.5 md:flex-col">
               {nav.primary.map((item) => {
                 const active =
                   item.href === homeHref ? pathname === homeHref : pathname.startsWith(item.href);
@@ -81,7 +81,7 @@ export function AppShell({
             <p className="text-muted-foreground px-2.5 pb-1 font-mono text-[10px] uppercase tracking-[0.14em]">
               Account
             </p>
-            <ul className="flex flex-col gap-0.5">
+            <ul className="flex flex-row flex-wrap gap-0.5 md:flex-col">
               {nav.secondary.map((item) => {
                 const active = pathname.startsWith(item.href);
                 return (
