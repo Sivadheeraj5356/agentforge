@@ -48,7 +48,7 @@ export function SelectTrigger({ className, children, ...props }: SelectTriggerPr
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "border-border bg-surface text-foreground flex h-(--height-control) w-full items-center justify-between gap-2 whitespace-nowrap rounded-md border px-3 text-sm shadow-sm transition-colors",
+        "border-border bg-surface text-foreground h-(--height-control) flex w-full items-center justify-between gap-2 whitespace-nowrap rounded-md border px-3 text-sm shadow-sm transition-colors",
         "hover:border-muted-foreground/40 focus-visible:outline-focus focus-visible:outline-2 focus-visible:outline-offset-2",
         "data-[placeholder]:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         "[&>span]:min-w-0 [&>span]:truncate",
