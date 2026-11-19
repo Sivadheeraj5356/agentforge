@@ -47,11 +47,11 @@ export function Breadcrumbs({ trail }: { trail: readonly Crumb[] }): ReactElemen
 
 function Fact({ label, value }: { label: string; value: string }): ReactElement {
   return (
-    <div className="flex flex-col gap-0.5">
-      <dt className="text-muted-foreground font-mono text-[10px] uppercase tracking-[0.14em]">
+    <div className="flex flex-col gap-1">
+      <dt className="text-muted-foreground text-[11px] font-medium uppercase tracking-wider">
         {label}
       </dt>
-      <dd className="font-mono text-xs">{value}</dd>
+      <dd className="font-mono text-[13px] tabular-nums">{value}</dd>
     </div>
   );
 }
@@ -85,7 +85,7 @@ export function TaskHeaderBlock({
 
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex flex-col gap-1">
-          <h1 className="font-serif text-2xl font-semibold tracking-tight">{task.name}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">{task.name}</h1>
           <p className="text-muted-foreground font-mono text-xs">
             {task.externalKey}
             {task.taskVersion ? ` · version ${task.taskVersion}` : ""}
@@ -95,9 +95,9 @@ export function TaskHeaderBlock({
         {actions}
       </div>
 
-      <dl className="flex flex-wrap gap-x-8 gap-y-3">
-        <div className="flex flex-col gap-0.5">
-          <dt className="text-muted-foreground font-mono text-[10px] uppercase tracking-[0.14em]">
+      <dl className="border-border bg-surface flex flex-wrap gap-x-8 gap-y-3 rounded-lg border px-4 py-3">
+        <div className="flex flex-col gap-1">
+          <dt className="text-muted-foreground text-[11px] font-medium uppercase tracking-wider">
             Validation
           </dt>
           <dd className="text-xs">

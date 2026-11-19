@@ -47,7 +47,7 @@ export default async function LabPage({
   return (
     <div className="flex flex-col gap-8">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Lab</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Lab</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Private scenarios, immutable environment versions, and PRIVATE dataset lineage. SSO, SAML,
           SCIM, and CMK are not implemented until a named customer needs them.
@@ -61,7 +61,7 @@ export default async function LabPage({
       ) : null}
       <section className="grid gap-6 md:grid-cols-2">
         <div>
-          <h2 className="font-serif text-lg tracking-tight">Scenarios</h2>
+          <h2 className="text-lg font-semibold tracking-tight">Scenarios</h2>
           <ul className="mt-2 text-sm">
             {(scenarios ?? []).map((row) => (
               <li key={row.id}>
@@ -71,7 +71,7 @@ export default async function LabPage({
           </ul>
         </div>
         <div>
-          <h2 className="font-serif text-lg tracking-tight">Datasets</h2>
+          <h2 className="text-lg font-semibold tracking-tight">Datasets</h2>
           <ul className="mt-2 text-sm">
             {(datasets ?? []).map((row) => (
               <li key={row.id}>
@@ -81,7 +81,7 @@ export default async function LabPage({
           </ul>
         </div>
         <div>
-          <h2 className="font-serif text-lg tracking-tight">Environments</h2>
+          <h2 className="text-lg font-semibold tracking-tight">Environments</h2>
           <ul className="mt-2 text-sm">
             {(environments ?? []).map((row) => (
               <li key={row.id}>
@@ -91,7 +91,7 @@ export default async function LabPage({
           </ul>
         </div>
         <div>
-          <h2 className="font-serif text-lg tracking-tight">Rollouts</h2>
+          <h2 className="text-lg font-semibold tracking-tight">Rollouts</h2>
           <p className="text-muted-foreground mt-2 text-sm">
             {(rollouts ?? []).length} recent ·{" "}
             <Link href={`/api/v1/rollouts`} className="underline underline-offset-4">

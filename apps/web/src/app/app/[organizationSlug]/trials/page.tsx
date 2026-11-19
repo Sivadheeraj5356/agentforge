@@ -31,7 +31,7 @@ export default async function TrialsPage({
   return (
     <div className="flex flex-col gap-8">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Trials</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Trials</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Model × task rewards from stored trial rows. Empty cells mean the pair has not been run.
           Failure categories are assigned by deterministic rules, not an LLM.
@@ -75,7 +75,7 @@ export default async function TrialsPage({
 
       {trials.length > 0 ? (
         <section aria-labelledby="recent-trials-heading" className="flex flex-col gap-3">
-          <h2 id="recent-trials-heading" className="font-serif text-lg tracking-tight">
+          <h2 id="recent-trials-heading" className="text-lg font-semibold tracking-tight">
             Recent attempts
           </h2>
           <ul className="border-border divide-border divide-y border-y">

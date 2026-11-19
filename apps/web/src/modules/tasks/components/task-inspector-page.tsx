@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
 import { buildFileTree } from "@agentforge/validation";
+import { Button } from "@agentforge/ui";
 
 import { ChecksDisclosure, ProvenanceDisclosure } from "@/modules/tasks/components/disclosures";
 import { RunHistory } from "@/modules/tasks/components/run-history";
@@ -97,18 +98,15 @@ export async function TaskInspectorPage({
         run={summary}
         completedAt={run.completed_at}
         actions={
-          <div className="flex flex-wrap items-center gap-4 text-sm">
+          <div className="flex flex-wrap items-center gap-2">
             {isLatestRun ? null : (
-              <Link href={context.taskBasePath} className="underline underline-offset-4">
-                Latest run
-              </Link>
+              <Button asChild variant="outline" size="sm">
+                <Link href={context.taskBasePath}>Latest run</Link>
+              </Button>
             )}
-            <Link
-              href={`${context.taskBasePath}/runs/compare`}
-              className="underline underline-offset-4"
-            >
-              Compare runs
-            </Link>
+            <Button asChild variant="outline" size="sm">
+              <Link href={`${context.taskBasePath}/runs/compare`}>Compare runs</Link>
+            </Button>
           </div>
         }
       />

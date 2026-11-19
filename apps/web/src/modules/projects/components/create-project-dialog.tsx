@@ -39,7 +39,7 @@ export function CreateProjectDialog({
           className="border-border flex items-start justify-between border-b px-5 py-4"
         >
           <div className="flex flex-col gap-1 pr-4">
-            <h2 id={titleId} className="font-serif text-xl tracking-tight">
+            <h2 id={titleId} className="text-xl font-semibold tracking-tight">
               Create project
             </h2>
             <p id={descriptionId} className="text-muted-foreground text-sm">

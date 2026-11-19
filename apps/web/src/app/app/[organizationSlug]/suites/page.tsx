@@ -31,7 +31,7 @@ export default async function SuitesPage({
   return (
     <div className="flex flex-col gap-6">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Suites</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Suites</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Pinned task version lists with machine-readable gates. GitHub App checks are last, behind
           an adapter that is not configured.

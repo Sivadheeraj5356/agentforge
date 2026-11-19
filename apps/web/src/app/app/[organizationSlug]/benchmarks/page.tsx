@@ -25,7 +25,7 @@ export default async function BenchmarksPage({
   return (
     <div className="flex flex-col gap-6">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Benchmarks</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Benchmarks</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Catalog of evaluation suites. Runs pin a specific version. Terminus structural validation
           maps packages through an adapter; Harbor execution lives in the evaluator worker.

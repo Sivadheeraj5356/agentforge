@@ -17,9 +17,7 @@ export default function TaskInspectorError({
 }): ReactElement {
   return (
     <div role="alert" className="flex max-w-prose flex-col items-start gap-3 py-10">
-      <h1 className="font-serif text-2xl font-semibold tracking-tight">
-        This report could not be assembled
-      </h1>
+      <h1 className="text-2xl font-semibold tracking-tight">This report could not be assembled</h1>
       <p className="text-muted-foreground text-sm leading-relaxed">
         The task and its validation history are stored and unchanged. AgentForge could not read one
         of the pieces it needs to show them — usually the run&rsquo;s findings or its file list.

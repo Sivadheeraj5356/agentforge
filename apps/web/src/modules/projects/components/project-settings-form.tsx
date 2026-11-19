@@ -87,7 +87,7 @@ export function ProjectSettingsForm({
 
       {canManage ? (
         <section className="border-border flex flex-col gap-3 border-t pt-8">
-          <h2 className="font-serif text-lg tracking-tight">
+          <h2 className="text-lg font-semibold tracking-tight">
             {isArchived ? "Restore project" : "Archive project"}
           </h2>
           <p className="text-muted-foreground text-sm leading-relaxed">

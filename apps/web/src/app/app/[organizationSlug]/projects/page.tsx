@@ -53,7 +53,7 @@ export default async function ProjectsPage({
           <p className="text-muted-foreground font-mono text-xs uppercase tracking-[0.16em]">
             {organization.name}
           </p>
-          <h1 className="font-serif text-3xl font-semibold tracking-tight">Projects</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
           <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
             Organize evaluation work by project. Archive instead of deleting when a suite retires.
           </p>

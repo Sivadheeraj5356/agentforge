@@ -19,7 +19,7 @@ export function AblationScoreTable({
   }
   return (
     <section aria-labelledby="ablation-heading" className="flex flex-col gap-4">
-      <h2 id="ablation-heading" className="font-serif text-lg tracking-tight">
+      <h2 id="ablation-heading" className="text-lg font-semibold tracking-tight">
         Reward ablations
       </h2>
       <p className="text-muted-foreground max-w-2xl text-sm">

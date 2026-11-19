@@ -7,7 +7,7 @@ export default function ValidationRunLoading(): ReactElement {
         <p className="text-muted-foreground font-mono text-xs uppercase tracking-[0.14em]">
           validation
         </p>
-        <h1 className="font-serif text-3xl font-semibold tracking-tight">Validation report</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Validation report</h1>
       </header>
       <p role="status" className="text-muted-foreground text-sm">
         Inspecting task package…

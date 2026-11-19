@@ -41,7 +41,7 @@ export function WorkspaceShortcutCards({
 
   return (
     <section aria-labelledby="more-heading" className="flex flex-col gap-3">
-      <h2 id="more-heading" className="font-serif text-lg tracking-tight">
+      <h2 id="more-heading" className="text-lg font-semibold tracking-tight">
         More in this workspace
       </h2>
       <ul className="grid gap-3 sm:grid-cols-2">

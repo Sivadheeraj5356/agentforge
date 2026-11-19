@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import type { ProjectListQuery } from "@agentforge/contracts";
 
+import { FormSelect } from "@/components/form-select";
+
 function hrefFor(
   organizationSlug: string,
   next: Partial<ProjectListQuery> & { status?: string; q?: string; sort?: string },
@@ -86,21 +88,19 @@ export function ProjectFilters({
             className="border-border bg-surface h-(--height-control) w-full rounded-md border px-3 text-sm"
           />
         </div>
-        <div className="flex w-full flex-col gap-1.5 sm:w-48">
-          <label htmlFor="project-sort" className="text-muted-foreground text-xs font-medium">
-            Sort
-          </label>
-          <select
+        <div className="w-full sm:w-52">
+          <FormSelect
             id="project-sort"
             name="sort"
+            label="Sort"
             defaultValue={query.sort}
-            className="border-border bg-surface h-(--height-control) w-full rounded-md border px-3 text-sm"
-          >
-            <option value="updated_desc">Recently updated</option>
-            <option value="updated_asc">Oldest updated</option>
-            <option value="name_asc">Name A–Z</option>
-            <option value="name_desc">Name Z–A</option>
-          </select>
+            options={[
+              { value: "updated_desc", label: "Recently updated" },
+              { value: "updated_asc", label: "Oldest updated" },
+              { value: "name_asc", label: "Name A-Z" },
+              { value: "name_desc", label: "Name Z-A" },
+            ]}
+          />
         </div>
         <button
           type="submit"

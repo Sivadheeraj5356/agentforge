@@ -39,7 +39,7 @@ export default async function ProjectHomePage({
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-2">
-            <h1 className="font-serif text-3xl font-semibold tracking-tight">{project.name}</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">{project.name}</h1>
             {project.description ? (
               <p className="text-muted-foreground max-w-2xl whitespace-pre-wrap text-sm leading-relaxed">
                 {project.description}
@@ -59,7 +59,7 @@ export default async function ProjectHomePage({
 
       <section aria-labelledby="tasks-heading" className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 id="tasks-heading" className="font-serif text-lg tracking-tight">
+          <h2 id="tasks-heading" className="text-lg font-semibold tracking-tight">
             Tasks
           </h2>
           {canUpload ? (

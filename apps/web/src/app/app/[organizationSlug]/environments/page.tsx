@@ -58,7 +58,7 @@ export default async function EnvironmentsPage({
   return (
     <div className="flex flex-col gap-8">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Environments</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Environments</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Private Agent Work Environments — executable packs with hidden stage verifiers. Simulated
           Slack, GitHub, Jira, and Grafana stay labeled simulated. Scores come from the evaluator
@@ -82,7 +82,7 @@ export default async function EnvironmentsPage({
       <section className="grid gap-8 lg:grid-cols-2">
         {EXPERIENCE_PACK_CATALOG.map((pack) => (
           <article key={pack.key} className="border-border flex flex-col gap-3 border-t pt-4">
-            <h2 className="font-serif text-lg tracking-tight">{pack.title}</h2>
+            <h2 className="text-lg font-semibold tracking-tight">{pack.title}</h2>
             <p className="text-sm leading-relaxed">{pack.instruction}</p>
             <SimulatedBadges pack={pack} />
             <h3 className="font-mono text-[11px] uppercase tracking-[0.14em]">Stages</h3>
@@ -92,7 +92,7 @@ export default async function EnvironmentsPage({
       </section>
 
       <section>
-        <h2 className="font-serif text-lg tracking-tight">Partial rewards</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Partial rewards</h2>
         <p className="text-muted-foreground mt-1 text-sm">
           Stage keys appear here after the worker writes <span className="font-mono">metrics</span>.
         </p>
@@ -119,7 +119,7 @@ export default async function EnvironmentsPage({
       </section>
 
       <section>
-        <h2 className="font-serif text-lg tracking-tight">Capability gap</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Capability gap</h2>
         <p className="text-muted-foreground mt-1 text-sm">
           Counts from stored <span className="font-mono">failure_category</span> rows. No pie chart.
         </p>
@@ -145,7 +145,7 @@ export default async function EnvironmentsPage({
       </section>
 
       <section>
-        <h2 className="font-serif text-lg tracking-tight">Export</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Export</h2>
         <p className="text-muted-foreground mt-1 text-sm">PRIVATE JSONL from real rollouts.</p>
         <ul className="mt-2 flex flex-col gap-1 text-sm">
           <li>

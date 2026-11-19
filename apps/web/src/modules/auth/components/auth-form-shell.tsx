@@ -22,7 +22,7 @@ export function AuthFormShell({
           >
             AgentForge
           </Link>
-          <h1 className="font-serif text-3xl leading-tight tracking-tight">{title}</h1>
+          <h1 className="text-3xl leading-tight tracking-tight">{title}</h1>
           <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
         </div>
         {children}

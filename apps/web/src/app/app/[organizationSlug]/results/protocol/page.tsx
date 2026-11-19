@@ -28,7 +28,7 @@ export default async function ProtocolResultsPage({
   return (
     <div className="flex flex-col gap-8">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Horizon v1 protocol</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Horizon v1 protocol</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Recorded oracle, NOP, BYO, and reference rows only. Empty means no protocol runs have been
           written — not 0%. This is not a Fable 5 board.

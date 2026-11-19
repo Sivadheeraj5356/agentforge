@@ -6,7 +6,9 @@ import {
   simulatedLabel,
   type ExperiencePack,
 } from "@agentforge/contracts";
-import { Button, Label } from "@agentforge/ui";
+import { Button } from "@agentforge/ui";
+
+import { FormSelect } from "@/components/form-select";
 
 import {
   resetEnvironmentAction,
@@ -15,9 +17,6 @@ import {
 } from "@/modules/environments/actions";
 
 const initial: EnvironmentActionResult | undefined = undefined;
-
-const selectClassName =
-  "border-border bg-surface text-foreground h-(--height-control) w-full rounded-md border px-3 text-sm";
 
 export function EnvironmentPackForm({
   organizationSlug,
@@ -46,32 +45,24 @@ export function EnvironmentPackForm({
       <form action={formAction} className="flex flex-col gap-4">
         <input type="hidden" name="organizationSlug" value={organizationSlug} />
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="env-project">Project</Label>
-            <select id="env-project" name="projectSlug" className={selectClassName} required>
-              {projects.map((project) => (
-                <option key={project.slug} value={project.slug}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="env-pack">Experience pack</Label>
-            <select
-              id="env-pack"
-              name="packKey"
-              className={selectClassName}
-              defaultValue={defaultPack?.key}
-              required
-            >
-              {EXPERIENCE_PACK_CATALOG.map((pack) => (
-                <option key={pack.key} value={pack.key}>
-                  {pack.title}
-                </option>
-              ))}
-            </select>
-          </div>
+          <FormSelect
+            id="env-project"
+            name="projectSlug"
+            label="Project"
+            required
+            options={projects.map((project) => ({ value: project.slug, label: project.name }))}
+          />
+          <FormSelect
+            id="env-pack"
+            name="packKey"
+            label="Experience pack"
+            defaultValue={defaultPack?.key}
+            required
+            options={EXPERIENCE_PACK_CATALOG.map((pack) => ({
+              value: pack.key,
+              label: pack.title,
+            }))}
+          />
         </div>
         {pending ? (
           <p role="status" className="text-muted-foreground text-sm">
@@ -112,16 +103,13 @@ export function EnvironmentPackForm({
           <input type="hidden" name="organizationSlug" value={organizationSlug} />
           <input type="hidden" name="environmentVersionId" value={environmentVersionId} />
           <input type="hidden" name="agentKind" value="oracle" />
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="reset-project">Reset on project</Label>
-            <select id="reset-project" name="projectSlug" className={selectClassName} required>
-              {projects.map((project) => (
-                <option key={`reset-${project.slug}`} value={project.slug}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <FormSelect
+            id="reset-project"
+            name="projectSlug"
+            label="Reset on project"
+            required
+            options={projects.map((project) => ({ value: project.slug, label: project.name }))}
+          />
           {resetPending ? (
             <p role="status" className="text-muted-foreground text-sm">
               Queueing reset…

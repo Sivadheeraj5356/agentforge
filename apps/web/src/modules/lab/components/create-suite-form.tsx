@@ -4,6 +4,7 @@ import { useActionState, type ReactElement } from "react";
 import { Button, Input, Label } from "@agentforge/ui";
 
 import { createSuiteAction, type LabActionResult } from "@/modules/lab/actions";
+import { FormSelect } from "@/components/form-select";
 import type { CatalogTaskOption } from "@/modules/evaluations/server/catalog";
 
 const initial: LabActionResult | undefined = undefined;
@@ -23,21 +24,16 @@ export function CreateSuiteForm({
         <Label htmlFor="suite-name">Suite name</Label>
         <Input id="suite-name" name="name" required />
       </div>
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="suite-task">Pinned task version</Label>
-        <select
-          id="suite-task"
-          name="catalogTaskKey"
-          className="border-border bg-surface h-(--height-control) rounded-md border px-3 text-sm"
-          required
-        >
-          {tasks.map((task) => (
-            <option key={task.taskVersionId} value={task.taskKey}>
-              {task.taskKey} @{task.taskVersion}
-            </option>
-          ))}
-        </select>
-      </div>
+      <FormSelect
+        id="suite-task"
+        name="catalogTaskKey"
+        label="Pinned task version"
+        required
+        options={tasks.map((task) => ({
+          value: task.taskKey,
+          label: `${task.taskKey} @${task.taskVersion}`,
+        }))}
+      />
       <div className="flex flex-col gap-2">
         <Label htmlFor="suite-gate">Fail if pass@1 &lt;</Label>
         <Input

@@ -60,7 +60,7 @@ export default async function ResultsPage({
   return (
     <div className="flex flex-col gap-8">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Results</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Results</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Scores written by the evaluator worker. Training experiment rows can be planned here;
           metrics stay empty until `services/training --execute` and a held-out evaluator run.
@@ -98,7 +98,7 @@ export default async function ResultsPage({
       <AblationScoreTable groups={ablationGroups} />
 
       <section aria-labelledby="experiments-heading" className="flex flex-col gap-4">
-        <h2 id="experiments-heading" className="font-serif text-lg tracking-tight">
+        <h2 id="experiments-heading" className="text-lg font-semibold tracking-tight">
           Training experiments
         </h2>
         <p className="text-muted-foreground max-w-2xl text-sm">

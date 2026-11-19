@@ -9,11 +9,9 @@ import {
   type ActionResult,
 } from "@/modules/evaluations/actions";
 import type { CatalogTaskOption } from "@/modules/evaluations/server/catalog";
+import { FormSelect } from "@/components/form-select";
 
 const initial: ActionResult | undefined = undefined;
-
-const selectClassName =
-  "border-border bg-surface text-foreground h-(--height-control) w-full rounded-md border px-3 text-sm";
 
 export function EnqueueEvaluationForm({
   organizationSlug,
@@ -48,59 +46,47 @@ export function EnqueueEvaluationForm({
       <form action={formAction} className="flex flex-col gap-4">
         <input type="hidden" name="organizationSlug" value={organizationSlug} />
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="eval-project">Project</Label>
-            <select id="eval-project" name="projectSlug" className={selectClassName} required>
-              {projects.map((project) => (
-                <option key={project.slug} value={project.slug}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="eval-task">Catalog task</Label>
-            <select
-              id="eval-task"
-              name="catalogTaskKey"
-              className={selectClassName}
-              defaultValue={defaultTask?.taskKey}
-              required
-            >
-              {tasks.map((task) => (
-                <option key={task.taskVersionId} value={task.taskKey}>
-                  {task.benchmarkKey} / {task.taskName}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="eval-recipe">Reward recipe</Label>
-            <select
-              id="eval-recipe"
-              name="rewardRecipe"
-              className={selectClassName}
-              defaultValue="binary"
-            >
-              <option value="binary">Binary</option>
-              <option value="continuous">Continuous</option>
-              <option value="hybrid">Hybrid</option>
-              <option value="staged">Staged (work environments)</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="eval-sandbox">Sandbox</Label>
-            <select
-              id="eval-sandbox"
-              name="sandboxProvider"
-              className={selectClassName}
-              defaultValue="isolated"
-            >
-              <option value="isolated">Isolated (agent ≠ grader)</option>
-              <option value="work">Work environment (MCP, evaluator)</option>
-              <option value="fake">Fake (fixtures only, tests)</option>
-            </select>
-          </div>
+          <FormSelect
+            id="eval-project"
+            name="projectSlug"
+            label="Project"
+            required
+            options={projects.map((project) => ({ value: project.slug, label: project.name }))}
+          />
+          <FormSelect
+            id="eval-task"
+            name="catalogTaskKey"
+            label="Catalog task"
+            defaultValue={defaultTask?.taskKey}
+            required
+            options={tasks.map((task) => ({
+              value: task.taskKey,
+              label: `${task.benchmarkKey} / ${task.taskName}`,
+            }))}
+          />
+          <FormSelect
+            id="eval-recipe"
+            name="rewardRecipe"
+            label="Reward recipe"
+            defaultValue="binary"
+            options={[
+              { value: "binary", label: "Binary" },
+              { value: "continuous", label: "Continuous" },
+              { value: "hybrid", label: "Hybrid" },
+              { value: "staged", label: "Staged (work environments)" },
+            ]}
+          />
+          <FormSelect
+            id="eval-sandbox"
+            name="sandboxProvider"
+            label="Sandbox"
+            defaultValue="isolated"
+            options={[
+              { value: "isolated", label: "Isolated (agent ≠ grader)" },
+              { value: "work", label: "Work environment (MCP, evaluator)" },
+              { value: "fake", label: "Fake (fixtures only, tests)" },
+            ]}
+          />
           <div className="flex flex-col gap-2">
             <Label htmlFor="eval-attempts">Attempts (pass@k)</Label>
             <Input
@@ -155,32 +141,24 @@ export function EnqueueEvaluationForm({
       <form action={ablationAction} className="flex flex-col gap-3">
         <input type="hidden" name="organizationSlug" value={organizationSlug} />
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="ablation-project">Ablation project</Label>
-            <select id="ablation-project" name="projectSlug" className={selectClassName} required>
-              {projects.map((project) => (
-                <option key={project.slug} value={project.slug}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="ablation-task">Ablation catalog task</Label>
-            <select
-              id="ablation-task"
-              name="catalogTaskKey"
-              className={selectClassName}
-              defaultValue={defaultTask?.taskKey}
-              required
-            >
-              {tasks.map((task) => (
-                <option key={`ablation-${task.taskVersionId}`} value={task.taskKey}>
-                  {task.benchmarkKey} / {task.taskName}
-                </option>
-              ))}
-            </select>
-          </div>
+          <FormSelect
+            id="ablation-project"
+            name="projectSlug"
+            label="Ablation project"
+            required
+            options={projects.map((project) => ({ value: project.slug, label: project.name }))}
+          />
+          <FormSelect
+            id="ablation-task"
+            name="catalogTaskKey"
+            label="Ablation catalog task"
+            defaultValue={defaultTask?.taskKey}
+            required
+            options={tasks.map((task) => ({
+              value: task.taskKey,
+              label: `${task.benchmarkKey} / ${task.taskName}`,
+            }))}
+          />
         </div>
         <input type="hidden" name="sandboxProvider" value="isolated" />
         <input type="hidden" name="attemptCount" value="1" />

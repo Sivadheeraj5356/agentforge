@@ -29,7 +29,7 @@ export default async function ProjectTasksPage({
             { label: "Tasks" },
           ]}
         />
-        <h1 className="font-serif text-3xl font-semibold tracking-tight">Tasks</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Tasks</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Every task AgentForge found inside a validated package. Open one to read its files
           alongside the findings. Nothing here was built, installed, or executed.

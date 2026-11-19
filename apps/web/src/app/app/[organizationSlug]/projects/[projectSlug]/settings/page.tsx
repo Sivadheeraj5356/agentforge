@@ -28,7 +28,7 @@ export default async function ProjectSettingsPage({
           <span aria-hidden="true">/</span>
           <span>Settings</span>
         </div>
-        <h1 className="font-serif text-3xl font-semibold tracking-tight">Project settings</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Project settings</h1>
         <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
           Update the name and description, or archive the project. Slugs stay fixed for stable URLs.
         </p>

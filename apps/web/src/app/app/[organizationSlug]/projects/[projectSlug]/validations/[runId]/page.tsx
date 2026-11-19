@@ -46,7 +46,7 @@ export default async function ValidationRunPage({
           <span aria-hidden="true">/</span>
           <span>validation</span>
         </div>
-        <h1 className="font-serif text-3xl font-semibold tracking-tight">Validation report</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Validation report</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Static findings only. Every claim below comes from inspecting files in the uploaded
           package. Nothing in the package was built, installed, or executed.

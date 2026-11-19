@@ -6,6 +6,7 @@ import { assertNeverExecutesUserCode } from "@agentforge/security";
 import { Button } from "@agentforge/ui";
 
 import { RunComparisonView } from "@/modules/tasks/components/run-comparison";
+import { FormSelect } from "@/components/form-select";
 import { Breadcrumbs } from "@/modules/tasks/components/task-header";
 import type { InspectorFinding } from "@/modules/tasks/model";
 import {
@@ -77,7 +78,7 @@ export default async function CompareRunsPage({
           { label: "Compare" },
         ]}
       />
-      <h1 className="font-serif text-2xl font-semibold tracking-tight">Compare runs</h1>
+      <h1 className="text-2xl font-semibold tracking-tight">Compare runs</h1>
       <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
         Findings are matched by fingerprint — the finding code plus its validator and evidence
         location — so a re-ordered report reads as unchanged.
@@ -166,22 +167,16 @@ function RunSelect({
   selected: number;
 }): ReactElement {
   return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={`compare-${name}`} className="text-muted-foreground text-xs">
-        {label}
-      </label>
-      <select
-        id={`compare-${name}`}
-        name={name}
-        defaultValue={String(selected)}
-        className="border-border bg-surface h-(--height-control) rounded-md border px-2 text-sm"
-      >
-        {runs.map((run) => (
-          <option key={run.runNumber} value={run.runNumber}>
-            {`Run ${run.runNumber} · ${run.createdAt.slice(0, 10)}`}
-          </option>
-        ))}
-      </select>
-    </div>
+    <FormSelect
+      id={`compare-${name}`}
+      name={name}
+      label={label}
+      defaultValue={String(selected)}
+      className="w-56"
+      options={runs.map((run) => ({
+        value: String(run.runNumber),
+        label: `Run ${run.runNumber} · ${run.createdAt.slice(0, 10)}`,
+      }))}
+    />
   );
 }

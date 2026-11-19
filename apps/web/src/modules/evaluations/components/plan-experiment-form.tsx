@@ -4,10 +4,9 @@ import { useActionState, type ReactElement } from "react";
 import { Button, Input, Label } from "@agentforge/ui";
 
 import { createExperimentAction, type ActionResult } from "@/modules/evaluations/actions";
+import { FormSelect } from "@/components/form-select";
 
 const initial: ActionResult | undefined = undefined;
-const selectClassName =
-  "border-border bg-surface text-foreground h-(--height-control) w-full rounded-md border px-3 text-sm";
 
 export function PlanExperimentForm({
   organizationSlug,
@@ -34,38 +33,36 @@ export function PlanExperimentForm({
           <Label htmlFor="exp-name">Name</Label>
           <Input id="exp-name" name="name" required maxLength={120} />
         </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="exp-project">Project</Label>
-          <select id="exp-project" name="projectSlug" className={selectClassName} required>
-            {projects.map((project) => (
-              <option key={project.slug} value={project.slug}>
-                {project.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="exp-stage">Stage</Label>
-          <select id="exp-stage" name="stage" className={selectClassName} defaultValue="sft">
-            <option value="base">Base</option>
-            <option value="sft">SFT</option>
-            <option value="grpo">GRPO</option>
-            <option value="ablation">Ablation</option>
-          </select>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="exp-recipe">Reward recipe</Label>
-          <select
-            id="exp-recipe"
-            name="rewardRecipe"
-            className={selectClassName}
-            defaultValue="binary"
-          >
-            <option value="binary">Binary</option>
-            <option value="continuous">Continuous</option>
-            <option value="hybrid">Hybrid</option>
-          </select>
-        </div>
+        <FormSelect
+          id="exp-project"
+          name="projectSlug"
+          label="Project"
+          required
+          options={projects.map((project) => ({ value: project.slug, label: project.name }))}
+        />
+        <FormSelect
+          id="exp-stage"
+          name="stage"
+          label="Stage"
+          defaultValue="sft"
+          options={[
+            { value: "base", label: "Base" },
+            { value: "sft", label: "SFT" },
+            { value: "grpo", label: "GRPO" },
+            { value: "ablation", label: "Ablation" },
+          ]}
+        />
+        <FormSelect
+          id="exp-recipe"
+          name="rewardRecipe"
+          label="Reward recipe"
+          defaultValue="binary"
+          options={[
+            { value: "binary", label: "Binary" },
+            { value: "continuous", label: "Continuous" },
+            { value: "hybrid", label: "Hybrid" },
+          ]}
+        />
         <div className="flex flex-col gap-2">
           <Label htmlFor="exp-heldout">Held-out tasks</Label>
           <Input

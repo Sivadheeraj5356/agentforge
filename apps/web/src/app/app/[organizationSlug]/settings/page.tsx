@@ -1,8 +1,9 @@
 import type { ReactElement } from "react";
-import { Button, Label } from "@agentforge/ui";
+import { Button } from "@agentforge/ui";
 import { assertNeverExecutesUserCode } from "@agentforge/security";
 
 import { WorkspaceShortcutLinks } from "@/components/workspace-shortcuts";
+import { FormSelect } from "@/components/form-select";
 import { assignWorkflowRoleAction } from "@/modules/reviews/actions";
 import { CreateWebhookForm } from "@/modules/lab/components/create-webhook-form";
 import { StartStripeCheckoutForm } from "@/modules/billing/components/start-stripe-checkout-form";
@@ -35,7 +36,7 @@ export default async function SettingsPage({
   return (
     <div className="flex flex-col gap-6">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Settings</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Workflow reviewer and adjudicator roles are not org owner/admin/member. Assign them here.
         </p>
@@ -44,33 +45,26 @@ export default async function SettingsPage({
       {canAssign ? (
         <form action={assignWorkflowRoleAction} className="flex max-w-md flex-col gap-3">
           <input type="hidden" name="organizationSlug" value={organization.slug} />
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="workflow-user">Member</Label>
-            <select
-              id="workflow-user"
-              name="userId"
-              className="border-border bg-surface h-(--height-control) rounded-md border px-3 text-sm"
-              required
-            >
-              {(members ?? []).map((member) => (
-                <option key={member.user_id} value={member.user_id}>
-                  {member.user_id.slice(0, 8)} · {member.role}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="workflow-role">Workflow role</Label>
-            <select
-              id="workflow-role"
-              name="workflowRole"
-              className="border-border bg-surface h-(--height-control) rounded-md border px-3 text-sm"
-              required
-            >
-              <option value="reviewer">Reviewer</option>
-              <option value="adjudicator">Adjudicator</option>
-            </select>
-          </div>
+          <FormSelect
+            id="workflow-user"
+            name="userId"
+            label="Member"
+            required
+            options={(members ?? []).map((member) => ({
+              value: member.user_id,
+              label: `${member.user_id.slice(0, 8)} · ${member.role}`,
+            }))}
+          />
+          <FormSelect
+            id="workflow-role"
+            name="workflowRole"
+            label="Workflow role"
+            required
+            options={[
+              { value: "reviewer", label: "Reviewer" },
+              { value: "adjudicator", label: "Adjudicator" },
+            ]}
+          />
           <Button type="submit">Assign workflow role</Button>
         </form>
       ) : (
@@ -81,7 +75,7 @@ export default async function SettingsPage({
       {canAssign ? <CreateWebhookForm organizationSlug={organization.slug} /> : null}
 
       <section aria-labelledby="billing-heading" className="flex max-w-md flex-col gap-3">
-        <h2 id="billing-heading" className="font-serif text-lg tracking-tight">
+        <h2 id="billing-heading" className="text-lg font-semibold tracking-tight">
           Billing
         </h2>
         <p className="text-muted-foreground text-sm leading-relaxed">

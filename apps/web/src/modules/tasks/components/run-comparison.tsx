@@ -68,7 +68,7 @@ function Bucket({
   return (
     <section className="flex flex-col gap-2">
       <div className="flex items-baseline gap-3">
-        <h3 className="font-serif text-base tracking-tight">{title}</h3>
+        <h3 className="text-base font-semibold tracking-tight">{title}</h3>
         <span className="text-muted-foreground font-mono text-xs tabular-nums">
           {findings.length}
         </span>
@@ -145,7 +145,7 @@ export function RunComparisonView({
 
       <section className="flex flex-col gap-2">
         <div className="flex items-baseline gap-3">
-          <h3 className="font-serif text-base tracking-tight">Severity changed</h3>
+          <h3 className="text-base font-semibold tracking-tight">Severity changed</h3>
           <span className="text-muted-foreground font-mono text-xs tabular-nums">
             {comparison.changedFindings.length}
           </span>

@@ -70,7 +70,7 @@ export function TaskEvaluationDashboard({
 
   return (
     <section aria-labelledby="eval-dashboard-heading" className="flex flex-col gap-4">
-      <h2 id="eval-dashboard-heading" className="font-serif text-lg tracking-tight">
+      <h2 id="eval-dashboard-heading" className="text-lg font-semibold tracking-tight">
         Evaluation
       </h2>
       <nav aria-label="Evaluation sections" className="flex flex-wrap gap-2">

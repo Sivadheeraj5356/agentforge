@@ -4,27 +4,13 @@ import type { ValidationSeverity } from "@agentforge/contracts";
 import { VALIDATION_SEVERITY_ORDER, ValidationOutcomeSchema } from "@agentforge/contracts";
 
 import type { ValidationFinding, ValidationRun } from "@/modules/validation/server/validation-runs";
+import { SeverityBadge } from "@/modules/tasks/components/severity";
 
 const SEVERITY_LABEL: Record<ValidationSeverity, string> = {
   critical: "Critical",
   error: "Error",
   warning: "Warning",
   info: "Info",
-};
-
-/** Severity is never conveyed by colour alone. */
-const SEVERITY_MARK: Record<ValidationSeverity, string> = {
-  critical: "!!",
-  error: "!",
-  warning: "▲",
-  info: "i",
-};
-
-const SEVERITY_TONE: Record<ValidationSeverity, string> = {
-  critical: "text-danger",
-  error: "text-danger",
-  warning: "text-warning",
-  info: "text-muted-foreground",
 };
 
 const OUTCOME_COPY = {
@@ -82,17 +68,6 @@ function evidenceLabel(evidence: Evidence): string {
   return evidence.line === null ? evidence.path : `${evidence.path}:${evidence.line}`;
 }
 
-function SeverityBadge({ severity }: { severity: ValidationSeverity }): ReactElement {
-  return (
-    <span className={`flex items-center gap-1.5 text-sm ${SEVERITY_TONE[severity]}`}>
-      <span aria-hidden="true" className="font-mono text-xs">
-        {SEVERITY_MARK[severity]}
-      </span>
-      <span>{SEVERITY_LABEL[severity]}</span>
-    </span>
-  );
-}
-
 function SummaryCounts({ run }: { run: ValidationRun }): ReactElement {
   const counts: readonly { severity: ValidationSeverity; count: number }[] = [
     { severity: "critical", count: run.critical_count },
@@ -102,13 +77,13 @@ function SummaryCounts({ run }: { run: ValidationRun }): ReactElement {
   ];
 
   return (
-    <dl className="border-border divide-border divide-y border-y">
+    <dl className="border-border bg-surface divide-border grid grid-cols-2 divide-x rounded-lg border shadow-sm sm:grid-cols-4">
       {counts.map((row) => (
-        <div key={row.severity} className="flex items-baseline justify-between gap-4 py-2">
+        <div key={row.severity} className="flex flex-col items-start gap-1 px-4 py-3">
           <dt>
             <SeverityBadge severity={row.severity} />
           </dt>
-          <dd className="font-mono text-sm tabular-nums">{row.count}</dd>
+          <dd className="text-xl font-semibold tabular-nums">{row.count}</dd>
         </div>
       ))}
     </dl>
@@ -228,7 +203,7 @@ export function ValidationFindingsReport({
   return (
     <div className="flex flex-col gap-8">
       <section aria-labelledby="validation-summary-heading" className="flex flex-col gap-4">
-        <h2 id="validation-summary-heading" className="font-serif text-lg tracking-tight">
+        <h2 id="validation-summary-heading" className="text-lg font-semibold tracking-tight">
           Summary
         </h2>
 
@@ -290,7 +265,7 @@ export function ValidationFindingsReport({
 
       <section aria-labelledby="validation-findings-heading" className="flex flex-col gap-4">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <h2 id="validation-findings-heading" className="font-serif text-lg tracking-tight">
+          <h2 id="validation-findings-heading" className="text-lg font-semibold tracking-tight">
             Findings
           </h2>
           {findings.length > 0 ? (

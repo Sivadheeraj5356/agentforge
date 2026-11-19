@@ -46,9 +46,7 @@ export default async function OrganizationHomePage({
         <p className="text-muted-foreground font-mono text-xs uppercase tracking-[0.16em]">
           {organization.name}
         </p>
-        <h1 className="font-serif text-3xl font-semibold tracking-tight">
-          Evaluation Infrastructure
-        </h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Evaluation Infrastructure</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Build private work environments, queue reproducible trials, and inspect results without
           running untrusted code in the control plane.
@@ -57,7 +55,7 @@ export default async function OrganizationHomePage({
 
       <section aria-labelledby="projects-heading" className="flex flex-col gap-3">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 id="projects-heading" className="font-serif text-lg tracking-tight">
+          <h2 id="projects-heading" className="text-lg font-semibold tracking-tight">
             Recent projects
           </h2>
           <Link

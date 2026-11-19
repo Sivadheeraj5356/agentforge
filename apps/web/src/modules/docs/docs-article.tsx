@@ -56,7 +56,7 @@ function DocsBlockView({ block }: { block: DocsBlock }): ReactElement {
       return <p className="text-muted-foreground text-lg leading-relaxed">{block.text}</p>;
     case "heading":
       return (
-        <h2 id={block.id} className="scroll-mt-28 font-serif text-2xl tracking-tight">
+        <h2 id={block.id} className="scroll-mt-28 text-2xl font-semibold tracking-tight">
           {block.title}
         </h2>
       );

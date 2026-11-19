@@ -71,7 +71,7 @@ export function FindingsPanel({
       <section aria-labelledby="run-summary-heading" className="flex flex-col gap-3">
         <h2
           id="run-summary-heading"
-          className="text-muted-foreground font-mono text-[10px] uppercase tracking-[0.14em]"
+          className="text-muted-foreground text-[11px] font-semibold uppercase tracking-wider"
         >
           Result
         </h2>
@@ -84,16 +84,23 @@ export function FindingsPanel({
             </p>
           </div>
         ) : (
-          <OutcomeBadge outcome={outcome} status={status} className="text-sm font-medium" />
+          <OutcomeBadge outcome={outcome} status={status} />
         )}
 
-        <dl className="border-border divide-border grid grid-cols-4 divide-x border-y">
+        <dl className="border-border bg-surface divide-border grid grid-cols-4 divide-x rounded-lg border shadow-sm">
           {severities.map((facet) => (
-            <div key={facet.value} className="flex flex-col items-start gap-0.5 px-2 py-1.5">
-              <dt className="text-muted-foreground text-[10px] uppercase tracking-wide">
+            <div key={facet.value} className="flex flex-col items-start gap-0.5 px-3 py-2.5">
+              <dt className="text-muted-foreground text-[10px] font-medium uppercase tracking-wide">
                 {SEVERITY_LABEL[facet.value]}
               </dt>
-              <dd className="font-mono text-sm tabular-nums">{counts[facet.value]}</dd>
+              <dd
+                className={cn(
+                  "text-lg font-semibold tabular-nums",
+                  counts[facet.value] === 0 && "text-muted-foreground",
+                )}
+              >
+                {counts[facet.value]}
+              </dd>
             </div>
           ))}
         </dl>
@@ -101,7 +108,7 @@ export function FindingsPanel({
 
       <section aria-labelledby="findings-heading" className="flex min-h-0 flex-col gap-3">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 id="findings-heading" className="font-serif text-base tracking-tight">
+          <h2 id="findings-heading" className="text-sm font-semibold tracking-tight">
             Findings
           </h2>
           <p className="text-muted-foreground font-mono text-xs tabular-nums">
@@ -220,11 +227,11 @@ function FilterRow({
     <div
       role="group"
       aria-labelledby={labelId}
-      className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
+      className="flex flex-wrap items-center gap-x-2 gap-y-1.5"
     >
       <span
         id={labelId}
-        className="text-muted-foreground font-mono text-[10px] uppercase tracking-[0.14em]"
+        className="text-muted-foreground w-14 shrink-0 text-[11px] font-medium uppercase tracking-wider"
       >
         {label}
       </span>
@@ -235,14 +242,21 @@ function FilterRow({
           aria-pressed={option.value === active}
           onClick={() => onSelect(option.value)}
           className={cn(
-            "rounded-sm text-xs underline-offset-4",
+            "inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs transition-colors",
             option.value === active
-              ? "text-foreground font-medium underline"
-              : "text-muted-foreground hover:text-foreground hover:underline",
+              ? "border-primary/40 bg-primary text-primary-foreground font-medium"
+              : "border-border bg-surface text-muted-foreground hover:border-muted-foreground/40 hover:text-foreground",
           )}
         >
           {option.label}
-          <span className="ms-1 font-mono tabular-nums">{option.count}</span>
+          <span
+            className={cn(
+              "font-mono text-[10px] tabular-nums",
+              option.value === active ? "opacity-70" : "text-muted-foreground",
+            )}
+          >
+            {option.count}
+          </span>
         </button>
       ))}
     </div>

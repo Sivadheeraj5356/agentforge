@@ -79,7 +79,7 @@ export function DocsShell({
             <p className="text-muted-foreground font-mono text-base uppercase tracking-[0.16em]">
               {groupLabel}
             </p>
-            <h1 className="font-serif text-5xl font-semibold tracking-tight">{section.title}</h1>
+            <h1 className="text-5xl font-semibold tracking-tight">{section.title}</h1>
             <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
               {section.summary}
             </p>

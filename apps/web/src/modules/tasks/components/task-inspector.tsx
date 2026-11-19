@@ -270,7 +270,7 @@ export function TaskInspector({
       <div
         role="tablist"
         aria-label="Inspector panes"
-        className="border-border flex gap-1 border-b pb-2 md:hidden"
+        className="border-border bg-muted/60 mb-2 inline-flex w-fit gap-0.5 rounded-lg border p-0.5 md:hidden"
       >
         {MOBILE_PANES.map((pane) => (
           <button
@@ -280,10 +280,10 @@ export function TaskInspector({
             aria-selected={mobilePane === pane}
             onClick={() => setMobilePane(pane)}
             className={cn(
-              "rounded-sm px-2.5 py-1 text-sm",
+              "rounded-md px-3 py-1 text-sm transition-colors",
               mobilePane === pane
-                ? "bg-accent/10 text-accent font-medium"
-                : "text-muted-foreground hover:bg-muted/70",
+                ? "bg-surface text-foreground font-medium shadow-sm"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {PANE_LABEL[pane]}
@@ -454,7 +454,7 @@ function topLevelDirectories(tree: readonly FileTreeNode[]): readonly string[] {
 
 function PaneHeader({ children }: { children: ReactNode }): ReactElement {
   return (
-    <div className="border-border bg-surface/80 text-muted-foreground sticky top-0 z-10 flex items-center gap-2 border-b px-3 py-2 font-mono text-[10px] uppercase tracking-[0.14em] backdrop-blur">
+    <div className="border-border bg-muted/40 text-muted-foreground sticky top-0 z-10 flex h-9 items-center gap-2 border-b px-3 text-[11px] font-semibold uppercase tracking-wider">
       {children}
     </div>
   );

@@ -20,16 +20,15 @@ export const SEVERITY_LABEL: Record<ValidationSeverity, string> = {
   info: "Info",
 };
 
-const SEVERITY_TONE: Record<ValidationSeverity, string> = {
-  critical: "text-danger",
-  error: "text-danger",
-  warning: "text-warning",
-  info: "text-muted-foreground",
+const SEVERITY_CHIP: Record<ValidationSeverity, string> = {
+  critical: "border-danger/30 bg-danger/10 text-danger",
+  error: "border-danger/30 bg-danger/10 text-danger",
+  warning: "border-warning/30 bg-warning/10 text-warning",
+  info: "border-border bg-muted text-muted-foreground",
 };
 
-export function severityTone(severity: ValidationSeverity): string {
-  return SEVERITY_TONE[severity];
-}
+const CHIP_BASE =
+  "inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium";
 
 export function SeverityIcon({
   severity,
@@ -94,7 +93,7 @@ export function SeverityBadge({
   className?: string;
 }): ReactElement {
   return (
-    <span className={cn("inline-flex items-center gap-1.5", SEVERITY_TONE[severity], className)}>
+    <span className={cn(CHIP_BASE, SEVERITY_CHIP[severity], className)}>
       <SeverityIcon severity={severity} />
       <span>{SEVERITY_LABEL[severity]}</span>
     </span>
@@ -116,10 +115,10 @@ export const OUTCOME_COPY: Record<ValidationOutcome, { label: string; detail: st
   },
 };
 
-const OUTCOME_TONE: Record<ValidationOutcome, string> = {
-  pass: "text-success",
-  warn: "text-warning",
-  fail: "text-danger",
+const OUTCOME_CHIP: Record<ValidationOutcome, string> = {
+  pass: "border-success/30 bg-success/10 text-success",
+  warn: "border-warning/30 bg-warning/10 text-warning",
+  fail: "border-danger/30 bg-danger/10 text-danger",
 };
 
 const OUTCOME_MARK: Record<ValidationOutcome, string> = {
@@ -139,7 +138,7 @@ export function OutcomeBadge({
 }): ReactElement {
   if (!outcome || status === "failed" || status === "cancelled") {
     return (
-      <span className={cn("text-muted-foreground inline-flex items-center gap-1.5", className)}>
+      <span className={cn(CHIP_BASE, "border-border bg-muted text-muted-foreground", className)}>
         <span aria-hidden="true" className="font-mono text-xs">
           —
         </span>
@@ -149,7 +148,7 @@ export function OutcomeBadge({
   }
 
   return (
-    <span className={cn("inline-flex items-center gap-1.5", OUTCOME_TONE[outcome], className)}>
+    <span className={cn(CHIP_BASE, OUTCOME_CHIP[outcome], className)}>
       <span aria-hidden="true" className="font-mono text-xs">
         {OUTCOME_MARK[outcome]}
       </span>

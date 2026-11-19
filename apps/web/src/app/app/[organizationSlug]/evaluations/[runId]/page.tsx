@@ -50,7 +50,7 @@ export default async function EvaluationRunPage({
           <span aria-hidden="true"> / </span>
           run {run.run_number}
         </p>
-        <h1 className="font-serif text-2xl tracking-tight">
+        <h1 className="text-2xl font-semibold tracking-tight">
           {run.projectName} run {run.run_number}
         </h1>
         <p className="text-muted-foreground max-w-2xl text-sm">

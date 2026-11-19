@@ -45,7 +45,7 @@ export default async function EvaluationsPage({
   return (
     <div className="flex flex-col gap-8">
       <header className="border-border flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-serif text-2xl tracking-tight">Evaluations</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Evaluations</h1>
         <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">
           Queue Oracle, NOP, reference, BYO, or multi-agent trials against a pinned catalog task.
           The control plane stores job metadata; the evaluator worker starts the sandbox.
@@ -64,7 +64,7 @@ export default async function EvaluationsPage({
 
       {canEnqueue ? (
         <section aria-labelledby="enqueue-heading" className="flex flex-col gap-3">
-          <h2 id="enqueue-heading" className="font-serif text-lg tracking-tight">
+          <h2 id="enqueue-heading" className="text-lg font-semibold tracking-tight">
             Queue a run
           </h2>
           <EnqueueEvaluationForm

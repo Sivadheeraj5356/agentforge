@@ -9,6 +9,7 @@ import {
   createScenarioAction,
   type LabActionResult,
 } from "@/modules/lab/actions";
+import { FormSelect } from "@/components/form-select";
 
 const initial: LabActionResult | undefined = undefined;
 
@@ -26,36 +27,30 @@ export function LabForms({
   return (
     <div className="grid gap-8 lg:grid-cols-3">
       <form action={scenarioAction} className="flex flex-col gap-3">
-        <h2 className="font-serif text-lg tracking-tight">Private scenario</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Private scenario</h2>
         <input type="hidden" name="organizationSlug" value={organizationSlug} />
-        <Label htmlFor="scenario-project">Project</Label>
-        <select
+        <FormSelect
           id="scenario-project"
           name="projectSlug"
-          className="border-border bg-surface h-(--height-control) rounded-md border px-3 text-sm"
+          label="Project"
           required
-        >
-          {projects.map((project) => (
-            <option key={project.slug} value={project.slug}>
-              {project.name}
-            </option>
-          ))}
-        </select>
+          options={projects.map((project) => ({ value: project.slug, label: project.name }))}
+        />
         <Label htmlFor="scenario-key">Key</Label>
         <Input id="scenario-key" name="key" required />
         <Label htmlFor="scenario-name">Name</Label>
         <Input id="scenario-name" name="name" required />
         <Label htmlFor="scenario-request">Request</Label>
         <Textarea id="scenario-request" name="requestText" required />
-        <Label htmlFor="scenario-source">Authoring</Label>
-        <select
+        <FormSelect
           id="scenario-source"
           name="authoringSource"
-          className="border-border bg-surface h-(--height-control) rounded-md border px-3 text-sm"
-        >
-          <option value="human">Human</option>
-          <option value="ai_assisted">AI-assisted (never auto-trusted)</option>
-        </select>
+          label="Authoring"
+          options={[
+            { value: "human", label: "Human" },
+            { value: "ai_assisted", label: "AI-assisted (never auto-trusted)" },
+          ]}
+        />
         <input type="hidden" name="difficulty" value="medium" />
         {scenarioState && !scenarioState.ok ? (
           <p role="alert" className="text-danger text-sm">
@@ -69,18 +64,18 @@ export function LabForms({
       </form>
 
       <form action={envAction} className="flex flex-col gap-3">
-        <h2 className="font-serif text-lg tracking-tight">Environment version</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Environment version</h2>
         <input type="hidden" name="organizationSlug" value={organizationSlug} />
-        <Label htmlFor="env-adapter">Adapter</Label>
-        <select
+        <FormSelect
           id="env-adapter"
           name="adapterId"
-          className="border-border bg-surface h-(--height-control) rounded-md border px-3 text-sm"
-        >
-          <option value="isolated">isolated</option>
-          <option value="unsupported">unsupported (refuses Gmail/Slack)</option>
-          <option value="work">work (evaluator MCP worlds)</option>
-        </select>
+          label="Adapter"
+          options={[
+            { value: "isolated", label: "isolated" },
+            { value: "unsupported", label: "unsupported (refuses Gmail/Slack)" },
+            { value: "work", label: "work (evaluator MCP worlds)" },
+          ]}
+        />
         <Label htmlFor="env-version">Version</Label>
         <Input id="env-version" name="version" required placeholder="1.0.0" />
         {envState && !envState.ok ? (
@@ -93,7 +88,7 @@ export function LabForms({
       </form>
 
       <form action={datasetAction} className="flex flex-col gap-3">
-        <h2 className="font-serif text-lg tracking-tight">Dataset version</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Dataset version</h2>
         <input type="hidden" name="organizationSlug" value={organizationSlug} />
         <Label htmlFor="dataset-name">Name</Label>
         <Input id="dataset-name" name="name" required />
