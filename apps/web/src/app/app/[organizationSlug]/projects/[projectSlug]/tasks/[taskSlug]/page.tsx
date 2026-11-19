@@ -7,6 +7,10 @@ import {
 } from "@/modules/tasks/components/task-inspector-page";
 
 /** The task at its most recent validation run. */
+
+// The agent review falls back across providers and can take over a minute.
+export const maxDuration = 300;
+
 export default async function TaskPage({
   params,
   searchParams,

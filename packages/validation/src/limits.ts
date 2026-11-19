@@ -2,8 +2,8 @@
  * Named ingest limits. Hostile archives are rejected against these ceilings.
  * Tune here — do not scatter magic numbers through the pipeline.
  */
-// 50 MiB matches the Supabase Storage free-plan per-object ceiling, the binding
-// constraint on this deployment (uploads go direct to storage via signed URL).
+// 50 MiB matches the deployment object store's free-plan per-object ceiling,
+// the binding constraint here (uploads go direct to storage via signed URL).
 export const MAX_UPLOAD_ARCHIVE_BYTES = 50 * 1024 * 1024;
 export const MAX_EXTRACTED_ARCHIVE_BYTES = 128 * 1024 * 1024;
 export const MAX_ARCHIVE_FILE_COUNT = 2048;

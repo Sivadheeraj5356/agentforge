@@ -14,6 +14,9 @@ import {
  * Runs are immutable, so this renders the same inspector with that run's own
  * findings, file manifest, and provenance.
  */
+// The agent review falls back across providers and can take over a minute.
+export const maxDuration = 300;
+
 export default async function TaskRunPage({
   params,
   searchParams,
