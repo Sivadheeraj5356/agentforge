@@ -6,8 +6,6 @@
 
 AgentForge is evaluation infrastructure for coding and work agents: immutable task versions, hidden graders, staged rewards, and a split **control plane** (Next.js) / **execution plane** (Python worker + Docker). The product is the bench itself — not Terminus-2, not Terminal-Bench, and not a Fable 5 leaderboard.
 
-> The local folder may still be named `vortex`. The product, npm packages (`@agentforge/*`), and this GitHub repo are **AgentForge**.
-
 ## What this is
 
 Labs and agent teams need a world the agent can fail in: a pinned environment, tools, hidden stage verifiers, a 0–1 reward, and a reset. AgentForge ships that as:
