@@ -76,31 +76,35 @@ export function configuredReviewProviders(): string[] {
 }
 
 export async function generateReviewJson(prompt: string): Promise<ProviderResult> {
-  const attempts: (() => Promise<ProviderResult>)[] = [];
+  const attempts: { name: string; run: () => Promise<ProviderResult> }[] = [];
   if (process.env.GEMINI_API_KEY) {
-    attempts.push(() => generateGeminiJson(prompt));
+    attempts.push({ name: "gemini", run: () => generateGeminiJson(prompt) });
   }
   const groqKey = process.env.GROQ_API_KEY;
   if (groqKey) {
-    attempts.push(() =>
-      callChatCompletions(
-        GROQ_ENDPOINT,
-        groqKey,
-        envModel("GROQ_MODEL", GROQ_DEFAULT_MODEL),
-        prompt,
-      ),
-    );
+    attempts.push({
+      name: "groq",
+      run: () =>
+        callChatCompletions(
+          GROQ_ENDPOINT,
+          groqKey,
+          envModel("GROQ_MODEL", GROQ_DEFAULT_MODEL),
+          prompt,
+        ),
+    });
   }
   const openRouterKey = process.env.OPENROUTER_API_KEY;
   if (openRouterKey) {
-    attempts.push(() =>
-      callChatCompletions(
-        OPENROUTER_ENDPOINT,
-        openRouterKey,
-        envModel("OPENROUTER_MODEL", OPENROUTER_DEFAULT_MODEL),
-        prompt,
-      ),
-    );
+    attempts.push({
+      name: "openrouter",
+      run: () =>
+        callChatCompletions(
+          OPENROUTER_ENDPOINT,
+          openRouterKey,
+          envModel("OPENROUTER_MODEL", OPENROUTER_DEFAULT_MODEL),
+          prompt,
+        ),
+    });
   }
   if (attempts.length === 0) {
     return {
@@ -109,14 +113,16 @@ export async function generateReviewJson(prompt: string): Promise<ProviderResult
         "No review provider key is configured on the server. Set one of GEMINI_API_KEY, GROQ_API_KEY, or OPENROUTER_API_KEY in the app environment; all three have free tiers.",
     };
   }
-  for (const attempt of attempts) {
-    const result = await attempt();
+  const failures: string[] = [];
+  for (const { name, run } of attempts) {
+    const result = await run();
     if (result.ok) {
       return result;
     }
+    failures.push(`${name}: ${result.error}`);
   }
   return {
     ok: false,
-    error: "All configured review providers failed. Try again in a moment.",
+    error: `All configured review providers failed (${failures.join("; ")}). Try again in a moment.`,
   };
 }

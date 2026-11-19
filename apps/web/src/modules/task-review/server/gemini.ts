@@ -43,9 +43,17 @@ export async function generateGeminiJson(prompt: string): Promise<GeminiResult> 
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
     if (!response.ok) {
+      let detail = "";
+      try {
+        const body = (await response.json()) as { error?: { message?: string } };
+        detail = body.error?.message ?? "";
+      } catch {
+        detail = "";
+      }
+      const suffix = detail.length > 0 ? ` ${detail.slice(0, 160)}` : "";
       return {
         ok: false,
-        error: `The review service answered with HTTP ${response.status}. Check the model name and key quota.`,
+        error: `The review service answered with HTTP ${response.status}.${suffix}`,
       };
     }
     const payload = (await response.json()) as GeminiResponse;
