@@ -109,7 +109,7 @@ export async function generateReviewJson(prompt: string): Promise<ProviderResult
     return {
       ok: false,
       error:
-        "No review provider key is configured on the server. Set one of GEMINI_API_KEY, GROQ_API_KEY, or OPENROUTER_API_KEY in the app environment; all three have free tiers.",
+        "No review provider key is configured on the server. Set one of the supported provider keys in the app environment.",
     };
   }
   const failures: string[] = [];
@@ -120,8 +120,10 @@ export async function generateReviewJson(prompt: string): Promise<ProviderResult
     }
     failures.push(`${name}: ${result.error}`);
   }
+  // Provider names stay server-side; the UI must not name review vendors.
+  console.error(`agent review providers failed: ${failures.join("; ")}`);
   return {
     ok: false,
-    error: `All configured review providers failed (${failures.join("; ")}). Try again in a moment.`,
+    error: "The review service is unavailable right now. Try again in a moment.",
   };
 }

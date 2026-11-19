@@ -47,8 +47,7 @@ describe("generateReviewJson", () => {
     const result = await generateReviewJson("prompt");
     expect(result.ok).toBe(false);
     if (!result.ok) {
-      expect(result.error).toContain("GEMINI_API_KEY");
-      expect(result.error).toContain("GROQ_API_KEY");
+      expect(result.error).toContain("No review provider key is configured");
     }
   });
 
@@ -96,7 +95,7 @@ describe("generateReviewJson", () => {
     const result = await generateReviewJson("prompt");
     expect(result.ok).toBe(false);
     if (!result.ok) {
-      expect(result.error).toContain("All configured review providers failed");
+      expect(result.error).toContain("unavailable");
     }
   });
 });

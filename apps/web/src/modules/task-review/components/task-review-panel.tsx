@@ -85,7 +85,9 @@ export function TaskReviewPanel({
             >
               {state.review.difficulty}
             </span>
-            <span className="text-muted-foreground text-xs">Reviewed with {state.model}</span>
+            <span className="text-muted-foreground text-xs">
+              Reviewed by the agent review chain
+            </span>
           </div>
           <p className="text-sm">{state.review.summary}</p>
           <p className="text-muted-foreground text-sm">{state.review.difficultyRationale}</p>
