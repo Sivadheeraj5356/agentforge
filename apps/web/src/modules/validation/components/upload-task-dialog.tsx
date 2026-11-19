@@ -11,7 +11,7 @@ import {
 } from "@/modules/validation/direct-upload-actions";
 
 const ARTIFACT_BUCKET = "agentforge-artifacts";
-const MAX_BYTES = 32 * 1024 * 1024;
+const MAX_BYTES = 50 * 1024 * 1024;
 
 export function UploadTaskDialog({
   organizationSlug,
@@ -63,7 +63,7 @@ export function UploadTaskDialog({
               return;
             }
             if (file.size > MAX_BYTES) {
-              setSizeError("This ZIP is over 32 MB, the upload limit.");
+              setSizeError("This ZIP is over 50 MB, the upload limit.");
               return;
             }
             setSizeError(null);
