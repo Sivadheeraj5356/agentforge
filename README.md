@@ -244,15 +244,16 @@ Evaluator: `python -m pytest` from `services/evaluator`. Set `AGENTFORGE_SKIP_IS
 
 Canonical prefix is `AGENTFORGE_*`. `VORTEX_*` and existing `HARBOR_*` names are one-release aliases. See [`.env.example`](.env.example).
 
-| Variable                                                          | Where           | Notes                                                             |
-| ----------------------------------------------------------------- | --------------- | ----------------------------------------------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`      | `apps/web`      | Browser-safe. Local demo keys only.                               |
-| `SUPABASE_SERVICE_ROLE_KEY`                                       | Server / worker | **Never** `NEXT_PUBLIC_*`. Not used for normal user queries.      |
-| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`                            | Evaluator only  | Reference agent. Missing keys fail the job.                       |
-| `AGENTFORGE_BYO_CMD` / `AGENTFORGE_BYO_HTTP_URL`                  | Evaluator       | Isolated command or work-pack HTTP/stdio                          |
-| `R2_ACCOUNT_ID` + access keys + bucket                            | Control plane   | ArtifactStore; otherwise local disk                               |
-| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `STRIPE_PRICE_ID` | Control plane   | Test mode. Does not gate eval.                                    |
-| `TB_FIXTURES_DIR`                                                 | Evaluator       | Gitignored licensed Terminal Bench checkout — do not commit dumps |
+| Variable                                                          | Where           | Notes                                                                      |
+| ----------------------------------------------------------------- | --------------- | -------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`      | `apps/web`      | Browser-safe. Local demo keys only.                                        |
+| `SUPABASE_SERVICE_ROLE_KEY`                                       | Server / worker | **Never** `NEXT_PUBLIC_*`. Not used for normal user queries.               |
+| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`                            | Evaluator only  | Reference agent. Missing keys fail the job.                                |
+| `GEMINI_API_KEY` / `GEMINI_MODEL`                                 | Control plane   | Task review in the inspector. Free AI Studio key; review is off until set. |
+| `AGENTFORGE_BYO_CMD` / `AGENTFORGE_BYO_HTTP_URL`                  | Evaluator       | Isolated command or work-pack HTTP/stdio                                   |
+| `R2_ACCOUNT_ID` + access keys + bucket                            | Control plane   | ArtifactStore; otherwise local disk                                        |
+| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `STRIPE_PRICE_ID` | Control plane   | Test mode. Does not gate eval.                                             |
+| `TB_FIXTURES_DIR`                                                 | Evaluator       | Gitignored licensed Terminal Bench checkout — do not commit dumps          |
 
 ## Security
 

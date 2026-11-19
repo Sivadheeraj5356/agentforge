@@ -17,6 +17,7 @@ import {
 } from "@/modules/tasks/server/task-runs";
 import { TaskEvaluationDashboard } from "@/modules/evaluations/components/task-evaluation-dashboard";
 import { listEvaluationsForTaskKey } from "@/modules/evaluations/server/task-evaluations";
+import { TaskReviewPanel } from "@/modules/task-review/components/task-review-panel";
 
 export type InspectorSearchParams = {
   readonly severity?: string | string[];
@@ -116,6 +117,13 @@ export async function TaskInspectorPage({
         history={history}
         activeRunNumber={run.run_number}
         taskBasePath={context.taskBasePath}
+      />
+
+      <TaskReviewPanel
+        organizationSlug={organization.slug}
+        projectSlug={project.slug}
+        taskSlug={task.slug}
+        runNumber={run.run_number}
       />
 
       <TaskEvaluationDashboard
