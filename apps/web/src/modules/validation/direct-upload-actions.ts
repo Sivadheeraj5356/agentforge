@@ -95,7 +95,7 @@ export async function ingestUploadedTaskAction(input: {
       return { ok: false, error: "The uploaded file was not found. Try again." };
     }
     if (data.size > MAX_UPLOAD_ARCHIVE_BYTES) {
-      return { ok: false, error: "The ZIP is larger than the 32 MB upload limit." };
+      return { ok: false, error: "The ZIP is larger than the 50 MB upload limit." };
     }
     const bytes = new Uint8Array(await data.arrayBuffer());
     const result = await executeValidationJob({
