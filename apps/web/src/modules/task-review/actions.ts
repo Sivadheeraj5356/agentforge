@@ -86,7 +86,7 @@ export async function requestTaskReviewAction(
     if (!review) {
       return {
         ok: false,
-        error: "Gemini returned a response that was not a readable review. Try again.",
+        error: "The review service returned a response that was not a readable review. Try again.",
       };
     }
 

@@ -58,8 +58,8 @@ export function TaskReviewPanel({
         <div className="flex flex-col gap-1">
           <h3 className="text-sm font-medium">AI task review</h3>
           <p className="text-muted-foreground text-sm">
-            Sends the task instruction, file list, and validation findings to Google Gemini for a
-            quality review, difficulty rating, and readiness assessment. Nothing executes.
+            Sends the task instruction, file list, and validation findings to an agent for a quality
+            review, difficulty rating, and readiness assessment. Nothing executes.
           </p>
         </div>
         <form action={formAction}>
@@ -68,7 +68,7 @@ export function TaskReviewPanel({
           <input type="hidden" name="taskSlug" value={taskSlug} />
           <input type="hidden" name="runNumber" value={runNumber} />
           <Button type="submit" disabled={pending}>
-            {pending ? "Reviewing..." : "Run Gemini review"}
+            {pending ? "Reviewing..." : "Run agent review"}
           </Button>
         </form>
       </div>

@@ -45,7 +45,7 @@ export async function generateGeminiJson(prompt: string): Promise<GeminiResult> 
     if (!response.ok) {
       return {
         ok: false,
-        error: `Gemini answered with HTTP ${response.status}. Check the model name and key quota.`,
+        error: `The review service answered with HTTP ${response.status}. Check the model name and key quota.`,
       };
     }
     const payload = (await response.json()) as GeminiResponse;
@@ -55,10 +55,10 @@ export async function generateGeminiJson(prompt: string): Promise<GeminiResult> 
       .join("")
       .trim();
     if (text.length === 0) {
-      return { ok: false, error: "Gemini returned an empty response." };
+      return { ok: false, error: "The review service returned an empty response." };
     }
     return { ok: true, text, model };
   } catch {
-    return { ok: false, error: "The Gemini request did not complete. Try again." };
+    return { ok: false, error: "The review request did not complete. Try again." };
   }
 }
